@@ -26,7 +26,7 @@ export default function Register() {
       // First make sure selected username is available
       await reserveUsername(username);
 
-      // Finish user authorization in firebase
+      // If username is available, create new user authentication in Firebase
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -34,7 +34,7 @@ export default function Register() {
       );
       const uid = userCredential.user.uid;
 
-      // Generate user profile in the database
+      // Create and populate user profile in the realtime database
       await finalizeUserProfile(uid, username, email);
     } catch (err) {
       setError(err.message || "Unable to create account");
