@@ -3,15 +3,19 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import {
+  reserveUsername,
+  finalizeUserProfile,
+} from "../../modules/firebaseHelpers";
 import styles from "./Register.module.css";
 
 export default function Register() {
-  const { user } = useAuth(); // read current user from context
+  const { user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [error, setError] = useState("");
 
-  // If already logged in, redirect immediately
   if (user) return <Navigate to="/home" replace />;
 
   async function handleSubmit(e) {
@@ -19,11 +23,21 @@ export default function Register() {
     setError("");
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      // Firebase logs the user in automatically after registration
-      // AuthContext will update `user`, triggering the redirect above
+      // First make sure selected username is available
+      await reserveUsername(username);
+
+      // Finish user authorization in firebase
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const uid = userCredential.user.uid;
+
+      // Generate user profile in the database
+      await finalizeUserProfile(uid, username, email);
     } catch (err) {
-      setError("Unable to create account");
+      setError(err.message || "Unable to create account");
     }
   }
 
@@ -48,6 +62,14 @@ export default function Register() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <input
+          className={styles.input}
+          type="text"
+          placeholder="Display Name"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
 
         <button className={styles.button} type="submit">

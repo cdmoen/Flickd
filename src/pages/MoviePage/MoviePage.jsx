@@ -7,7 +7,6 @@ import { fetchMovieInfo } from "../../modules/fetchers";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import { writeUserData } from "../../modules/firebaseHelpers";
 import styles from "./MoviePage.module.css";
 
 export default function MoviePage() {

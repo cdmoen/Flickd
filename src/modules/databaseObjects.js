@@ -47,7 +47,7 @@ ________________________FRIENDS__________________________
 ______________________________________________________
 _________________GROUP LIST METADATA__________________
 
-/groupLists/{groupListId} {
+/groups/{groupId} {
   "name": "Horror Marathon",
   "createdAt": 123456789,
   "createdBy": "{userId}"
@@ -59,7 +59,7 @@ _________________GROUP LIST METADATA__________________
 ______________________________________________________
 _____________GROUP LIST COLLABORATORS_________________
 
-/groupListCollaborators/{groupListId}/{userId}: true
+/groupCollaborators/{groupId}/{userId}: true
 
 
 ######################################################
@@ -69,7 +69,7 @@ ______________________________________________________
 _____________REVERSE LOOKUP COLLABORATOR_________________
 
 (groups a user collaborates on)
-/userGroupLists/{userId}/{groupListId}: true
+/userGroups/{userId}/{groupId}: true
 
 ######################################################
 
@@ -77,7 +77,7 @@ _____________REVERSE LOOKUP COLLABORATOR_________________
 ______________________________________________________
 ____________________GROUP LIST ITEMS___________________
 
-/groupListItems/{groupListId}/{filmId} {
+/groupItems/{groupId}/{filmId} {
   "addedBy": "{userId}",
   "addedAt": 123456789,
   "notes": "We should watch this first"
