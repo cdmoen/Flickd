@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useUserGroups } from "../../modules/useUserGroups";
-import { GroupCard } from "../../components/GroupCard/GroupCard";
+import { deleteGroup, inviteToGroup } from "../../modules/firebaseHelpers";
+import GroupCard from "../../components/GroupCard/GroupCard";
 import CreateGroup from "../../components/CreateGroup/CreateGroup";
+
 import styles from "./Groups.module.css";
 
 export default function Groups() {
@@ -11,6 +13,11 @@ export default function Groups() {
   const [showForm, setShowForm] = useState(false);
 
   function handleDelete(group) {
+    if (!user || !user.uid) {
+      console.error("User not loaded yet");
+      return;
+    }
+
     deleteGroup(group.id, user.uid);
   }
 

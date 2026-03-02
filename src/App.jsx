@@ -12,6 +12,7 @@ import Groups from "./pages/Groups/Groups";
 import Layout from "./components/Layout/Layout";
 import MoviePage from "./pages/MoviePage/MoviePage";
 import Home from "./pages/Home/Home";
+import Group from "./pages/Group/Group";
 
 function App() {
   return (

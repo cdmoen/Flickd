@@ -9,22 +9,41 @@ import {
   remove,
 } from "firebase/database";
 
-/*  ########## INCOMPLETE FUNCTIONS #################
-// function to delete a group
-export async function deleteGroup(groupId, uid) {
-  // implement your permission logic here
-  await remove(ref(database, `groups/${groupId}`));
-  await remove(ref(database, `users/${uid}/groups/${groupId}`));
-}
-
+//########## INCOMPLETE FUNCTIONS #################
 // function to invite a friend to a group
 export function inviteToGroup(groupId) {
   // open modal, send notification, etc.
   console.log("Invite friend to group:", groupId);
 }
 
+// ##############################################################
 
-*/
+// Delete group and remove the user's membership pointer.
+// @param {string} groupId - The ID of the group to delete.
+// @param {string} uid - The ID of the user performing the deletion.
+export async function deleteGroup(groupId, uid) {
+  if (!groupId || !uid) {
+    throw new Error("Missing groupId or uid");
+  }
+
+  try {
+    // Remove the group object
+    await remove(ref(database, `groups/${groupId}`));
+
+    // Remove the membership pointer for the user
+    await remove(ref(database, `users/${uid}/groups/${groupId}`));
+
+    // OPTIONAL: If you later add collaborators or group lists,
+    // you can remove those here as well.
+    // await remove(ref(database, `groupCollaborators/${groupId}`));
+    // await remove(ref(database, `groupLists/${groupId}`));
+
+    return true;
+  } catch (err) {
+    console.error("Error deleting group:", err);
+    throw err;
+  }
+}
 
 // Check if a username is available
 async function reserveUsername(username) {

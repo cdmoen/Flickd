@@ -1,21 +1,13 @@
-import { useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
+import { useParams } from "react-router-dom";
 import styles from "./Group.module.css";
 
-export default function Home() {
-  const { user, logout } = useAuth();
+export default function Group() {
+  const { groupId } = useParams();
 
   return (
-    <>
-      <h1>Example Group</h1>
-      <h2>List of Films</h2>
-      <ul>
-        <li>Film 1</li>
-        <li>Film 2</li>
-        <li>Film 3</li>
-      </ul>
-      <p>Logged in as: {user?.email}</p>
-      <button onClick={logout}>Logout</button>
-    </>
+    <div style={{ padding: "1rem" }}>
+      <h1>Group: {groupId}</h1>
+      <p>Group details will go here.</p>
+    </div>
   );
 }
