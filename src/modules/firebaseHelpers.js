@@ -39,24 +39,37 @@ export { reserveUsername, finalizeUserProfile };
 
 // Create a new group
 async function createGroup(uid, groupName) {
-  const groupsRef = ref(database, "groups");
+  try {
+    // reference the /groups path
+    const groupsRef = ref(database, "groups");
 
-  const newGroupRef = push(groupsRef);
+    // create a new unique key inside the /groups path
+    const newGroupRef = push(groupsRef);
 
-  // Optional: get the generated ID
-  const groupID = newGroupRef.key;
+    // Save the generated key to use below
+    const groupID = newGroupRef.key;
 
-  // Write the group data
-  await set(newGroupRef, {
-    id: groupID,
-    name: groupName,
-    owner: uid,
-    createdAt: Date.now(),
-  });
+    // Write the group data inside the new group that exists in /groups/:groupID
+    await set(newGroupRef, {
+      id: groupID,
+      name: groupName,
+      owner: uid,
+      createdAt: Date.now(),
+    });
 
-  await set(ref(database, `users/${uid}/groups/${groupId}`), true);
-
-  return groupID;
+    /* 
+    Link the group to the creator's profile by creating a reference at /users/:uid/groups/:groupID
+     The data inside /users/:uid/groups will look like this:
+     {
+       [groupID]: true,
+       [groupID]: true
+     }*/
+    await set(ref(database, `users/${uid}/groups/${groupId}`), true);
+    return groupID;
+  } catch (err) {
+    console.error("Error creating group:", err);
+    throw err;
+  }
 }
 
 export { createGroup };

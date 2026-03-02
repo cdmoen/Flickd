@@ -74,10 +74,6 @@ export default function MoviePage() {
           </li>
         </ul>
       </div>
-      <button onClick={() => writeUserData(5, "george", 55)}>ADD GEORGE</button>
-      <button>DELETE GEORGE</button>
-
-      <button onClick={logout}>Logout</button>
     </div>
   );
 }

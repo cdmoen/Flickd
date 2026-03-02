@@ -26,7 +26,7 @@ export default function Register() {
       // First make sure selected username is available
       await reserveUsername(username);
 
-      // If username is available, create new user authentication in Firebase
+      // If username is available, create new Firebase user Authentication (nothing happens to realtime database)
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -34,7 +34,7 @@ export default function Register() {
       );
       const uid = userCredential.user.uid;
 
-      // Create and populate user profile in the realtime database
+      // Create and populate user profile in the realtime database (this is where realtime database is impacted)
       await finalizeUserProfile(uid, username, email);
     } catch (err) {
       setError(err.message || "Unable to create account");
