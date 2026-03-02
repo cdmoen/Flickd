@@ -9,15 +9,13 @@ export default function CreateGroup() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const uid = user.uid;
-
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
     setLoading(true);
 
     try {
-      await createGroup(uid, groupName);
+      await createGroup(user.uid, groupName);
       setGroupName("");
     } catch {
       setError("Could not create group.");

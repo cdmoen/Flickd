@@ -1,6 +1,30 @@
 // firebaseHelpers.js
 import { database } from "../firebase";
-import { ref, runTransaction, update } from "firebase/database";
+import {
+  ref,
+  runTransaction,
+  update,
+  push,
+  set,
+  remove,
+} from "firebase/database";
+
+/*  ########## INCOMPLETE FUNCTIONS #################
+// function to delete a group
+export async function deleteGroup(groupId, uid) {
+  // implement your permission logic here
+  await remove(ref(database, `groups/${groupId}`));
+  await remove(ref(database, `users/${uid}/groups/${groupId}`));
+}
+
+// function to invite a friend to a group
+export function inviteToGroup(groupId) {
+  // open modal, send notification, etc.
+  console.log("Invite friend to group:", groupId);
+}
+
+
+*/
 
 // Check if a username is available
 async function reserveUsername(username) {
@@ -54,6 +78,7 @@ async function createGroup(uid, groupName) {
       id: groupID,
       name: groupName,
       owner: uid,
+      members: [uid],
       createdAt: Date.now(),
     });
 
@@ -64,7 +89,7 @@ async function createGroup(uid, groupName) {
        [groupID]: true,
        [groupID]: true
      }*/
-    await set(ref(database, `users/${uid}/groups/${groupId}`), true);
+    await set(ref(database, `users/${uid}/groups/${groupID}`), true);
     return groupID;
   } catch (err) {
     console.error("Error creating group:", err);

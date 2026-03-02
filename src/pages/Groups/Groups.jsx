@@ -1,13 +1,22 @@
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import { useUserGroups } from "../../modules/useUserGroups";
+import { GroupCard } from "../../components/GroupCard/GroupCard";
 import CreateGroup from "../../components/CreateGroup/CreateGroup";
 import styles from "./Groups.module.css";
 
-import { useState } from "react";
-import CreateGroup from "../components/CreateGroup"; // adjust path as needed
-
 export default function Groups() {
+  const { user } = useAuth();
+  const { groups, loading } = useUserGroups(user?.uid);
   const [showForm, setShowForm] = useState(false);
+
+  function handleDelete(group) {
+    deleteGroup(group.id, user.uid);
+  }
+
+  function handleInvite(group) {
+    inviteToGroup(group.id);
+  }
 
   return (
     <div style={{ padding: "1rem" }}>
@@ -42,11 +51,23 @@ export default function Groups() {
         </div>
       )}
 
-      {/* Placeholder for your actual group list */}
-      <div>
-        <h2>Existing Groups</h2>
-        <p>(Your groups will appear here.)</p>
-      </div>
+      <h2>Existing Groups</h2>
+
+      {loading && <p>Loading groups...</p>}
+
+      {!loading && groups.length === 0 && (
+        <p>You don't belong to any groups yet.</p>
+      )}
+
+      {!loading &&
+        groups.map((group) => (
+          <GroupCard
+            key={group.id}
+            group={group}
+            onDelete={handleDelete}
+            onInvite={handleInvite}
+          />
+        ))}
     </div>
   );
 }

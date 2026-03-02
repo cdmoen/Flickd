@@ -30,6 +30,7 @@ function App() {
             <Route path="/movies/:movieID" element={<MoviePage />} />
             <Route path="/friends" element={<Friends />} />
             <Route path="/groups" element={<Groups />} />
+            <Route path="/groups/:groupId" element={<Group />} />
           </Route>
         </Route>
       </Routes>
