@@ -153,20 +153,12 @@ FRIENDS
 
 /groupCollaborators/{groupId}/{userId}: true
 
-######################################################
-
----
-
-**\*\***\_**\*\***REVERSE LOOKUP COLLABORATOR**\*\*\*\***\_**\*\*\*\***
+# REVERSE LOOKUP COLLABORATOR
 
 (groups a user collaborates on)
 /userGroups/{userId}/{groupId}: true
 
-######################################################
-
----
-
-**\*\*\*\***\_\_\_\_**\*\*\*\***GROUP LIST ITEMS**\*\*\*\***\_\_\_**\*\*\*\***
+# GROUP ITEMS
 
 /groupItems/{groupId}/{filmId} {
 "addedBy": "{userId}",
@@ -174,11 +166,7 @@ FRIENDS
 "notes": "We should watch this first"
 }
 
-######################################################
-
----
-
-\***\*\*\*\*\*\*\***\_\***\*\*\*\*\*\*\***FILM DATA **\*\*\*\***\_\_\_**\*\*\*\***
+# FILM DATA
 
 /films/{filmId} {
 "title": "...",

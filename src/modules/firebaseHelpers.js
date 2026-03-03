@@ -101,3 +101,96 @@ export async function createGroup(uid, groupName) {
 export function inviteToGroup(groupId) {
   console.log("Invite friend to group:", groupId);
 }
+
+/* ============================
+   FRIEND HELPERS
+   ============================ */
+
+// _______ SEND FRIEND REQUEST  _______
+
+export async function sendFriendRequest(myUid, theirUid) {
+  if (!myUid || !theirUid) {
+    throw new Error("Invalid UIDs for friend request");
+  }
+  if (myUid === theirUid) {
+    throw new Error("You cannot friend yourself");
+  }
+
+  const updates = {};
+
+  // You → Them (outgoing)
+  updates[`friendRequestsOutgoing/${myUid}/${theirUid}`] = true;
+
+  // Them → You (incoming)
+  updates[`friendRequestsIncoming/${theirUid}/${myUid}`] = true;
+
+  await update(ref(database), updates);
+}
+
+// _______ ACCEPT FRIEND REQUEST  _______
+
+export async function acceptFriendRequest(myUid, otherUid) {
+  const updates = {};
+
+  // add the new friend's uid to your friends node
+  updates[`friends/${myUid}/${otherUid}`] = true;
+
+  // add your uid to the new friend's friends node
+  updates[`friends/${otherUid}/${myUid}`] = true;
+
+  // clear the 'incoming' request node from friend's account
+  updates[`friendRequestsIncoming/${myUid}/${otherUid}`] = null;
+
+  // clear the 'outgoing' request node from your account
+  updates[`friendRequestsOutgoing/${otherUid}/${myUid}`] = null;
+
+  await update(ref(database), updates);
+}
+
+// _______ REJECT FRIEND REQUEST  _______
+
+export async function rejectFriendRequest(myUid, otherUid) {
+  const updates = {};
+
+  // Remove the 'incoming' request from your user account
+  updates[`friendRequestsIncoming/${myUid}/${otherUid}`] = null;
+
+  // remove the 'outgoing' request from the other user's account
+  updates[`friendRequestsOutgoing/${otherUid}/${myUid}`] = null;
+
+  await update(ref(database), updates);
+}
+
+// _______ CANCEL FRIEND REQUEST _______
+
+export async function cancelFriendRequest(myUid, otherUid) {
+  if (!myUid || !otherUid) {
+    throw new Error("Invalid UIDs for canceling friend request");
+  }
+
+  const updates = {};
+
+  // Remove your outgoing request
+  updates[`friendRequestsOutgoing/${myUid}/${otherUid}`] = null;
+
+  // Remove their incoming request
+  updates[`friendRequestsIncoming/${otherUid}/${myUid}`] = null;
+
+  await update(ref(database), updates);
+}
+
+// _______ DELETE FRIEND _______
+
+export async function deleteFriend(myUid, otherUid) {
+  if (!myUid || !otherUid) {
+    throw new Error("Invalid UIDs for deleting friend");
+  }
+
+  const updates = {};
+
+  // Remove each side of the mutual friendship
+  updates[`friends/${myUid}/${otherUid}`] = null;
+  updates[`friends/${otherUid}/${myUid}`] = null;
+
+  await update(ref(database), updates);
+}

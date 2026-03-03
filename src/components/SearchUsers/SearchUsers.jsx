@@ -10,7 +10,12 @@ import {
 import { database } from "../../firebase";
 import styles from "./SearchUsers.module.css";
 
-export default function SearchUsers({ onSelect }) {
+export default function SearchUsers({
+  friends,
+  incoming,
+  outgoing,
+  onSendRequest,
+}) {
   const [term, setTerm] = useState("");
   const [results, setResults] = useState([]);
 
@@ -23,7 +28,7 @@ export default function SearchUsers({ onSelect }) {
       return;
     }
 
-    const usersRef = ref(database, "users");
+    const usersRef = ref(database, "usersPublic");
     const q = query(
       usersRef,
       orderByChild("username"),
@@ -32,12 +37,26 @@ export default function SearchUsers({ onSelect }) {
     );
 
     const snap = await get(q);
+
     if (snap.exists()) {
       const data = snap.val();
-      setResults(Object.entries(data).map(([uid, user]) => ({ uid, ...user })));
+      const formatted = Object.entries(data).map(([uid, user]) => ({
+        uid,
+        username: user.username,
+      }));
+      setResults(formatted);
     } else {
       setResults([]);
     }
+  }
+
+  function getStatus(uid) {
+    if (friends[uid]) return { label: "Friends", className: styles.friends };
+    if (outgoing[uid])
+      return { label: "Request sent", className: styles.outgoing };
+    if (incoming[uid])
+      return { label: "Requested you", className: styles.incoming };
+    return { label: "Not friends", className: styles.notFriends };
   }
 
   return (
@@ -51,20 +70,28 @@ export default function SearchUsers({ onSelect }) {
       />
 
       <div className={styles.results}>
-        {results.map((user) => (
-          <div
-            key={user.uid}
-            className={styles.resultRow}
-            onClick={() => onSelect(user)}
-          >
-            <span className={styles.username}>{user.username}</span>
+        {results.map((user) => {
+          const status = getStatus(user.uid);
 
-            <span className={styles.status}>
-              {/* placeholder — will show real status later */}
-              Status
-            </span>
-          </div>
-        ))}
+          return (
+            <div key={user.uid} className={styles.resultRow}>
+              <span className={styles.username}>{user.username}</span>
+
+              <span className={`${styles.status} ${status.className}`}>
+                {status.label}
+              </span>
+
+              {status.label === "Not friends" && (
+                <button
+                  className={styles.addButton}
+                  onClick={() => onSendRequest(user.uid)}
+                >
+                  Add Friend
+                </button>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
