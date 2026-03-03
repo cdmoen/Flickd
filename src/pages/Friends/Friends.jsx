@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import SearchUsers from "../../components/SearchUsers/SearchUsers";
 import styles from "./Friends.module.css";
 
 export default function Friends() {
@@ -7,6 +8,7 @@ export default function Friends() {
 
   return (
     <>
+      <SearchUsers />
       <h1>Friends</h1>
       <p>Logged in as: {user?.email}</p>
       <h2>Friend List Example</h2>

@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import NavFriends from "../NavFriends/NavFriends";
 import styles from "./NavBar.module.css";
 
 export default function NavBar() {
@@ -13,14 +14,7 @@ export default function NavBar() {
         Home
       </NavLink>
 
-      <NavLink
-        to="/friends"
-        className={({ isActive }) =>
-          isActive ? `${styles.link} ${styles.active}` : styles.link
-        }
-      >
-        Friends
-      </NavLink>
+      <NavFriends />
 
       <NavLink
         to="/groups"

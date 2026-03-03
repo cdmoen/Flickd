@@ -1,0 +1,23 @@
+.friendsButton {
+  position: relative;
+  background: none;
+  border: none;
+  color: rgb(51, 51, 51);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.pending {
+  color: #4a90e2;
+  font-weight: 600;
+}
+
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+}
