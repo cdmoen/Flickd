@@ -6,6 +6,7 @@ import {
   push,
   set,
   remove,
+  get,
 } from "firebase/database";
 
 /* ============================
@@ -60,6 +61,33 @@ export async function finalizeUserProfile(uid, username, email) {
    GROUP HELPERS
    ============================ */
 
+// _______ CREATE GROUP _______
+export async function createGroup(uid, groupName) {
+  try {
+    const groupsRef = ref(database, "groups");
+    const newGroupRef = push(groupsRef);
+    const groupID = newGroupRef.key;
+
+    await set(newGroupRef, {
+      id: groupID,
+      name: groupName,
+      createdBy: uid,
+      members: {
+        [uid]: true,
+      },
+      createdAt: Date.now(),
+    });
+
+    // Add membership pointer under the user
+    await set(ref(database, `users/${uid}/groups/${groupID}`), true);
+
+    return groupID;
+  } catch (err) {
+    console.error("Error creating group:", err);
+    throw err;
+  }
+}
+
 // _______ DELETE GROUP _______
 export async function deleteGroup(groupId, uid) {
   if (!groupId || !uid) throw new Error("Missing groupId or uid");
@@ -74,32 +102,98 @@ export async function deleteGroup(groupId, uid) {
   }
 }
 
-// _______ CREATE GROUP _______
-export async function createGroup(uid, groupName) {
-  try {
-    const groupsRef = ref(database, "groups");
-    const newGroupRef = push(groupsRef);
-    const groupID = newGroupRef.key;
-
-    await set(newGroupRef, {
-      id: groupID,
-      name: groupName,
-      owner: uid,
-      members: [uid],
-      createdAt: Date.now(),
-    });
-
-    await set(ref(database, `users/${uid}/groups/${groupID}`), true);
-    return groupID;
-  } catch (err) {
-    console.error("Error creating group:", err);
-    throw err;
+// _______ INVITE TO GROUP _______
+export async function inviteToGroup(groupId, fromUid, toUid) {
+  if (!groupId || !fromUid || !toUid) {
+    throw new Error("Invalid arguments for inviteToGroup");
   }
+
+  const updates = {};
+
+  // Outgoing: you → them
+  updates[`groupInvitesOutgoing/${fromUid}/${groupId}/${toUid}`] = true;
+
+  // Incoming: them ← you
+  updates[`groupInvitesIncoming/${toUid}/${groupId}`] = {
+    from: fromUid,
+    groupId: groupId,
+    timestamp: Date.now(),
+  };
+
+  await update(ref(database), updates);
 }
 
-// _______ INVITE TO GROUP _______ (unfinished)
-export function inviteToGroup(groupId) {
-  console.log("Invite friend to group:", groupId);
+// _______ ACCEPT GROUP INVITE _______
+
+export async function acceptGroupInvite(uid, groupId) {
+  const updates = {};
+
+  // Add member
+  updates[`groups/${groupId}/members/${uid}`] = true;
+
+  // Read the incoming invite to get the inviter UID
+  const incomingSnap = await get(
+    ref(database, `groupInvitesIncoming/${uid}/${groupId}`),
+  );
+
+  let inviterUid = null;
+  if (incomingSnap.exists()) {
+    inviterUid = incomingSnap.val().from;
+  }
+
+  // Remove incoming invite
+  updates[`groupInvitesIncoming/${uid}/${groupId}`] = null;
+
+  // Remove outgoing invite (only one inviter)
+  if (inviterUid) {
+    updates[`groupInvitesOutgoing/${inviterUid}/${groupId}/${uid}`] = null;
+  }
+
+  await update(ref(database), updates);
+}
+
+// _______ REJECT GROUP INVITE  _______
+export async function rejectGroupInvite(uid, groupId) {
+  if (!uid || !groupId) {
+    throw new Error("Invalid arguments for rejectGroupInvite");
+  }
+
+  const updates = {};
+
+  // Remove incoming invite
+  updates[`groupInvitesIncoming/${uid}/${groupId}`] = null;
+
+  // Remove outgoing invites from any inviter
+  const snap = await get(ref(database, `groupInvitesOutgoing`));
+
+  if (snap.exists()) {
+    const allOutgoing = snap.val();
+
+    for (const inviterUid in allOutgoing) {
+      if (allOutgoing[inviterUid][groupId]?.[uid]) {
+        updates[`groupInvitesOutgoing/${inviterUid}/${groupId}/${uid}`] = null;
+      }
+    }
+  }
+
+  await update(ref(database), updates);
+}
+
+// _______ CANCEL GROUP INVITE _______
+export async function cancelGroupInvite(fromUid, groupId, toUid) {
+  if (!fromUid || !groupId || !toUid) {
+    throw new Error("Invalid arguments for cancelGroupInvite");
+  }
+
+  const updates = {};
+
+  // Remove outgoing invite
+  updates[`groupInvitesOutgoing/${fromUid}/${groupId}/${toUid}`] = null;
+
+  // Remove incoming invite
+  updates[`groupInvitesIncoming/${toUid}/${groupId}`] = null;
+
+  await update(ref(database), updates);
 }
 
 /* ============================
