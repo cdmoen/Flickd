@@ -4,6 +4,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { database } from "../../firebase";
 import { useUserGroups } from "../../hooks/useUserGroups";
 import { useFriends } from "../../hooks/useFriends";
+import { useGroupOutgoingInvites } from "../../hooks/useGroupOutgoingInvites";
 import {
   deleteGroup,
   acceptGroupInvite,
@@ -25,7 +26,7 @@ export default function Groups() {
   const { groups, loading } = useUserGroups(uid);
 
   // Load the user's friends for the bottom sheet
-  const { friends } = useFriends(uid); // NEW
+  const { friends } = useFriends(uid);
 
   // Invite state
   const [incomingInvites, setIncomingInvites] = useState({});
@@ -37,6 +38,12 @@ export default function Groups() {
 
   // Create group form toggle
   const [showForm, setShowForm] = useState(false);
+
+  // Retrieve list of friends who have already been invited to a selected group
+  const invited = useGroupOutgoingInvites(uid, selectedGroupId);
+
+  // Filter out the already-invited friends to only display friends who could still be invited to a group
+  const filteredFriends = friends.filter((f) => !invited.includes(f.uid));
 
   // ---------------------------------------------------------
   // SUBSCRIPTIONS FOR INCOMING + OUTGOING GROUP INVITES
@@ -73,6 +80,12 @@ export default function Groups() {
   function handleInvite(group) {
     setSelectedGroupId(group.id);
     setIsPickerOpen(true);
+  }
+
+  // Close the friend picker sheet
+  function onClose() {
+    setIsPickerOpen(false);
+    setSelectedGroupId(null);
   }
 
   return (
@@ -186,10 +199,10 @@ export default function Groups() {
       --------------------------------------------------------- */}
       <FriendPickerSheet
         isOpen={isPickerOpen}
-        onClose={() => setIsPickerOpen(false)}
+        onClose={onClose}
         groupId={selectedGroupId}
         uid={uid}
-        friends={friends} // from useFriends hook
+        friends={filteredFriends}
       />
     </div>
   );

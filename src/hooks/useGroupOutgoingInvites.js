@@ -1,5 +1,6 @@
 import { ref, onValue } from "firebase/database";
-import { database } from "../modules/firebase";
+import { database } from "../firebase";
+import { useEffect, useState } from "react";
 
 export function useGroupOutgoingInvites(uid, groupId) {
   const [invited, setInvited] = useState([]);

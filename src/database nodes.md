@@ -149,9 +149,9 @@ FRIENDS
 "createdBy": "{userId}"
 }
 
-# GROUP COLLABORATORS
+# GROUP Members
 
-/groupCollaborators/{groupId}/{userId}: true
+/groupMembers/{groupId}/{userId}: true
 
 # REVERSE LOOKUP COLLABORATOR
 
