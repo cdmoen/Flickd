@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import styles from "./Home.module.css";
 
-export default function Home() {
+export default function HomePage() {
   const { user, logout, profile, loading } = useAuth();
 
   return (

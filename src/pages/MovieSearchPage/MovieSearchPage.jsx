@@ -1,9 +1,9 @@
 import { useState } from "react";
-import MovieCard from "../../components/MovieCard/MovieCard";
+import MovieCard from "./MovieCard";
 import { fetchMovieSearch } from "../../modules/fetchers";
 import styles from "./MovieSearch.module.css";
 
-export default function MovieSearch() {
+export default function MovieSearchPage() {
   const [searchParams, setSearchParams] = useState("");
   const [searchResults, setSearchResults] = useState(null);
   const [movieIDs, setMovieIDs] = useState([]);

@@ -9,7 +9,7 @@ import {
 } from "../../modules/firebaseHelpers";
 import styles from "./Register.module.css";
 
-export default function Register() {
+export default function RegisterPage() {
   const { user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -5,7 +5,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { Link, Navigate } from "react-router-dom";
 import styles from "./Login.module.css";
 
-export default function Login() {
+export default function LoginPage() {
   const { user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

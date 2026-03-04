@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ref, onValue, get } from "firebase/database";
 import { useAuth } from "../../contexts/AuthContext";
 import { database } from "../../modules/firebase";
-import SearchUsers from "../../components/SearchUsers/SearchUsers";
+import SearchUsers from "./SearchUsers";
 import {
   sendFriendRequest,
   acceptFriendRequest,
@@ -12,7 +12,7 @@ import {
 } from "../../modules/firebaseHelpers";
 import styles from "./Friends.module.css";
 
-export default function Friends() {
+export default function FriendsPage() {
   const { user, logout } = useAuth();
   const uid = user?.uid;
 

@@ -8,6 +8,7 @@ import {
   remove,
   get,
 } from "firebase/database";
+import { fetchMovieInfo } from "./fetchers";
 
 /* ============================
    USER REGISTRATION HELPERS
@@ -194,6 +195,32 @@ export async function cancelGroupInvite(fromUid, groupId, toUid) {
   updates[`groupInvitesIncoming/${toUid}/${groupId}`] = null;
 
   await update(ref(database), updates);
+}
+
+// _________ADD FILM TO GROUP___________
+
+export async function addFilmToGroup(groupId, uid, tmdbId) {
+  // 1. Fetch metadata from TMDB
+  try {
+    const movie = await fetchMovieInfo(tmdbId);
+  } catch (err) {
+    console.log("fetchMovieInfo from TMDB failed");
+    return false;
+  }
+  // 2. Build the Firebase path
+  // Using tmdbId as the filmId keeps things simple and avoids duplicates
+  const filmRef = ref(database, `groups/${groupId}/films/${tmdbId}`);
+
+  // 3. Write the film object into Firebase
+  await set(filmRef, {
+    title: movie.title,
+    tmdbId: movie.tmdbId,
+    posterUrl: movie.posterUrl,
+    addedBy: uid,
+    addedAt: Date.now(),
+  });
+
+  return true;
 }
 
 /* ============================

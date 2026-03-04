@@ -12,13 +12,13 @@ import {
   cancelGroupInvite,
 } from "../../modules/firebaseHelpers";
 
-import GroupCard from "../../components/GroupCard/GroupCard";
-import CreateGroup from "../../components/CreateGroup/CreateGroup";
-import FriendPickerSheet from "../../components/FriendPickerSheet/FriendPickerSheet"; // NEW COMPONENT
+import GroupCard from "./GroupCard";
+import CreateGroup from "./CreateGroup";
+import FriendPickerSheet from "./FriendPickerSheet";
 
 import styles from "./Groups.module.css";
 
-export default function Groups() {
+export default function GroupsPage() {
   const { user } = useAuth();
   const uid = user?.uid;
 
