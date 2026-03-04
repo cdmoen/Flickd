@@ -5,7 +5,7 @@ import { ref, onValue } from "firebase/database";
 import { database } from "../../modules/firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import FilmCard from "./FilmCard";
-import styles from "./Group.module.css";
+import styles from "./GroupPage.module.css";
 
 export default function GroupPage() {
   const { user } = useAuth();

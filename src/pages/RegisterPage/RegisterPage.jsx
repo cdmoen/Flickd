@@ -7,7 +7,7 @@ import {
   reserveUsername,
   finalizeUserProfile,
 } from "../../modules/firebaseHelpers";
-import styles from "./Register.module.css";
+import styles from "./RegisterPage.module.css";
 
 export default function RegisterPage() {
   const { user } = useAuth();

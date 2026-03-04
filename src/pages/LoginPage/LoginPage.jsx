@@ -3,7 +3,7 @@ import { auth } from "../../modules/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, Navigate } from "react-router-dom";
-import styles from "./Login.module.css";
+import styles from "./LoginPage.module.css";
 
 export default function LoginPage() {
   const { user } = useAuth();

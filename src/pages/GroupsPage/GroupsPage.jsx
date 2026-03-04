@@ -16,7 +16,7 @@ import GroupCard from "./GroupCard";
 import CreateGroup from "./CreateGroup";
 import FriendPickerSheet from "./FriendPickerSheet";
 
-import styles from "./Groups.module.css";
+import styles from "./GroupsPage.module.css";
 
 export default function GroupsPage() {
   const { user } = useAuth();

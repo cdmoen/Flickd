@@ -10,7 +10,7 @@ import {
   cancelFriendRequest,
   deleteFriend,
 } from "../../modules/firebaseHelpers";
-import styles from "./Friends.module.css";
+import styles from "./FriendsPage.module.css";
 
 export default function FriendsPage() {
   const { user, logout } = useAuth();

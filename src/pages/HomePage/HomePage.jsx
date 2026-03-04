@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import styles from "./Home.module.css";
+import styles from "./HomePage.module.css";
 
 export default function HomePage() {
   const { user, logout, profile, loading } = useAuth();
