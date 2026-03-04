@@ -3,13 +3,11 @@ import { ref, onValue, get } from "firebase/database";
 import { useAuth } from "../../contexts/AuthContext";
 import { database } from "../../modules/firebase";
 import SearchUsers from "./SearchUsers";
-import {
-  sendFriendRequest,
-  acceptFriendRequest,
-  rejectFriendRequest,
-  cancelFriendRequest,
-  deleteFriend,
-} from "../../modules/firebaseHelpers";
+import { sendFriendRequest } from "../../modules//friends/sendFriendRequest";
+import { acceptFriendRequest } from "../../modules/friends/acceptFriendRequest";
+import { rejectFriendRequest } from "../../modules/friends/rejectFriendRequest";
+import { cancelFriendRequest } from "../../modules/friends/cancelFriendRequest";
+import { deleteFriend } from "../../modules/friends/deleteFriend";
 import styles from "./FriendsPage.module.css";
 
 export default function FriendsPage() {

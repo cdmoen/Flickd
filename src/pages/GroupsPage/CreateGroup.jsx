@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createGroup } from "../../modules/firebaseHelpers";
+import { createGroup } from "../../modules/groups/createGroup";
 import { useAuth } from "../../contexts/AuthContext";
 import styles from "./CreateGroup.module.css";
 

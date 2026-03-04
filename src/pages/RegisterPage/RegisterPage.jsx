@@ -3,10 +3,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../modules/firebase";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import {
-  reserveUsername,
-  finalizeUserProfile,
-} from "../../modules/firebaseHelpers";
+import { finalizeUserProfile } from "../../modules/users/finalizeUserProfile";
+import { reserveUsername } from "../../modules/users/reserveUsername";
 import styles from "./RegisterPage.module.css";
 
 export default function RegisterPage() {

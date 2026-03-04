@@ -5,12 +5,10 @@ import { database } from "../../modules/firebase";
 import { useUserGroups } from "../../hooks/useUserGroups";
 import { useFriends } from "../../hooks/useFriends";
 import { useGroupOutgoingInvites } from "../../hooks/useGroupOutgoingInvites";
-import {
-  deleteGroup,
-  acceptGroupInvite,
-  rejectGroupInvite,
-  cancelGroupInvite,
-} from "../../modules/firebaseHelpers";
+import { cancelGroupInvite } from "../../modules/groups/cancelGroupInvite";
+import { acceptGroupInvite } from "../../modules/groups/acceptGroupInvite";
+import { rejectGroupInvite } from "../../modules/groups/rejectGroupInvite";
+import { deleteGroup } from "../../modules/groups/deleteGroup";
 
 import GroupCard from "./GroupCard";
 import CreateGroup from "./CreateGroup";

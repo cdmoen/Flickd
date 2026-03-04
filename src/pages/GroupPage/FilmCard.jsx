@@ -1,5 +1,6 @@
 import { ref, set, push, remove } from "firebase/database";
 import { database } from "../../modules/firebase";
+import styles from "./FilmCard.module.css";
 
 export default function FilmCard({ film, filmId, groupId, uid }) {
   const rating = film.ratings?.[uid] ?? null;
@@ -40,19 +41,32 @@ export default function FilmCard({ film, filmId, groupId, uid }) {
   }
 
   return (
-    <div className="film-card">
-      <img src={film.posterUrl} alt={film.title} className="poster" />
+    <div className={styles.card}>
+      <img src={film.posterURL} alt={film.title} className={styles.poster} />
 
-      <div className="info">
-        <h2>
+      <div className={styles.info}>
+        <h2 className={styles.title}>
           <a href={`/film/${film.tmdbId}`}>{film.title}</a>
         </h2>
+        <p>{film.releaseYear}</p>
+        <p>Genre: {film.genres}</p>
 
-        <div className="actions">
-          <button onClick={() => handleRate(8)}>Rate</button>
-          <button onClick={toggleSeen}>{seen ? "Seen ✓" : "Mark Seen"}</button>
-          <button onClick={() => addComment("Nice pick!")}>Comment</button>
-          <button onClick={removeFilm}>Remove</button>
+        <div className={styles.actions}>
+          <button className={styles.button} onClick={() => handleRate(8)}>
+            Rate
+          </button>
+          <button className={styles.button} onClick={toggleSeen}>
+            {seen ? "Seen ✓" : "Mark Seen"}
+          </button>
+          <button
+            className={styles.button}
+            onClick={() => addComment("Nice pick!")}
+          >
+            Comment
+          </button>
+          <button className={styles.button} onClick={removeFilm}>
+            Remove
+          </button>
         </div>
       </div>
     </div>

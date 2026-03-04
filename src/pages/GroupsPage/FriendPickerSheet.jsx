@@ -1,4 +1,4 @@
-import { inviteToGroup } from "../../modules/firebaseHelpers";
+import { inviteToGroup } from "../../modules/groups/inviteToGroup";
 import { useGroupOutgoingInvites } from "../../hooks/useGroupOutgoingInvites";
 import styles from "./FriendPickerSheet.module.css";
 

@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { deleteGroup } from "../../modules/firebaseHelpers";
 import { useAuth } from "../../contexts/AuthContext";
 import styles from "./GroupCard.module.css";
 

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { database } from "../../modules/firebase";
 import { useAuth } from "../../contexts/AuthContext";
+import AddFilmSheet from "./AddFilmSheet";
 import FilmCard from "./FilmCard";
 import styles from "./GroupPage.module.css";
 
@@ -12,8 +13,12 @@ export default function GroupPage() {
   const uid = user.uid;
   const { groupId } = useParams();
   const films = useGroupFilms(groupId);
-
   const [group, setGroup] = useState(null);
+  const [addFilmSheetIsOpen, setAddFilmSheetIsOpen] = useState(false);
+
+  function handleAddFilm() {
+    setAddFilmSheetIsOpen(true);
+  }
 
   useEffect(() => {
     const groupRef = ref(database, `groups/${groupId}`);
@@ -26,14 +31,18 @@ export default function GroupPage() {
 
   if (!group) return <div>Loading group…</div>;
 
+  console.log(films);
+
   return (
-    <div className="group-page">
-      <header className="group-header">
+    <div className={styles.groupPage}>
+      <header className={styles.groupHeader}>
         <h1>{group.name}</h1>
-        <button className="add-film-btn">Add Film</button>
+        <button className={styles.addFilmBtn} onClick={handleAddFilm}>
+          Add Film
+        </button>
       </header>
 
-      <div className="film-list">
+      <div className={styles.filmList}>
         {films.map((film) => (
           <FilmCard
             key={film.id}
@@ -44,6 +53,13 @@ export default function GroupPage() {
           />
         ))}
       </div>
+
+      <AddFilmSheet
+        groupId={groupId}
+        uid={uid}
+        onClose={() => setAddFilmSheetIsOpen(false)}
+        isOpen={addFilmSheetIsOpen}
+      />
     </div>
   );
 }
