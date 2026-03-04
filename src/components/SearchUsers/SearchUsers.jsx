@@ -7,7 +7,7 @@ import {
   endAt,
   get,
 } from "firebase/database";
-import { database } from "../../firebase";
+import { database } from "../../modules/firebase";
 import styles from "./SearchUsers.module.css";
 
 export default function SearchUsers({

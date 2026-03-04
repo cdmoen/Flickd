@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ref, onValue } from "firebase/database";
 import { useAuth } from "../../contexts/AuthContext";
-import { database } from "../../firebase";
+import { database } from "../../modules/firebase";
 import { useUserGroups } from "../../hooks/useUserGroups";
 import { useFriends } from "../../hooks/useFriends";
 import { useGroupOutgoingInvites } from "../../hooks/useGroupOutgoingInvites";

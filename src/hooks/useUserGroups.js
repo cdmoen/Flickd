@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ref, onValue, get } from "firebase/database";
-import { database } from "../firebase";
+import { database } from "../modules/firebase";
 
 /**
  * useUserGroups(uid)

@@ -1,5 +1,5 @@
 import { ref, onValue } from "firebase/database";
-import { database } from "../firebase";
+import { database } from "../modules/firebase";
 import { useEffect, useState } from "react";
 
 export function useGroupOutgoingInvites(uid, groupId) {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ref, onValue, get } from "firebase/database";
 import { useAuth } from "../../contexts/AuthContext";
-import { database } from "../../firebase";
+import { database } from "../../modules/firebase";
 import SearchUsers from "../../components/SearchUsers/SearchUsers";
 import {
   sendFriendRequest,
