@@ -45,8 +45,7 @@ export default function MoviePage() {
 
   return (
     <div className="movie-container">
-      <h1>Home</h1>
-      <p>Logged in as: {user?.email}</p>
+      <h1>{movie.title}</h1>
       <img
         className="movie-poster"
         src={`https://image.tmdb.org/t/p/w780/${movie.backdrop_path || "ss4GSbqZy2xKumjWD48dU2cZQ31.jpg"}`}
@@ -54,7 +53,6 @@ export default function MoviePage() {
       />
 
       <div className="movie-info">
-        <h1 className="movie-title">{movie.title}</h1>
         <p className="movie-year">
           {movie.release_date.slice(0, 4)} •{" "}
           {movie.genres?.map((genre) => genre.name).join(", ")}

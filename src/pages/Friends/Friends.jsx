@@ -67,17 +67,14 @@ export default function Friends() {
 
   return (
     <div className={styles.container}>
+      <h1>Friends</h1>
       <h2 className={styles.sectionTitle}>Add Friends</h2>
-
       <SearchUsers
         friends={friends}
         incoming={incoming}
         outgoing={outgoing}
         onSendRequest={(otherUid) => sendFriendRequest(uid, otherUid)}
       />
-
-      <h1>Friends</h1>
-      <p>Logged in as: {user?.email}</p>
 
       {/* FRIEND LIST */}
       <h2 className={styles.sectionTitle}>Your Friends</h2>

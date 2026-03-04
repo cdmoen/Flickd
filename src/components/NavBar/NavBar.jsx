@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import NavFriends from "../NavFriends/NavFriends";
 import styles from "./NavBar.module.css";
 
 export default function NavBar() {
+  const { user, profile } = useAuth();
+
   return (
     <nav className={styles.navbar}>
       <NavLink
@@ -33,6 +36,8 @@ export default function NavBar() {
       >
         Search Movies
       </NavLink>
+
+      <span className={styles.loginStatus}>Welcome, {profile?.username}!</span>
     </nav>
   );
 }
