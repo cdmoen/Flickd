@@ -3,13 +3,7 @@ import { ref, onValue } from "firebase/database";
 import { database } from "../../modules/firebase";
 import styles from "./SeenSheet.module.css";
 
-export default function SeenSheet({
-  isOpen,
-  onClose,
-  groupId,
-  filmId,
-  profile,
-}) {
+export default function SeenSheet({ isOpen, onClose, groupId, filmId }) {
   const [seen, setSeen] = useState({});
 
   useEffect(() => {
@@ -31,7 +25,7 @@ export default function SeenSheet({
         <div className={styles.list}>
           {Object.entries(seen).map(([uid, value]) => (
             <div key={uid} className={styles.row}>
-              <span className={styles.user}>{uid}</span>
+              <span className={styles.user}>{value.username}</span>
               <span className={styles.status}>{value ? "✓" : "✗"}</span>
             </div>
           ))}

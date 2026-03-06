@@ -32,10 +32,10 @@ export default function RatingsSheet({
         <h2>Ratings</h2>
 
         <div className={styles.list}>
-          {Object.entries(ratings).map(([uid, stars]) => (
+          {Object.entries(ratings).map(([uid, value]) => (
             <div key={uid} className={styles.row}>
-              <span className={styles.user}>{uid}</span>
-              <span className={styles.stars}>{stars} ★</span>
+              <span className={styles.user}>{value.username}</span>
+              <span className={styles.stars}>{value.rating} ★</span>
             </div>
           ))}
         </div>

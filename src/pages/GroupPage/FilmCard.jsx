@@ -2,12 +2,29 @@ import { useState } from "react";
 import CommentsSheet from "./CommentsSheet";
 import RatingsSheet from "./RatingsSheet";
 import SeenSheet from "./SeenSheet";
+import {
+  markFilmAsViewed,
+  rateFilm,
+} from "../../modules/groups/filmInteractions";
+import { useFriends } from "../../hooks/useFriends";
 import styles from "./FilmCard.module.css";
 
 export default function FilmCard({ film, filmId, groupId, uid, profile }) {
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [ratingsOpen, setRatingsOpen] = useState(false);
   const [seenOpen, setSeenOpen] = useState(false);
+  const { friends } = useFriends(uid);
+
+  // Quick actions
+  function handleViewed() {
+    markFilmAsViewed(groupId, filmId, uid, profile);
+    setSeenOpen(true); // optional: open sheet after marking
+  }
+
+  function handleQuickRating(rating) {
+    rateFilm(groupId, filmId, uid, rating, profile);
+    setRatingsOpen(true); // optional: open sheet after rating
+  }
 
   return (
     <>
@@ -22,6 +39,23 @@ export default function FilmCard({ film, filmId, groupId, uid, profile }) {
             <button onClick={() => setRatingsOpen(true)}>Ratings</button>
             <button onClick={() => setSeenOpen(true)}>Viewed</button>
           </div>
+
+          {/* NEW QUICK ACTIONS */}
+          <div className={styles.quickActions}>
+            <button onClick={handleViewed}>I've Viewed This</button>
+
+            <div className={styles.ratingRow}>
+              {[1, 2, 3, 4, 5].map((n) => (
+                <button
+                  key={n}
+                  className={styles.ratingStar}
+                  onClick={() => handleQuickRating(n)}
+                >
+                  {n}★
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -32,6 +66,7 @@ export default function FilmCard({ film, filmId, groupId, uid, profile }) {
         filmId={filmId}
         uid={uid}
         profile={profile}
+        friends={friends}
       />
 
       <RatingsSheet
@@ -40,6 +75,7 @@ export default function FilmCard({ film, filmId, groupId, uid, profile }) {
         groupId={groupId}
         filmId={filmId}
         profile={profile}
+        friends={friends}
       />
 
       <SeenSheet
@@ -48,6 +84,7 @@ export default function FilmCard({ film, filmId, groupId, uid, profile }) {
         groupId={groupId}
         filmId={filmId}
         profile={profile}
+        friends={friends}
       />
     </>
   );

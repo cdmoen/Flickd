@@ -52,3 +52,29 @@
 .button:hover {
   background: #444;
 }
+
+.quickActions {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ratingRow {
+  display: flex;
+  gap: 4px;
+}
+
+.ratingStar {
+  background: #222;
+  border: 1px solid #444;
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #ffd700;
+  font-size: 0.85rem;
+}
+
+.ratingStar:hover {
+  background: #333;
+}
