@@ -45,12 +45,11 @@ export function topThreeStars(movieInfo) {
 // Takes in movieInfo object and returns director
 export function director(movieInfo) {
   const crew = movieInfo.credits.crew;
-  const director = crew.map((member) => {
-    if (member.job === "Director") {
-      return member.name;
-    }
-  });
-  return director;
+  const director = crew.find((member) => member.job === "Director");
+  if (!director) {
+    return null;
+  }
+  return director.name;
 }
 
 // Takes in movieInfo object and returns youtube embed code

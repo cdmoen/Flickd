@@ -10,8 +10,14 @@ import { database } from "../modules/firebase";
  * 2. Fetches each friend's public profile from usersPublic/{friendUid}.
  *
  * Returns:
- * - friends: array of { uid, username, ... }
- * - loading: boolean
+ * - friends: an ARRAY of friend objects like so: 
+        [
+          { uid, username, avatarUrl, ... }, 
+          {uid, username, avatarUrl, ...}
+        ]
+ * 
+ * 
+ * - loading: a boolean
  *
  * This mirrors the structure of useUserGroups and keeps all friend-loading
  * logic in one place so components stay clean and focused.

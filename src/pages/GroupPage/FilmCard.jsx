@@ -1,74 +1,54 @@
-import { ref, set, push, remove } from "firebase/database";
-import { database } from "../../modules/firebase";
+import { useState } from "react";
+import CommentsSheet from "./CommentsSheet";
+import RatingsSheet from "./RatingsSheet";
+import SeenSheet from "./SeenSheet";
 import styles from "./FilmCard.module.css";
 
-export default function FilmCard({ film, filmId, groupId, uid }) {
-  const rating = film.ratings?.[uid] ?? null;
-  const seen = film.seen?.[uid] ?? false;
-
-  function handleRate(value) {
-    const ratingRef = ref(
-      database,
-      `groups/${groupId}/films/${filmId}/ratings/${uid}`,
-    );
-    set(ratingRef, value);
-  }
-
-  function toggleSeen() {
-    const seenRef = ref(
-      database,
-      `groups/${groupId}/films/${filmId}/seen/${uid}`,
-    );
-    set(seenRef, !seen);
-  }
-
-  function addComment(text) {
-    const commentsRef = ref(
-      database,
-      `groups/${groupId}/films/${filmId}/comments`,
-    );
-    const newCommentRef = push(commentsRef);
-    set(newCommentRef, {
-      uid,
-      text,
-      timestamp: Date.now(),
-    });
-  }
-
-  function removeFilm() {
-    const filmRef = ref(database, `groups/${groupId}/films/${filmId}`);
-    remove(filmRef);
-  }
+export default function FilmCard({ film, filmId, groupId, uid, profile }) {
+  const [commentsOpen, setCommentsOpen] = useState(false);
+  const [ratingsOpen, setRatingsOpen] = useState(false);
+  const [seenOpen, setSeenOpen] = useState(false);
 
   return (
-    <div className={styles.card}>
-      <img src={film.posterURL} alt={film.title} className={styles.poster} />
+    <>
+      <div className={styles.card}>
+        <img src={film.posterURL} className={styles.poster} />
 
-      <div className={styles.info}>
-        <h2 className={styles.title}>
-          <a href={`/film/${film.tmdbId}`}>{film.title}</a>
-        </h2>
-        <p>{film.releaseYear}</p>
-        <p>Genre: {film.genres}</p>
+        <div className={styles.info}>
+          <h3 className={styles.title}>{film.title}</h3>
 
-        <div className={styles.actions}>
-          <button className={styles.button} onClick={() => handleRate(8)}>
-            Rate
-          </button>
-          <button className={styles.button} onClick={toggleSeen}>
-            {seen ? "Seen ✓" : "Mark Seen"}
-          </button>
-          <button
-            className={styles.button}
-            onClick={() => addComment("Nice pick!")}
-          >
-            Comment
-          </button>
-          <button className={styles.button} onClick={removeFilm}>
-            Remove
-          </button>
+          <div className={styles.actions}>
+            <button onClick={() => setCommentsOpen(true)}>Comments</button>
+            <button onClick={() => setRatingsOpen(true)}>Ratings</button>
+            <button onClick={() => setSeenOpen(true)}>Viewed</button>
+          </div>
         </div>
       </div>
-    </div>
+
+      <CommentsSheet
+        isOpen={commentsOpen}
+        onClose={() => setCommentsOpen(false)}
+        groupId={groupId}
+        filmId={filmId}
+        uid={uid}
+        profile={profile}
+      />
+
+      <RatingsSheet
+        isOpen={ratingsOpen}
+        onClose={() => setRatingsOpen(false)}
+        groupId={groupId}
+        filmId={filmId}
+        profile={profile}
+      />
+
+      <SeenSheet
+        isOpen={seenOpen}
+        onClose={() => setSeenOpen(false)}
+        groupId={groupId}
+        filmId={filmId}
+        profile={profile}
+      />
+    </>
   );
 }

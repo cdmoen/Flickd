@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ref, onValue } from "firebase/database";
 import { useAuth } from "../../contexts/AuthContext";
 import { database } from "../../modules/firebase";
+
 import { useUserGroups } from "../../hooks/useUserGroups";
+import { useIncomingInviteGroups } from "../../hooks/useIncomingInviteGroups";
 import { useFriends } from "../../hooks/useFriends";
 import { useGroupOutgoingInvites } from "../../hooks/useGroupOutgoingInvites";
+
 import { cancelGroupInvite } from "../../modules/groups/cancelGroupInvite";
 import { acceptGroupInvite } from "../../modules/groups/acceptGroupInvite";
 import { rejectGroupInvite } from "../../modules/groups/rejectGroupInvite";
@@ -20,32 +23,31 @@ export default function GroupsPage() {
   const { user } = useAuth();
   const uid = user?.uid;
 
-  // Load groups the user belongs to
-  const { groups, loading } = useUserGroups(uid);
+  // Groups the user belongs to
+  const { groups: userGroups, loading } = useUserGroups(uid);
 
-  // Load the user's friends for the bottom sheet
+  // Friends
   const { friends } = useFriends(uid);
 
   // Invite state
   const [incomingInvites, setIncomingInvites] = useState({});
   const [outgoingInvites, setOutgoingInvites] = useState({});
 
-  // Bottom sheet state
+  // Load metadata for groups the user is invited to
+  const incomingInviteGroups = useIncomingInviteGroups(incomingInvites);
+
+  // Bottom sheet
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [selectedGroupId, setSelectedGroupId] = useState(null);
 
   // Create group form toggle
   const [showForm, setShowForm] = useState(false);
 
-  // Retrieve list of friends who have already been invited to a selected group
+  // Outgoing invites for selected group
   const invited = useGroupOutgoingInvites(uid, selectedGroupId);
-
-  // Filter out the already-invited friends to only display friends who could still be invited to a group
   const filteredFriends = friends.filter((f) => !invited.includes(f.uid));
 
-  // ---------------------------------------------------------
-  // SUBSCRIPTIONS FOR INCOMING + OUTGOING GROUP INVITES
-  // ---------------------------------------------------------
+  // Subscribe to incoming + outgoing invites
   useEffect(() => {
     if (!uid) return;
 
@@ -66,21 +68,26 @@ export default function GroupsPage() {
     };
   }, [uid]);
 
-  // ---------------------------------------------------------
-  // ACTIONS
-  // ---------------------------------------------------------
+  // Fast lookup maps
+  const userGroupMap = useMemo(() => {
+    const map = {};
+    for (const g of userGroups) map[g.id] = g;
+    return map;
+  }, [userGroups]);
+
+  const incomingGroupMap = useMemo(() => {
+    return incomingInviteGroups; // already keyed by groupId
+  }, [incomingInviteGroups]);
 
   function handleDelete(group) {
     deleteGroup(group.id, uid);
   }
 
-  // Open the bottom sheet and store which group is being invited to
   function handleInvite(group) {
     setSelectedGroupId(group.id);
     setIsPickerOpen(true);
   }
 
-  // Close the friend picker sheet
   function onClose() {
     setIsPickerOpen(false);
     setSelectedGroupId(null);
@@ -103,43 +110,44 @@ export default function GroupsPage() {
         </div>
       )}
 
-      {/* ---------------------------------------------------------
-         YOUR GROUPS
-      --------------------------------------------------------- */}
+      {/* USER GROUPS */}
       <h2 className={styles.sectionTitle}>Your Groups</h2>
 
       {loading && <p>Loading groups...</p>}
 
-      {!loading && groups.length === 0 && (
+      {!loading && userGroups.length === 0 && (
         <p className={styles.empty}>You don't belong to any groups yet.</p>
       )}
 
       {!loading &&
-        groups.map((group) => (
+        userGroups.map((group) => (
           <GroupCard
             key={group.id}
             group={group}
             onDelete={handleDelete}
-            onInvite={handleInvite} // opens bottom sheet
+            onInvite={handleInvite}
           />
         ))}
 
-      {/* ---------------------------------------------------------
-         INCOMING INVITES
-      --------------------------------------------------------- */}
+      {/* INCOMING INVITES */}
       <h2 className={styles.sectionTitle}>Group Invites</h2>
 
       {Object.keys(incomingInvites).length === 0 ? (
         <p className={styles.empty}>No group invites.</p>
       ) : (
         <ul className={styles.list}>
-          {Object.keys(incomingInvites).map((groupId) => {
-            const groupName =
-              groups.find((g) => g.id === groupId)?.name || groupId;
+          {Object.entries(incomingInvites).map(([inviteId, invite]) => {
+            const groupId = invite.groupId;
+            const group = incomingGroupMap[groupId];
+            const groupName = group?.name || groupId;
 
             return (
-              <li key={groupId} className={styles.listItem}>
-                <span className={styles.groupName}>{groupName}</span>
+              <li key={inviteId} className={styles.listItem}>
+                <span className={styles.groupName}>
+                  {friends.find((f) => f.uid === invite.from)?.username ||
+                    invite.from}{" "}
+                  has invited you to join the group: {groupName}
+                </span>
 
                 <div className={styles.buttonRow}>
                   <button
@@ -161,9 +169,7 @@ export default function GroupsPage() {
         </ul>
       )}
 
-      {/* ---------------------------------------------------------
-         OUTGOING INVITES
-      --------------------------------------------------------- */}
+      {/* OUTGOING INVITES */}
       <h2 className={styles.sectionTitle}>Pending Invitations</h2>
 
       {Object.keys(outgoingInvites).length === 0 ? (
@@ -171,13 +177,14 @@ export default function GroupsPage() {
       ) : (
         <ul className={styles.list}>
           {Object.entries(outgoingInvites).map(([groupId, invitedUsers]) => {
-            const groupName =
-              groups.find((g) => g.id === groupId)?.name || groupId;
+            const group = userGroupMap[groupId];
+            const groupName = group?.name || groupId;
 
             return Object.keys(invitedUsers).map((friendUid) => (
               <li key={`${groupId}-${friendUid}`} className={styles.listItem}>
                 <span className={styles.groupName}>
-                  {groupName} → {friendUid}
+                  {groupName} →{" "}
+                  {friends.find((i) => i.uid === friendUid)?.username}
                 </span>
 
                 <button
@@ -192,9 +199,6 @@ export default function GroupsPage() {
         </ul>
       )}
 
-      {/* ---------------------------------------------------------
-         FRIEND PICKER BOTTOM SHEET
-      --------------------------------------------------------- */}
       <FriendPickerSheet
         isOpen={isPickerOpen}
         onClose={onClose}

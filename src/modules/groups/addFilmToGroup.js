@@ -8,11 +8,14 @@ import {
 } from "../movieDatabaseHelpers";
 
 export async function addFilmToGroup(groupId, uid, tmdbId) {
-  let movie;
+  let film;
+  let directorName;
+  let topThreeStarsNames;
+  let youtubeTrailerLink;
 
   // 1. Fetch metadata from TMDB
   try {
-    movie = await fetchMovieInfo(tmdbId);
+    film = await fetchMovieInfo(tmdbId);
   } catch (err) {
     console.log("fetchMovieInfo from TMDB failed");
     return false;
@@ -22,24 +25,31 @@ export async function addFilmToGroup(groupId, uid, tmdbId) {
   const filmRef = ref(database, `groups/${groupId}/films/${tmdbId}`);
 
   // Extract director, top three stars, and trailer link from movie object:
-
-  const director = director(movie);
-  const topThreeStars = topThreeStars(movie);
-  const youtubeTrailer = youtubeTrailer(movie);
-
+  try {
+    directorName = await director(film);
+    topThreeStarsNames = await topThreeStars(film);
+    youtubeTrailerLink = await youtubeTrailer(film);
+  } catch (err) {
+    console.log(err);
+  }
   // 3. Write the film object into Firebase
   await set(filmRef, {
-    title: movie.title,
-    tmdbId: movie.id,
-    posterURL: `https://image.tmdb.org/t/p/w200/${movie.poster_path}`,
+    title: film.title,
+    tmdbId: film.id,
+    posterURL: `https://image.tmdb.org/t/p/w200/${film.poster_path}`,
     addedBy: uid,
-    genres: movie.genres.map((genre) => genre.name),
-    overview: movie.overview,
-    releaseDate: movie.release_date,
-    runtime: movie.runtime,
-    director: director || "no director info available",
-    topThreeStars: topThreeStars || "no cast info available",
-    youtubeTrailer: youtubeTrailer || "No trailer available",
+    genres: film.genres
+      .map((genre) => genre.name)
+      .slice(0, 3)
+      .join(", "),
+    overview: film.overview,
+    releaseDate: film.release_date,
+    runtime: film.runtime,
+    director: directorName ?? "no director info available",
+    topThreeStars: topThreeStarsNames ?? "no cast info available",
+    youtubeTrailer: youtubeTrailerLink
+      ? `https://www.youtube.com/embed/${youtubeTrailerLink}`
+      : "No trailer available",
     addedAt: Date.now(),
   });
 

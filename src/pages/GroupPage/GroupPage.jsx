@@ -9,7 +9,7 @@ import FilmCard from "./FilmCard";
 import styles from "./GroupPage.module.css";
 
 export default function GroupPage() {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const uid = user.uid;
   const { groupId } = useParams();
   const films = useGroupFilms(groupId);
@@ -31,8 +31,6 @@ export default function GroupPage() {
 
   if (!group) return <div>Loading group…</div>;
 
-  console.log(films);
-
   return (
     <div className={styles.groupPage}>
       <header className={styles.groupHeader}>
@@ -50,6 +48,7 @@ export default function GroupPage() {
             filmId={film.id}
             groupId={groupId}
             uid={uid}
+            profile={profile}
           />
         ))}
       </div>

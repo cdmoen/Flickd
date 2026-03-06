@@ -2,6 +2,9 @@
 
 .container {
   max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 4rem auto;
   padding: 2rem;
   background: #ffffff;
@@ -39,4 +42,36 @@
 
 .logoutBtn:active {
   background: #b71f2a;
+}
+
+.avatarContainer {
+  width: 64px; /* display size */
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden; /* hides corners of the image */
+  border: 2px solid #333;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills the circle without distortion */
+}
+
+.avatarPicker {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.avatarPicker:hover * {
+  color: rgb(255, 143, 249);
+}
+
+.avatarPicker:hover .avatarContainer {
+  background-color: rgb(255, 233, 254);
 }

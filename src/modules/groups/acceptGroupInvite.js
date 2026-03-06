@@ -6,6 +6,7 @@ export async function acceptGroupInvite(uid, groupId) {
 
   // Add member
   updates[`groups/${groupId}/members/${uid}`] = true;
+  updates[`users/${uid}/groups/${groupId}`] = true;
 
   // Read the incoming invite to get the inviter UID
   const incomingSnap = await get(

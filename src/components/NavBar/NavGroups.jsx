@@ -3,20 +3,21 @@ import { ref, onValue } from "firebase/database";
 import { database } from "../../modules/firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import { NavLink } from "react-router-dom";
-import styles from "./NavFriends.module.css";
+import styles from "./NavGroups.module.css";
 
-export default function NavFriends() {
+export default function NavGroups() {
   const { user } = useAuth();
-  const [hasRequests, setHasRequests] = useState(false);
+  const [hasInvites, setHasInvites] = useState(false);
 
   useEffect(() => {
     if (!user) return;
 
-    const reqRef = ref(database, `friendRequestsIncoming/${user.uid}`);
+    const inviteRef = ref(database, `groupInvitesIncoming/${user.uid}`);
 
-    const unsubscribe = onValue(reqRef, (snap) => {
+    const unsubscribe = onValue(inviteRef, (snap) => {
       const data = snap.val();
-      setHasRequests(data && Object.keys(data).length > 0);
+
+      setHasInvites(data && Object.keys(data).length > 0);
     });
 
     return () => unsubscribe();
@@ -24,15 +25,15 @@ export default function NavFriends() {
 
   return (
     <NavLink
-      to="/friends"
+      to="/groups"
       className={({ isActive }) =>
-        `${styles.friendsButton} 
-         ${hasRequests ? styles.pending : ""} 
+        `${styles.groupsButton} 
+         ${hasInvites ? styles.pending : ""} 
          ${isActive ? styles.active : ""}`
       }
     >
-      Friends
-      {hasRequests && <span className={styles.badge}></span>}
+      Groups
+      {hasInvites && <span className={styles.badge}></span>}
     </NavLink>
   );
 }

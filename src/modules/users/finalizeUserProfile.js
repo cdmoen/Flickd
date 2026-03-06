@@ -10,14 +10,14 @@ export async function finalizeUserProfile(uid, username, email) {
   updates[`users/${uid}`] = {
     email,
     username,
-    avatarUrl: null,
+    avatarUrl: "/avatars/popcorn.png",
     createdAt,
   };
 
   // Public profile
   updates[`usersPublic/${uid}`] = {
     username,
-    avatarUrl: null,
+    avatarUrl: "/avatars/popcorn.png",
   };
 
   // Username index
