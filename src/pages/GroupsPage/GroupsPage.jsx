@@ -13,7 +13,9 @@ import { acceptGroupInvite } from "../../modules/groups/acceptGroupInvite";
 import { rejectGroupInvite } from "../../modules/groups/rejectGroupInvite";
 import { deleteGroup } from "../../modules/groups/deleteGroup";
 
-import GroupCard from "./GroupCard";
+import UserGroupsList from "./UserGroupsList";
+import IncomingInvitesList from "./IncomingInvitesList";
+import OutgoingInvitesList from "./OutgoingInvitesList";
 import CreateGroup from "./CreateGroup";
 import FriendPickerSheet from "./FriendPickerSheet";
 
@@ -23,31 +25,26 @@ export default function GroupsPage() {
   const { user } = useAuth();
   const uid = user?.uid;
 
-  // Groups the user belongs to
-  const { groups: userGroups, loading } = useUserGroups(uid);
-
-  // Friends
+  // Data hooks
+  const { userGroups, loading } = useUserGroups(uid);
   const { friends } = useFriends(uid);
 
   // Invite state
   const [incomingInvites, setIncomingInvites] = useState({});
   const [outgoingInvites, setOutgoingInvites] = useState({});
 
-  // Load metadata for groups the user is invited to
   const incomingInviteGroups = useIncomingInviteGroups(incomingInvites);
 
-  // Bottom sheet
+  // UI state
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [selectedGroupId, setSelectedGroupId] = useState(null);
-
-  // Create group form toggle
   const [showForm, setShowForm] = useState(false);
 
   // Outgoing invites for selected group
   const invited = useGroupOutgoingInvites(uid, selectedGroupId);
   const filteredFriends = friends.filter((f) => !invited.includes(f.uid));
 
-  // Subscribe to incoming + outgoing invites
+  // Subscriptions
   useEffect(() => {
     if (!uid) return;
 
@@ -68,17 +65,19 @@ export default function GroupsPage() {
     };
   }, [uid]);
 
-  // Fast lookup maps
+  // Lookup maps
   const userGroupMap = useMemo(() => {
     const map = {};
     for (const g of userGroups) map[g.id] = g;
     return map;
   }, [userGroups]);
 
-  const incomingGroupMap = useMemo(() => {
-    return incomingInviteGroups; // already keyed by groupId
-  }, [incomingInviteGroups]);
+  const incomingGroupMap = useMemo(
+    () => incomingInviteGroups,
+    [incomingInviteGroups],
+  );
 
+  // Actions
   function handleDelete(group) {
     deleteGroup(group.id, uid);
   }
@@ -110,94 +109,32 @@ export default function GroupsPage() {
         </div>
       )}
 
-      {/* USER GROUPS */}
       <h2 className={styles.sectionTitle}>Your Groups</h2>
+      <UserGroupsList
+        loading={loading}
+        userGroups={userGroups}
+        onDelete={handleDelete}
+        onInvite={handleInvite}
+      />
 
-      {loading && <p>Loading groups...</p>}
-
-      {!loading && userGroups.length === 0 && (
-        <p className={styles.empty}>You don't belong to any groups yet.</p>
-      )}
-
-      {!loading &&
-        userGroups.map((group) => (
-          <GroupCard
-            key={group.id}
-            group={group}
-            onDelete={handleDelete}
-            onInvite={handleInvite}
-          />
-        ))}
-
-      {/* INCOMING INVITES */}
       <h2 className={styles.sectionTitle}>Group Invites</h2>
+      <IncomingInvitesList
+        incomingInvites={incomingInvites}
+        incomingGroupMap={incomingGroupMap}
+        friends={friends}
+        uid={uid}
+        acceptGroupInvite={acceptGroupInvite}
+        rejectGroupInvite={rejectGroupInvite}
+      />
 
-      {Object.keys(incomingInvites).length === 0 ? (
-        <p className={styles.empty}>No group invites.</p>
-      ) : (
-        <ul className={styles.list}>
-          {Object.entries(incomingInvites).map(([inviteId, invite]) => {
-            const groupId = invite.groupId;
-            const group = incomingGroupMap[groupId];
-            const groupName = group?.name || groupId;
-
-            return (
-              <li key={inviteId} className={styles.listItem}>
-                <span className={styles.groupName}>
-                  {friends.find((f) => f.uid === invite.from)?.username ||
-                    invite.from}{" "}
-                  has invited you to join the group: {groupName}
-                </span>
-
-                <div className={styles.buttonRow}>
-                  <button
-                    className={styles.acceptButton}
-                    onClick={() => acceptGroupInvite(uid, groupId)}
-                  >
-                    Accept
-                  </button>
-                  <button
-                    className={styles.rejectButton}
-                    onClick={() => rejectGroupInvite(uid, groupId)}
-                  >
-                    Reject
-                  </button>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-
-      {/* OUTGOING INVITES */}
       <h2 className={styles.sectionTitle}>Pending Invitations</h2>
-
-      {Object.keys(outgoingInvites).length === 0 ? (
-        <p className={styles.empty}>No pending invites.</p>
-      ) : (
-        <ul className={styles.list}>
-          {Object.entries(outgoingInvites).map(([groupId, invitedUsers]) => {
-            const group = userGroupMap[groupId];
-            const groupName = group?.name || groupId;
-
-            return Object.keys(invitedUsers).map((friendUid) => (
-              <li key={`${groupId}-${friendUid}`} className={styles.listItem}>
-                <span className={styles.groupName}>
-                  {groupName} →{" "}
-                  {friends.find((i) => i.uid === friendUid)?.username}
-                </span>
-
-                <button
-                  className={styles.rejectButton}
-                  onClick={() => cancelGroupInvite(uid, groupId, friendUid)}
-                >
-                  Cancel
-                </button>
-              </li>
-            ));
-          })}
-        </ul>
-      )}
+      <OutgoingInvitesList
+        outgoingInvites={outgoingInvites}
+        userGroupMap={userGroupMap}
+        friends={friends}
+        uid={uid}
+        cancelGroupInvite={cancelGroupInvite}
+      />
 
       <FriendPickerSheet
         isOpen={isPickerOpen}

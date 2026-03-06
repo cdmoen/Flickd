@@ -3,7 +3,7 @@ import { ref, onValue, get } from "firebase/database";
 import { database } from "../modules/firebase";
 
 export function useUserGroups(uid) {
-  const [groups, setGroups] = useState([]);
+  const [userGroups, setUserGroups] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export function useUserGroups(uid) {
       const ids = Object.keys(data);
 
       if (ids.length === 0) {
-        setGroups([]);
+        setUserGroups([]);
         setLoading(false);
         return;
       }
@@ -29,12 +29,12 @@ export function useUserGroups(uid) {
         .filter((s) => s.exists())
         .map((s, i) => ({ id: ids[i], ...s.val() }));
 
-      setGroups(results);
+      setUserGroups(results);
       setLoading(false);
     });
 
     return () => unsub();
   }, [uid]);
 
-  return { groups, loading };
+  return { userGroups, loading };
 }
