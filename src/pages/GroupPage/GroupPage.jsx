@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useGroupFilms } from "../../hooks/useGroupFilms";
 import { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
@@ -9,10 +9,12 @@ import FilmCard from "./FilmCard";
 import styles from "./GroupPage.module.css";
 
 export default function GroupPage() {
+  const navigate = useNavigate();
   const { user, profile } = useAuth();
   const uid = user.uid;
   const { groupId } = useParams();
   const films = useGroupFilms(groupId);
+
   const [group, setGroup] = useState(null);
   const [addFilmSheetIsOpen, setAddFilmSheetIsOpen] = useState(false);
 
@@ -34,7 +36,23 @@ export default function GroupPage() {
   return (
     <div className={styles.groupPage}>
       <header className={styles.groupHeader}>
+        <button
+          className={styles.backButton}
+          onClick={() => navigate("/groups")}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M15 18l-6-6 6-6"
+              stroke="red"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+
         <h1>{group.name}</h1>
+
         <button className={styles.addFilmBtn} onClick={handleAddFilm}>
           Add Film
         </button>
