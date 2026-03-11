@@ -32,7 +32,15 @@ export default function LoginPage() {
   }
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
+      <header className={styles.header}>
+        <img
+          src="public\images\flickd-2.png"
+          alt="Flickd Logo"
+          className={styles.logo}
+        />
+      </header>
+      
       <h1 className={styles.title}>Login</h1>
 
       {error && <p className={styles.error}>{error}</p>}
@@ -62,6 +70,6 @@ export default function LoginPage() {
       <Link className={styles.link} to="/register">
         Create an Account
       </Link>
-    </div>
+    </main>
   );
 }

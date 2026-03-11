@@ -12,16 +12,16 @@ export default function NavBar() {
   }
 
   return (
-    <div className={styles.navbar}>
-      <h1>FLICKD</h1>
+    <>
     <nav className={styles.navbar}>
       <NavLink
         to="/home"
-        className={({ isActive }) =>
-          isActive ? `${styles.link} ${styles.active}` : styles.link
-        }
       >
-        Home
+        <img
+          src="public\images\flickd-2.png"
+          alt="Logo"
+          className={styles.logo}
+        />
       </NavLink>
 
       <NavFriends />
@@ -34,7 +34,7 @@ export default function NavBar() {
           isActive ? `${styles.link} ${styles.active}` : styles.link
         }
       >
-        Search Movies
+        Search
       </NavLink>
 
       <span className={styles.loginStatus}>Welcome, {profile?.username}!</span>
@@ -42,6 +42,6 @@ export default function NavBar() {
         Logout
       </span>
     </nav>
-    </div>
+    </>
   );
 }

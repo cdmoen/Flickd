@@ -11,6 +11,11 @@
   font-family: "Roboto", system-ui, sans-serif;
 }
 
+.logo {
+  width: 100px;
+  height: 40px;
+}
+
 .link {
   text-decoration: none;
   color: #333;
@@ -41,7 +46,7 @@
 .logoutBtn {
   text-decoration: none;
   color: #ffffff;
-  background-color: #c783c0a4;
+  background: #e63946;
   font-size: 0.9rem;
   font-weight: 500;
   padding: 0.25rem 0.5rem;
@@ -53,6 +58,5 @@
 }
 
 .logoutBtn:hover {
-  background-color: #dfa4d9a4;
-  color: rgb(73, 73, 73);
+  background: #d62839;
 }
