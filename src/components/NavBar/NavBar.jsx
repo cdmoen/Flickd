@@ -13,40 +13,36 @@ export default function NavBar() {
 
   return (
     <>
-    <nav className={styles.navbar}>
-      <NavLink
-        to="/home"
-      >
-        <img
-          src="public\images\flickd-2.png"
-          alt="Logo"
-          className={styles.logo}
-        />
-      </NavLink>
+      <nav className={styles.navbar}>
+        <NavLink to="/home">
+          <img src="/images/flickd-2.png" alt="Logo" className={styles.logo} />
+        </NavLink>
 
-      <NavFriends />
+        <NavFriends />
 
-      <NavGroups />
+        <NavGroups />
 
-      <NavLink
-        to="/movies"
-        className={({ isActive }) =>
-          isActive ? `${styles.link} ${styles.active}` : styles.link
-        }
-      >
-        <img 
-          src="public\images\search.png"
-          alt="Search Icon"
-          className={styles.searchIcon}
-        />
+        <NavLink
+          to="/movies"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          <img
+            src="public\images\search.png"
+            alt="Search Icon"
+            className={styles.searchIcon}
+          />
           <span className={styles.linkText}>Search</span>
-      </NavLink>
+        </NavLink>
 
-      <span className={styles.loginStatus}>Welcome, {profile?.username}!</span>
-      <span className={styles.logoutBtn} onClick={logout}>
-        Logout
-      </span>
-    </nav>
+        <span className={styles.loginStatus}>
+          Welcome, {profile?.username}!
+        </span>
+        <span className={styles.logoutBtn} onClick={logout}>
+          Logout
+        </span>
+      </nav>
     </>
   );
 }
