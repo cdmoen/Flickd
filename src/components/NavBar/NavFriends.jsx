@@ -31,7 +31,13 @@ export default function NavFriends() {
          ${isActive ? styles.active : ""}`
       }
     >
-      Friends
+      <img 
+        src="public\images\light.png"
+        alt="Friend Icon"
+        className={styles.friendIcon}
+      />
+      <span className={styles.linkText}>Friends</span>
+      
       {hasRequests && <span className={styles.badge}></span>}
     </NavLink>
   );

@@ -1,38 +1,101 @@
-.friendsButton {
-  text-decoration: none;
-  color: #333;
-  position: relative;
-  font-size: 1.05rem;
-  font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition:
-    color 0.2s ease,
-    background 0.2s ease;
+@media screen and (max-width: 320px) {
+  .friendsButton {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .linkText {
+    display: none;
+  }
+
+  .friendIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
-.friendsButton:hover {
-  background: rgba(0, 0, 0, 0.06);
-  color: #000;
+@media screen and (min-width: 321px) and (max-width: 767px) {
+  .friendsButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .linkText {
+    display: none;
+  }
+
+  .friendIcon {
+    width: 2rem;
+    height: 2rem;
+  }
 }
 
-.pending {
-  color: #4a90e2;
-  font-weight: 600;
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .friendsButton {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .linkText {
+    display: none;
+  }
+
+  .friendIcon {
+    width: 3rem;
+    height: 3rem;
+  }
 }
 
-.badge {
-  position: absolute;
-  bottom: -1px;
-  right: -1px;
-  width: 8px;
-  height: 8px;
-  background: red;
-  border-radius: 50%;
-}
+@media screen and (min-width: 1024px) {
 
-.active {
-  background: #1d4ed8;
-  color: #fff;
+  .linkText {
+    display: flex;
+  }
+
+  .friendIcon {
+    display: none;
+  }
+
+  .friendsButton {
+    text-decoration: none;
+    color: #333;
+    position: relative;
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition:
+      color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .friendsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
+  }
+
+  .pending {
+    color: #4a90e2;
+    font-weight: 600;
+  }
+
+  .badge {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 8px;
+    height: 8px;
+    background: red;
+    border-radius: 50%;
+  }
+
+  .active {
+    background: #1d4ed8;
+    color: #fff;
+  }
+
 }
