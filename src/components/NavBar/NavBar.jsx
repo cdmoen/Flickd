@@ -3,6 +3,8 @@ import styles from "./NavBar.module.css";
 
 export default function NavBar() {
   return (
+    <div className={styles.navbar}>
+      <h1>FLICKD</h1>
     <nav className={styles.navbar}>
       <NavLink
         to="/"
@@ -40,5 +42,6 @@ export default function NavBar() {
         Search Movies
       </NavLink>
     </nav>
+    </div>
   );
 }

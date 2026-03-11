@@ -6,12 +6,12 @@ export default function Home() {
   const { user, logout } = useAuth();
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <h1 className={styles.title}>Home</h1>
-      <p className={styles.userInfo}>Logged in as: {user?.email}</p>
-      <button className={styles.logoutBtn} onClick={logout}>
-        Logout
-      </button>
-    </div>
+        <p className={styles.userInfo}>Logged in as: {user?.email}</p>
+        <button className={styles.logoutBtn} onClick={logout}>
+          Logout
+        </button>
+    </main>
   );
 }

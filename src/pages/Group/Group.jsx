@@ -6,8 +6,8 @@ export default function Home() {
   const { user, logout } = useAuth();
 
   return (
-    <>
-      <h1>Example Group</h1>
+    <main className={styles.container}>
+      <h1 className={styles.title}>Groups Example</h1>
       <h2>List of Films</h2>
       <ul>
         <li>Film 1</li>
@@ -16,6 +16,6 @@ export default function Home() {
       </ul>
       <p>Logged in as: {user?.email}</p>
       <button onClick={logout}>Logout</button>
-    </>
+    </main>
   );
 }

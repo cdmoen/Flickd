@@ -6,16 +6,18 @@ export default function Groups() {
   const { user, logout } = useAuth();
 
   return (
-    <div>
-      <h1>Groups Example</h1>
-      <p>Logged in as: {user?.email}</p>
+    <main className={styles.container}>
+      <h1 className={styles.title}>Groups Example</h1>
+      <p className={styles.userInfo}>Logged in as: {user?.email}</p>
       <h2>Group List Example</h2>
       <ul>
         <li>Example Group 1</li>
         <li>Example Group 2</li>
         <li>Example Group 3</li>
       </ul>
-      <button onClick={logout}>Logout</button>
-    </div>
+      <button className={styles.logoutBtn} onClick={logout}>
+        Logout
+      </button>
+    </main>
   );
 }
