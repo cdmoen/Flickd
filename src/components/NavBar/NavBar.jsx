@@ -34,7 +34,12 @@ export default function NavBar() {
           isActive ? `${styles.link} ${styles.active}` : styles.link
         }
       >
-        Search
+        <img 
+          src="public\images\search.png"
+          alt="Search Icon"
+          className={styles.searchIcon}
+        />
+          <span className={styles.linkText}>Search</span>
       </NavLink>
 
       <span className={styles.loginStatus}>Welcome, {profile?.username}!</span>

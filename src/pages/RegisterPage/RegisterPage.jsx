@@ -40,7 +40,15 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
+      <header className={styles.header}>
+        <img
+          src="public\images\flickd-2.png"
+          alt="Flickd Logo"
+          className={styles.logo}
+        />
+      </header>
+      
       <h1 className={styles.title}>Register</h1>
 
       {error && <p className={styles.error}>{error}</p>}
@@ -74,6 +82,6 @@ export default function RegisterPage() {
           Create Account
         </button>
       </form>
-    </div>
+    </main>
   );
 }

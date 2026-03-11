@@ -13,11 +13,11 @@ export default function HomePage() {
   }
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
+
       <h1 className={styles.title}>Home</h1>
-      <p className={styles.userInfo}>Logged in as: {profile?.username}</p>
-      <p className={styles.userInfo}>Email: {profile?.email}</p>
-      <div className={styles.avatarPicker} onClick={() => setPickerOpen(true)}>
+
+      <section className={styles.avatarPicker} onClick={() => setPickerOpen(true)}>
         <div className={styles.avatarContainer}>
           <img
             src={profile?.avatarUrl}
@@ -25,8 +25,15 @@ export default function HomePage() {
             alt="User avatar"
           />
         </div>
+        
         <p>Change Avatar</p>
-      </div>
+      
+      </section>      
+      
+      <p className={styles.userInfo}>Logged in as: {profile?.username}</p>
+      
+      <p className={styles.userInfo}>Email: {profile?.email}</p>
+
 
       {pickerOpen && (
         <AvatarPicker uid={user.uid} onClose={() => setPickerOpen(false)} />
@@ -35,6 +42,6 @@ export default function HomePage() {
       <button className={styles.logoutBtn} onClick={logout}>
         Logout
       </button>
-    </div>
+    </main>
   );
 }
