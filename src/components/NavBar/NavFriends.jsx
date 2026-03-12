@@ -32,7 +32,7 @@ export default function NavFriends() {
       }
     >
       <img 
-        src="public\images\light.png"
+        src="/images/search.png"
         alt="Friend Icon"
         className={styles.friendIcon}
       />

@@ -18,7 +18,7 @@ export default function NavBar() {
         to="/home"
       >
         <img
-          src="public\images\flickd-2.png"
+          src="/images/flickd-2.png"
           alt="Logo"
           className={styles.logo}
         />
@@ -35,7 +35,7 @@ export default function NavBar() {
         }
       >
         <img 
-          src="public\images\search.png"
+          src="/images/search.png"
           alt="Search Icon"
           className={styles.searchIcon}
         />
