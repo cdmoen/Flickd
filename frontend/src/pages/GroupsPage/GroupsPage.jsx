@@ -93,8 +93,10 @@ export default function GroupsPage() {
   }
 
   return (
-    <div className={styles.container}>
-      <h1>Your Groups</h1>
+    <main className={styles.container}>
+      <h1 className={styles.title}>
+        Your Groups
+      </h1>
 
       <button
         onClick={() => setShowForm((prev) => !prev)}
@@ -143,6 +145,6 @@ export default function GroupsPage() {
         uid={uid}
         friends={filteredFriends}
       />
-    </div>
+    </main>
   );
 }

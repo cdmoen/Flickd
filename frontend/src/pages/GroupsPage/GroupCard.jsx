@@ -6,7 +6,7 @@ export default function GroupCard({ group, onDelete, onInvite }) {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.card}>
+    <main className={styles.card}>
       <div className={styles.header}>
         <button
           className={styles.nameButton}
@@ -35,6 +35,6 @@ export default function GroupCard({ group, onDelete, onInvite }) {
       <div className={styles.meta}>
         <span>Created: {new Date(group.createdAt).toLocaleString()}</span>
       </div>
-    </div>
+    </main>
   );
 }

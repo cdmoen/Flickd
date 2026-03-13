@@ -1,38 +1,134 @@
-.groupsButton {
-  text-decoration: none;
-  color: #333;
-  position: relative;
-  font-size: 1.05rem;
-  font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition:
-    color 0.2s ease,
-    background 0.2s ease;
+@media screen and (max-width: 320px) {
+  .groupsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
+  }
+
+  .linkText {
+    display: none;
+  }
+
+  .groupsIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .badge {
+    position: absolute;
+    bottom: 2px;
+    right: 4px;
+    width: 4px;
+    height: 4px;
+    background: red;
+    border-radius: 50%;
+  }
+
 }
 
-.groupsButton:hover {
-  background: rgba(0, 0, 0, 0.06);
-  color: #000;
+@media screen and (min-width: 321px) and (max-width: 767px) {
+  .groupsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
+  }
+
+  .linkText {
+    display: none;
+  }
+
+  .groupsIcon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .badge {
+    position: absolute;
+    bottom: 0px;
+    right: 2px;
+    width: 6px;
+    height: 6px;
+    background: red;
+    border-radius: 50%;
+  }
+
 }
 
-.pending {
-  color: #4a90e2;
-  font-weight: 600;
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .groupsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
+  }
+
+  .linkText {
+    display: none;
+  }
+
+  .groupsIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .badge {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 8px;
+    height: 8px;
+    background: red;
+    border-radius: 50%;
+  }
+
 }
 
-.badge {
-  position: absolute;
-  bottom: -1px;
-  right: -1px;
-  width: 8px;
-  height: 8px;
-  background: red;
-  border-radius: 50%;
-}
+@media screen and (min-width: 1024px) {
+  .groupsButton {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    text-decoration: none;
+    color: #333;
+    position: relative;
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition:
+      color 0.2s ease,
+      background 0.2s ease;
+  }
 
-.active {
-  background: #1d4ed8;
-  color: #fff;
+  .groupsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
+  }
+
+  .linkText {
+    display: block;
+  }
+
+  .groupsIcon {
+    display: none;
+  }
+
+  .badge {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 8px;
+    height: 8px;
+    background: red;
+    border-radius: 50%;
+  }
+
+  .pending {
+    color: #4a90e2;
+    font-weight: 600;
+  }
+
+  .active {
+    background: #1d4ed8;
+    color: #fff;
+  }
+
 }

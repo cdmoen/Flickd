@@ -15,7 +15,11 @@ export default function NavBar() {
     <>
       <nav className={styles.navbar}>
         <NavLink to="/home">
-          <img src="/images/flickd-2.png" alt="Logo" className={styles.logo} />
+          <img 
+            src="/images/flickd-2.png" 
+            alt="Logo" 
+            className={styles.logo} 
+          />
         </NavLink>
 
         <NavFriends />
@@ -33,7 +37,9 @@ export default function NavBar() {
             alt="Search Icon"
             className={styles.searchIcon}
           />
-          <span className={styles.linkText}>Search</span>
+          <span className={styles.linkText}>
+            Search
+          </span>
         </NavLink>
 
         <span className={styles.loginStatus}>

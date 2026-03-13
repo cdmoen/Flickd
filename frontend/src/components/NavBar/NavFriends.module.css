@@ -1,9 +1,7 @@
 @media screen and (max-width: 320px) {
-  .friendsButton {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    position: relative;
+  .friendsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
   }
 
   .linkText {
@@ -27,11 +25,9 @@
 }
 
 @media screen and (min-width: 321px) and (max-width: 767px) {
-  .friendsButton {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    position: relative;
+  .friendsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
   }
 
   .linkText {
@@ -55,11 +51,9 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .friendsButton {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    position: relative;
+  .friendsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
   }
 
   .linkText {
