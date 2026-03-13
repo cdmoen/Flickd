@@ -37,7 +37,9 @@ export default function NavBar() {
             alt="Search Icon"
             className={styles.searchIcon}
           />
-          <span className={styles.linkText}>Search</span>
+          <span className={styles.linkText}>
+            Search
+          </span>
         </NavLink>
 
         <span className={styles.loginStatus}>
