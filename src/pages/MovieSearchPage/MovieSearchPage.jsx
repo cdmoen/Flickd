@@ -24,7 +24,7 @@ export default function MovieSearchPage() {
   }
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <h2 className={styles.title}>Search Movies</h2>
 
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -50,6 +50,6 @@ export default function MovieSearchPage() {
           ))}
         </ul>
       )}
-    </div>
+    </main>
   );
 }
