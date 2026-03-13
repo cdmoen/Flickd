@@ -1,6 +1,3 @@
-const TMDB_API_KEY =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNDRhMzU5M2M5M2ExYjA4M2Q2ZmNjYjE1Mzk1Zjc5ZCIsIm5iZiI6MTc3MTYxNDI2NS4wMjgsInN1YiI6IjY5OThiMDM5NDlkODE1ZDRiY2M5OWNjNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-4R9PwE931m9oQjt5seK2Opvw6erzfZX47c7CPGYxgw";
-
 /*
 ==============================
     FETCH MOVIE SEARCH
@@ -32,22 +29,17 @@ Takes in a movie string param and returns a list of TMDB movies with the followi
  */
 
 export async function fetchMovieSearch(searchParams) {
-  const paramsString = searchParams.split(" ").join("%20");
+  // Build the URL for your Vercel API route
+  const url = `/api/tmdb?path=search/movie&query=${encodeURIComponent(
+    searchParams,
+  )}&include_adult=false&language=en-US&page=1`;
 
-  const response = await fetch(
-    // Fetch using TMDB 'search' function to get list of movie ID's
-    `https://api.themoviedb.org/3/search/movie?query=${searchParams}&include_adult=false&language=en-US&page=1`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${TMDB_API_KEY}`,
-        accept: "application/json",
-      },
-    },
-  );
+  const response = await fetch(url);
+
   if (!response.ok) {
     throw new Error("fetchMovieSearch failed");
   }
+
   console.log("fetchMovieSearch successful");
   return await response.json();
 }
@@ -155,21 +147,12 @@ Takes in a single TMDB movieID and returns the following information about the m
 
 export async function fetchMovieInfo(movieID) {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieID}?append_to_response=credits%2Cvideos&language=en-US`,
-
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${TMDB_API_KEY}`,
-        accept: "application/json",
-      },
-    },
+    `/api/tmdb?path=movie/${movieID}&append_to_response=credits,videos&language=en-US`,
   );
 
   if (!response.ok) {
     throw new Error("fetchCredits failed");
   }
-  console.log("fetchMovieInfo successful");
   const movieInfo = await response.json();
   return movieInfo;
 }
