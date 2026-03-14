@@ -14,6 +14,7 @@
   height: 120px;
   object-fit: cover;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .info {
@@ -26,6 +27,7 @@
 .title {
   font-size: 1.1rem;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .meta {
