@@ -38,6 +38,7 @@ export default function GroupsPage() {
   // UI state
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [selectedGroupId, setSelectedGroupId] = useState(null);
+  const [selectedGroup, setSelectedGroup] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
   // Outgoing invites for selected group
@@ -84,6 +85,7 @@ export default function GroupsPage() {
 
   function handleInvite(group) {
     setSelectedGroupId(group.id);
+    setSelectedGroup(group);
     setIsPickerOpen(true);
   }
 
@@ -94,9 +96,7 @@ export default function GroupsPage() {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>
-        Your Groups
-      </h1>
+      <h1 className={styles.title}>Your Groups</h1>
 
       <button
         onClick={() => setShowForm((prev) => !prev)}
@@ -142,8 +142,9 @@ export default function GroupsPage() {
         isOpen={isPickerOpen}
         onClose={onClose}
         groupId={selectedGroupId}
+        group={selectedGroup}
         uid={uid}
-        friends={filteredFriends}
+        filteredFriends={filteredFriends}
       />
     </main>
   );

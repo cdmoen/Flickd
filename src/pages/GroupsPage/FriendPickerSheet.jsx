@@ -6,8 +6,9 @@ export default function FriendPickerSheet({
   isOpen,
   onClose,
   groupId,
+  group,
   uid,
-  friends = [],
+  filteredFriends = [],
 }) {
   if (!isOpen) return null;
 
@@ -19,6 +20,13 @@ export default function FriendPickerSheet({
       console.error("Error sending invite:", err);
     }
   }
+
+  // filteredFriends is an array of friends who haven't already been invited to the group.
+  // friendsMinusGroupOwner also removes the creator of the group so that they
+  // can't be invited to a group they themselves created.
+  const friendsMinusGroupOwner = filteredFriends.filter(
+    (friend) => friend.uid !== group.createdBy,
+  );
 
   return (
     <div className={styles.backdrop} onClick={onClose}>
@@ -32,11 +40,11 @@ export default function FriendPickerSheet({
         </div>
 
         <div className={styles.list}>
-          {friends.length === 0 && (
+          {filteredFriends.length === 0 && (
             <p className={styles.empty}>You have no friends to invite.</p>
           )}
 
-          {friends.map((friend) => (
+          {friendsMinusGroupOwner.map((friend) => (
             <div key={friend.uid} className={styles.friendRow}>
               <span className={styles.friendName}>{friend.username}</span>
               <button
