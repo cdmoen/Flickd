@@ -3,7 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import NavFriends from "./NavFriends";
 import NavGroups from "./NavGroups";
 import styles from "./NavBar.module.css";
-import { useTheme } from "../../contexts/Theme.jsx";
+import { useTheme } from "../../contexts/ThemeContext.jsx";
 
 export default function NavBar() {
   const { user, profile, logout, loading } = useAuth();
@@ -18,13 +18,19 @@ export default function NavBar() {
       <nav className={styles.navbar}>
         <NavLink to="/home">
           <picture>
-            <source media="(max-width: 390px)" srcSet="/images/logo-f-play.png" />
-            <source media="(min-width: 391px)" srcSet="/images/logo-flickd-play.png" />
-            <img 
+            <source
+              media="(max-width: 390px)"
+              srcSet="/images/logo-f-play.png"
+            />
+            <source
+              media="(min-width: 391px)"
+              srcSet="/images/logo-flickd-play.png"
+            />
+            <img
               src="/images/logo-f-play.png"
-              alt="Logo" 
+              alt="Logo"
               title="Flickd Home"
-              className={styles.logo} 
+              className={styles.logo}
             />
           </picture>
         </NavLink>
@@ -54,7 +60,7 @@ export default function NavBar() {
 
         <button className={styles.themeToggle} onClick={toggleTheme}>
           {theme === "light" ? "🌙" : "☀️"}
-        </button> 
+        </button>
 
         <span className={styles.logoutBtn} onClick={logout}>
           Logout
