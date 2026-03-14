@@ -1,3 +1,9 @@
+/*This backend function takes in a fetch from the frontend,
+reconstructs it and adds in the secret API key for the TMDB, sends its own
+fetch to TMDB, receives the response json from TMDB, and then forwards that json
+back to the frontend. 
+*/
+
 export default async function handler(req, res) {
   const { path, ...query } = req.query;
 

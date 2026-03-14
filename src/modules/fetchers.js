@@ -1,9 +1,33 @@
 /*
+
+How API Requests Work in This Project
+All network requests to The Movie Database (TMDB) are routed through Vercel Serverless Functions located in the /api directory. 
+These files run on the server, not in the browser, which keeps the TMDB API key private.
+When one of the fetcher functions below call something like:
+
+/api/tmdb?path=movie/550&language=en-US
+
+Vercel automatically executes the corresponding file:
+api/tmdb.js
+
+That backend function then does the following:
+
+1.  Reads the secret TMDB key from the Vercel project's environment 
+variables (those are not stored in the github repository - only on the Vercel website)
+
+2. Forwards the request to the real TMDB API
+
+3. Returns the JSON response back to the frontend
+
+This lets the frontend fetch TMDB data securely without ever exposing the API key to the frontend.
+
+
+
 ==============================
     FETCH MOVIE SEARCH
 ==============================
 
-Takes in a movie string param and returns a list of TMDB movies with the following info for each:
+This fetcher takes in a movie string param and returns a list of TMDB movies with the following info for each:
 
  "results": [
     {
@@ -49,7 +73,7 @@ export async function fetchMovieSearch(searchParams) {
     FETCH MOVIE INFO
 ==============================
 
-Takes in a single TMDB movieID and returns the following information about the movie:
+This fetcher takes in a single TMDB movieID and returns the following information about the movie:
 
 {
   "adult": false,
