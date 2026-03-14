@@ -8,7 +8,7 @@
   background: #ffffff;
   border-radius: 12px;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 12px var(--color-border);;
 }
 
 .avatarSection {
@@ -96,9 +96,9 @@
 .logoutBtn {
   width: 100%;
   padding: 0.65rem;
-  background: #fff0f0;
-  color: #c0392b;
-  border: 1px solid rgba(192, 57, 43, 0.25);
+  background: var(--color-terra);
+  color: var(--color-terra-soft-bg);
+  border: 1px solid var(--color-terra);
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 500;

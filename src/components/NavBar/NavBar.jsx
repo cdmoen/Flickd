@@ -3,7 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import NavFriends from "./NavFriends";
 import NavGroups from "./NavGroups";
 import styles from "./NavBar.module.css";
-import { useTheme } from "./Theme.jsx";
+import { useTheme } from "../../contexts/Theme.jsx";
 
 export default function NavBar() {
   const { user, profile, logout, loading } = useAuth();
