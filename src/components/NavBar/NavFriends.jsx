@@ -23,17 +23,22 @@ export default function NavFriends() {
   }, [user]);
 
   return (
-    <NavLink
+ <NavLink
       to="/friends"
-      className={({ isActive }) =>
-        `${styles.friendsButton} 
-         ${hasRequests ? styles.pending : ""} 
-         ${isActive ? styles.active : ""}`
-      }
+    className={({ isActive }) =>
+      [
+        styles.friendsButton,
+        hasRequests ? styles.pending : "",
+        isActive ? styles.active : "",
+      ]
+        .filter(Boolean)
+        .join(" ")
+    }
     >
       <img
         src="/images/light.png"
         alt="Friend Icon"
+        title="Friends"
         className={styles.friendIcon}
       />
       <span className={styles.linkText}>Friends</span>

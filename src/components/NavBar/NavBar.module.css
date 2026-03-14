@@ -1,10 +1,27 @@
 /* NavBar.module.css */
 
+/* Theme Toggle */
+.themeToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  align-items: center;
+  line-height: 1;
+  display: flex;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.themeToggle:hover {
+  background: var(--color-surface);
+}
+
+
 @media screen and (max-width: 320px) {
   
   nav {
     display: flex;
-  }
+}
 
   .navbar {
     display: flex;
@@ -16,8 +33,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
   
-  .logo {
-    width: 75px;
+ .logo {
     height: 30px;
   }
 
@@ -33,7 +49,7 @@
   .logoutBtn {
     text-decoration: none;
     color: #ffffff;
-    background: #e63946;
+    background: #9E4738;
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.25rem 0.5rem;
@@ -44,6 +60,10 @@
       background 0.2s ease;
   }
 
+    .logoutBtn:hover {
+    background: #D97721;
+  }
+
   .loginStatus {
     display: none;
   }
@@ -51,6 +71,21 @@
   .link:hover {
     background: rgba(0, 0, 0, 0.06);
     color: #000;
+  }
+
+  .themeToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  align-items: center;
+  line-height: 1;
+  display: flex;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .themeToggle:hover {
+    background: var(--color-surface);
   }
 
 }
@@ -73,7 +108,6 @@
   }
 
   .logo {
-    width: 100px;
     height: 40px;
   }
 
@@ -105,7 +139,7 @@
   .logoutBtn {
     text-decoration: none;
     color: #ffffff;
-    background: #e63946;
+    background: #9E4738;
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.25rem 0.5rem;
@@ -114,6 +148,10 @@
     transition:
       color 0.2s ease,
       background 0.2s ease;
+  }
+
+  .logoutBtn:hover {
+    background: #D97721;
   }
 
   .loginStatus {
@@ -133,21 +171,20 @@
     width: 100%;
   }
 
-   .logo {
-    width: 100px;
-    height: 40px;
+  .logo {
+    height: 50px;
   }
 
   .link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
     text-decoration: none;
     color: #333;
     font-size: 1.05rem;
     font-weight: 500;
-
     border-radius: 6px;
-    transition:
-      color 0.2s ease,
-      background 0.2s ease;
+    transition: color 0.2s ease, background 0.2s ease;
   }
 
   .link:hover {
@@ -156,33 +193,33 @@
   }
 
   .linkText {
-    display: none;
+    display: inline;
   }
 
   .searchIcon {
-    display: inline-block;
-    height: 3rem;
-    width: 3rem;
+    width: 40px;
+    height: 40px;
   }
 
   .logoutBtn {
     text-decoration: none;
     color: #ffffff;
-    background: #e63946;
+    background: #9E4738;
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.25rem 0.5rem;
     border-radius: 6px;
     cursor: pointer;
-    transition:
-      color 0.2s ease,
-      background 0.2s ease;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+
+  .logoutBtn:hover {
+    background: #D97721;
   }
 
   .loginStatus {
     display: none;
   }
-  
 }
 
 @media screen and (min-width: 1024px) {
@@ -195,25 +232,26 @@
     padding: 1rem 2rem;
     background: #ffffff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    font-family: "Roboto", system-ui, sans-serif;
     width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .logo {
-    width: 100px;
-    height: 40px;
+    height: 50px;
   }
 
   .link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
     text-decoration: none;
     color: #333;
     padding: 0.25rem 0.5rem;
     font-size: 1.05rem;
     font-weight: 500;
     border-radius: 6px;
-    transition:
-      color 0.2s ease,
-      background 0.2s ease;
+    transition: color 0.2s ease, background 0.2s ease;
   }
 
   .link:hover {
@@ -221,36 +259,43 @@
     color: #000;
   }
 
+  .linkText {
+    display: inline;
+  }
+
   .active {
     background: #1d4ed8;
     color: #fff;
   }
-  
+
   .searchIcon {
-    display: none;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
   }
 
   .loginStatus {
     text-align: right;
-    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-left: auto;
   }
 
   .logoutBtn {
     text-decoration: none;
     color: #ffffff;
-    background: #e63946;
+    background: #9E4738;
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.25rem 0.5rem;
     border-radius: 6px;
     cursor: pointer;
-    transition:
-      color 0.2s ease,
-      background 0.2s ease;
+    transition: color 0.2s ease, background 0.2s ease;
   }
 
   .logoutBtn:hover {
-    background: #d62839;
+    background: #D97721;
   }
-
 }
