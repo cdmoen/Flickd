@@ -25,27 +25,22 @@ export default function GroupsPage() {
   const { user } = useAuth();
   const uid = user?.uid;
 
-  // Data hooks
   const { userGroups, loading } = useUserGroups(uid);
   const { friends } = useFriends(uid);
 
-  // Invite state
   const [incomingInvites, setIncomingInvites] = useState({});
   const [outgoingInvites, setOutgoingInvites] = useState({});
 
   const incomingInviteGroups = useIncomingInviteGroups(incomingInvites);
 
-  // UI state
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [selectedGroupId, setSelectedGroupId] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
-  // Outgoing invites for selected group
   const invited = useGroupOutgoingInvites(uid, selectedGroupId);
   const filteredFriends = friends.filter((f) => !invited.includes(f.uid));
 
-  // Subscriptions
   useEffect(() => {
     if (!uid) return;
 
@@ -55,7 +50,6 @@ export default function GroupsPage() {
     const unsubIncoming = onValue(incomingRef, (snap) =>
       setIncomingInvites(snap.val() || {}),
     );
-
     const unsubOutgoing = onValue(outgoingRef, (snap) =>
       setOutgoingInvites(snap.val() || {}),
     );
@@ -66,7 +60,6 @@ export default function GroupsPage() {
     };
   }, [uid]);
 
-  // Lookup maps
   const userGroupMap = useMemo(() => {
     const map = {};
     for (const g of userGroups) map[g.id] = g;
@@ -78,7 +71,6 @@ export default function GroupsPage() {
     [incomingInviteGroups],
   );
 
-  // Actions
   function handleDelete(group) {
     deleteGroup(group.id, uid);
   }
@@ -96,47 +88,61 @@ export default function GroupsPage() {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>Your Groups</h1>
 
-      <button
-        onClick={() => setShowForm((prev) => !prev)}
-        className={styles.createButton}
-      >
-        {showForm ? "Cancel" : "Create a New Group"}
-      </button>
-
-      {showForm && (
-        <div className={styles.formWrapper}>
-          <CreateGroup />
+      <div className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Create a Group</h2>
+          <button
+            onClick={() => setShowForm((prev) => !prev)}
+            className={showForm ? styles.cancelButton : styles.createButton}
+          >
+            {showForm ? "Cancel" : "Create a New Group"}
+          </button>
         </div>
-      )}
 
-      <h2 className={styles.sectionTitle}>Your Groups</h2>
-      <UserGroupsList
-        loading={loading}
-        userGroups={userGroups}
-        onDelete={handleDelete}
-        onInvite={handleInvite}
-      />
+        {showForm && (
+          <div className={styles.formWrapper}>
+            <CreateGroup />
+          </div>
+        )}
+      </div>
 
-      <h2 className={styles.sectionTitle}>Group Invites</h2>
-      <IncomingInvitesList
-        incomingInvites={incomingInvites}
-        incomingGroupMap={incomingGroupMap}
-        friends={friends}
-        uid={uid}
-        acceptGroupInvite={acceptGroupInvite}
-        rejectGroupInvite={rejectGroupInvite}
-      />
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Your Groups</h2>
+        <UserGroupsList
+          loading={loading}
+          userGroups={userGroups}
+          onDelete={handleDelete}
+          onInvite={handleInvite}
+        />
+      </div>
 
-      <h2 className={styles.sectionTitle}>Pending Invitations</h2>
-      <OutgoingInvitesList
-        outgoingInvites={outgoingInvites}
-        userGroupMap={userGroupMap}
-        friends={friends}
-        uid={uid}
-        cancelGroupInvite={cancelGroupInvite}
-      />
+      <div className={styles.topRow}>
+
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Group Invites</h2>
+          <IncomingInvitesList
+            incomingInvites={incomingInvites}
+            incomingGroupMap={incomingGroupMap}
+            friends={friends}
+            uid={uid}
+            acceptGroupInvite={acceptGroupInvite}
+            rejectGroupInvite={rejectGroupInvite}
+          />
+        </div>
+
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Pending Invitations</h2>
+          <OutgoingInvitesList
+            outgoingInvites={outgoingInvites}
+            userGroupMap={userGroupMap}
+            friends={friends}
+            uid={uid}
+            cancelGroupInvite={cancelGroupInvite}
+          />
+        </div>
+
+      </div>
 
       <FriendPickerSheet
         isOpen={isPickerOpen}
@@ -146,6 +152,7 @@ export default function GroupsPage() {
         uid={uid}
         filteredFriends={filteredFriends}
       />
+
     </main>
   );
 }
