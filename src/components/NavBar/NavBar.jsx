@@ -3,9 +3,11 @@ import { useAuth } from "../../contexts/AuthContext";
 import NavFriends from "./NavFriends";
 import NavGroups from "./NavGroups";
 import styles from "./NavBar.module.css";
+import { useTheme } from "../../contexts/ThemeContext.jsx";
 
 export default function NavBar() {
   const { user, profile, logout, loading } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -15,11 +17,22 @@ export default function NavBar() {
     <>
       <nav className={styles.navbar}>
         <NavLink to="/home">
-          <img 
-            src="/images/flickd-2.png" 
-            alt="Logo" 
-            className={styles.logo} 
-          />
+          <picture>
+            <source
+              media="(max-width: 390px)"
+              srcSet="/images/logo-f-play.png"
+            />
+            <source
+              media="(min-width: 391px)"
+              srcSet="/images/logo-flickd-play.png"
+            />
+            <img
+              src="/images/logo-f-play.png"
+              alt="Logo"
+              title="Flickd Home"
+              className={styles.logo}
+            />
+          </picture>
         </NavLink>
 
         <NavFriends />
@@ -33,18 +46,22 @@ export default function NavBar() {
           }
         >
           <img
-            src="public\images\search.png"
+            src="/images/search.png"
             alt="Search Icon"
+            title="Search Movies"
             className={styles.searchIcon}
           />
-          <span className={styles.linkText}>
-            Search
-          </span>
+          <span className={styles.linkText}>Search</span>
         </NavLink>
 
         <span className={styles.loginStatus}>
           Welcome, {profile?.username}!
         </span>
+
+        <button className={styles.themeToggle} onClick={toggleTheme}>
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
+
         <span className={styles.logoutBtn} onClick={logout}>
           Logout
         </span>

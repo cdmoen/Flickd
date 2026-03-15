@@ -1,12 +1,33 @@
-const TMDB_API_KEY =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNDRhMzU5M2M5M2ExYjA4M2Q2ZmNjYjE1Mzk1Zjc5ZCIsIm5iZiI6MTc3MTYxNDI2NS4wMjgsInN1YiI6IjY5OThiMDM5NDlkODE1ZDRiY2M5OWNjNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-4R9PwE931m9oQjt5seK2Opvw6erzfZX47c7CPGYxgw";
-
 /*
+
+How API Requests Work in This Project
+All network requests to The Movie Database (TMDB) are routed through Vercel Serverless Functions located in the /api directory. 
+These files run on the server, not in the browser, which keeps the TMDB API key private.
+When one of the fetcher functions below call something like:
+
+/api/tmdb?path=movie/550&language=en-US
+
+Vercel automatically executes the corresponding file:
+api/tmdb.js
+
+That backend function then does the following:
+
+1.  Reads the secret TMDB key from the Vercel project's environment 
+variables (those are not stored in the github repository - only on the Vercel website)
+
+2. Forwards the request to the real TMDB API
+
+3. Returns the JSON response back to the frontend
+
+This lets the frontend fetch TMDB data securely without ever exposing the API key to the frontend.
+
+
+
 ==============================
     FETCH MOVIE SEARCH
 ==============================
 
-Takes in a movie string param and returns a list of TMDB movies with the following info for each:
+This fetcher takes in a movie string param and returns a list of TMDB movies with the following info for each:
 
  "results": [
     {
@@ -32,22 +53,17 @@ Takes in a movie string param and returns a list of TMDB movies with the followi
  */
 
 export async function fetchMovieSearch(searchParams) {
-  const paramsString = searchParams.split(" ").join("%20");
+  // Build the URL for your Vercel API route
+  const url = `/api/tmdb?path=search/movie&query=${encodeURIComponent(
+    searchParams,
+  )}&include_adult=false&language=en-US&page=1`;
 
-  const response = await fetch(
-    // Fetch using TMDB 'search' function to get list of movie ID's
-    `https://api.themoviedb.org/3/search/movie?query=${searchParams}&include_adult=false&language=en-US&page=1`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${TMDB_API_KEY}`,
-        accept: "application/json",
-      },
-    },
-  );
+  const response = await fetch(url);
+
   if (!response.ok) {
     throw new Error("fetchMovieSearch failed");
   }
+
   console.log("fetchMovieSearch successful");
   return await response.json();
 }
@@ -57,7 +73,7 @@ export async function fetchMovieSearch(searchParams) {
     FETCH MOVIE INFO
 ==============================
 
-Takes in a single TMDB movieID and returns the following information about the movie:
+This fetcher takes in a single TMDB movieID and returns the following information about the movie:
 
 {
   "adult": false,
@@ -155,21 +171,12 @@ Takes in a single TMDB movieID and returns the following information about the m
 
 export async function fetchMovieInfo(movieID) {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieID}?append_to_response=credits%2Cvideos&language=en-US`,
-
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${TMDB_API_KEY}`,
-        accept: "application/json",
-      },
-    },
+    `/api/tmdb?path=movie/${movieID}&append_to_response=credits,videos&language=en-US`,
   );
 
   if (!response.ok) {
     throw new Error("fetchCredits failed");
   }
-  console.log("fetchMovieInfo successful");
   const movieInfo = await response.json();
   return movieInfo;
 }

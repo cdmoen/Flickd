@@ -35,6 +35,7 @@ export default function NavGroups() {
       <img 
         src="/images/ticket.png"
         alt="Groups Icon"
+        title="Groups"
         className={styles.groupsIcon}
       />
       <span className={styles.linkText}>
