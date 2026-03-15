@@ -33,7 +33,7 @@ export default function NavGroups() {
       }
     >
       <img
-        src="/images/Roll.png"
+        src="/images/roll.png"
         alt="Groups Icon"
         title="Groups"
         className={styles.groupsIcon}
