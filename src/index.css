@@ -1,5 +1,9 @@
 body {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
+  background: var(--color-page-bg);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
 }
 
 :root {

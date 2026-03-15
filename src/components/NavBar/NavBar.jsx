@@ -18,8 +18,8 @@ export default function NavBar() {
       <nav className={styles.navbar}>
         <NavLink to="/home">
           <picture>
-            <source media="(max-width: 390px)" srcSet="/images/logo-f-play.png" />
-            <source media="(min-width: 391px)" srcSet="/images/logo-flickd-play.png" />
+            <source media="(max-width: 400px)" srcSet="/images/logo-f-play.png" />
+            <source media="(min-width: 401px)" srcSet="/images/logo-flickd-play.png" />
             <img 
               src="/images/logo-f-play.png"
               alt="Logo" 

@@ -1,117 +1,184 @@
 .container {
-  max-width: 420px;
+  max-width: 1200px;
+  margin: .5rem auto;
+  padding: 2;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+}
+
+.cardGrid {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.card {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 4rem auto;
-  padding: 2.5rem 2rem;
-  background: #ffffff;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--color-card-bg);
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 12px var(--color-border);;
+  border: 1px solid var(--color-border);
+  padding: 1rem 1rem;
+  box-sizing: border-box;
 }
 
-.avatarSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  margin-bottom: 2rem;
+.cardTitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+    background: linear-gradient(180deg, #D97721, #9E4738);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
 }
 
-.avatarWrapper {
-  position: relative;
-  width: 80px;
-  height: 80px;
+.watchlistTitle {
+  font-size: 2rem;
+  font-weight: 500;
+    background: linear-gradient(180deg, #D97721, #9E4738);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 20px;
 }
 
-.avatarContainer {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  transition: opacity 0.2s ease;
-}
-
-.avatarSection:hover .avatarContainer {
-  opacity: 0.85;
-}
-
-.avatarImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.editBadge {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-}
-
-.changeLabel {
-  font-size: 0.75rem;
-  color: #888;
-}
-
-.infoGrid {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-}
-
-.infoCard {
-  background: #f7f7f7;
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.infoLabel {
-  font-size: 0.75rem;
-  color: #999;
-}
-
-.infoValue {
+.cardContent {
   font-size: 0.95rem;
-  font-weight: 500;
-  color: #222;
+  color: var(--color-text-muted);
+  margin: 0;
 }
 
-.logoutBtn {
-  width: 100%;
-  padding: 0.65rem;
-  background: var(--color-terra);
-  color: var(--color-terra-soft-bg);
-  border: 1px solid var(--color-terra);
+.cardRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cardIcon {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+}
+
+.cardBtn {
+  padding: 0.75rem 1rem;
+  background: linear-gradient(180deg, var(--color-amber-hover), var(--color-terra-hover));
+  color: #ffffff;
+  border: none;
   border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 1rem;
   cursor: pointer;
+  text-decoration: none;
+  text-align: center;
   transition: background 0.2s ease;
 }
 
-.logoutBtn:hover {
-  background: #ffe0e0;
+.cardBtn:hover {
+  background: linear-gradient(180deg, var(--color-terra-hover), var(--color-amber-hover));
 }
 
-.loading {
+.backBtn {
+  padding: 0.5rem .5rem;
+  background: linear-gradient(180deg, var(--color-amber-hover), var(--color-terra-hover));
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
   text-align: center;
-  margin-top: 4rem;
-  color: #888;
+  transition: background 0.2s ease;
+}
+
+.backBtn:hover {
+  background: linear-gradient(180deg, var(--color-terra-hover), var(--color-amber-hover));
+}
+
+/* My Watchlist*/
+.addForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  border-color: var(--color-amber);
+  box-shadow: 0 0 0 3px var(--color-amber-soft-bg);
+  outline: none;
+}
+
+.filmList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.filmItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.filmTitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.filmNote {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0.2rem 0 0;
+}
+
+.removeBtn {
+  padding: 0.35rem 0.75rem;
+  background: var(--color-terra-soft-bg);
+  color: var(--color-terra-soft-text);
+  border: 1px solid var(--color-terra);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.removeBtn:hover {
+  background: var(--color-terra);
+  color: #ffffff;
+}
+
+
+/* smaller screens — stack vertically */
+@media screen and (max-width: 767px) {
+  .cardGrid {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+  }
 }
