@@ -35,7 +35,7 @@ export default function LoginPage() {
     <main className={styles.container}>
       <header className={styles.header}>
         <img
-          src="public\images\logo-flickd-play.png"
+          src="/images/logo-flickd-play.png"
           alt="Flickd Logo"
           className={styles.logo}
         />
