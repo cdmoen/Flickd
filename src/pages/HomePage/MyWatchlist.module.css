@@ -95,6 +95,36 @@
   font-weight: 300;
 }
 
+/* ── Top row right (done button + add film) ── */
+
+.topRowRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.doneBtn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.doneBtn:hover {
+  border-color: #e07b2a;
+  color: #e07b2a;
+}
+
 /* ── Grid ── */
 
 .grid {
@@ -115,6 +145,7 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
   animation: fadeUp 0.35s ease both;
   -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
 }
 
 @keyframes fadeUp {
@@ -126,6 +157,51 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ── Edit mode wiggle ── */
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+}
+
+.cardEditMode {
+  animation: wiggle 0.3s ease infinite;
+}
+
+/* ── Remove badge ── */
+
+.removeBadge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 2;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* mobile edit mode — always visible */
+.cardEditMode .removeBadge {
+  opacity: 1;
 }
 
 .poster {
@@ -262,6 +338,11 @@
     opacity: 1;
   }
 
+  /* desktop hover reveal for remove badge */
+  .card:hover .removeBadge {
+    opacity: 1;
+  }
+
   .poster {
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
@@ -273,6 +354,7 @@
   .cardTitle {
     font-size: 14px;
   }
+
   .cardYear {
     font-size: 11px;
   }

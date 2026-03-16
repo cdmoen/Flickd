@@ -1,7 +1,30 @@
-import { NavLink } from "react-router-dom";
+import { useState, useRef } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
 import styles from "./MyWatchlist.module.css";
 
-export default function MyWatchlist({ watchlist, onBack }) {
+export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
+  const navigate = useNavigate();
+  const [editMode, setEditMode] = useState(false);
+  const pressTimer = useRef(null);
+
+  function handleTouchStart() {
+    pressTimer.current = setTimeout(() => setEditMode(true), 500);
+  }
+
+  function handleTouchEnd() {
+    clearTimeout(pressTimer.current);
+  }
+
+  function handleCardClick(filmId) {
+    if (editMode) return; // clicks are swallowed in edit mode — only the × badge removes
+    navigate(`/movies/${filmId}`);
+  }
+
+  function handleRemove(e, filmId) {
+    e.stopPropagation(); // prevent click bubbling up to the card's onClick
+    removeFilm(filmId);
+  }
+
   return (
     <div className={styles.root}>
       <div className={styles.hero}>
@@ -9,9 +32,19 @@ export default function MyWatchlist({ watchlist, onBack }) {
           <button className={styles.back} onClick={onBack}>
             ← Back
           </button>
-          <NavLink to="/movies" className={styles.addBtn}>
-            + Add Film
-          </NavLink>
+          <div className={styles.topRowRight}>
+            {editMode && (
+              <button
+                className={styles.doneBtn}
+                onClick={() => setEditMode(false)}
+              >
+                Done
+              </button>
+            )}
+            <NavLink to="/movies" className={styles.addBtn}>
+              + Add Film
+            </NavLink>
+          </div>
         </div>
         <div className={styles.heading}>
           <p className={styles.eyebrow}>Your collection</p>
@@ -36,9 +69,21 @@ export default function MyWatchlist({ watchlist, onBack }) {
           {watchlist.map((film, index) => (
             <div
               key={film.id}
-              className={styles.card}
+              className={`${styles.card} ${editMode ? styles.cardEditMode : ""}`}
               style={{ animationDelay: `${index * 0.04}s` }}
+              onClick={() => handleCardClick(film.id)}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onContextMenu={(e) => e.preventDefault()}
             >
+              {editMode && (
+                <button
+                  className={styles.removeBadge}
+                  onClick={(e) => handleRemove(e, film.id)}
+                >
+                  ×
+                </button>
+              )}
               <img
                 src={film.poster}
                 alt={film.title}

@@ -31,6 +31,7 @@ export default function HomePage() {
         <MyWatchlist
           watchlist={watchlist}
           onBack={() => setShowWatchlist(false)}
+          removeFilm={removeFilm}
         />
       )}
     </main>
