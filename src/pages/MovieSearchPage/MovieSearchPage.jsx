@@ -41,6 +41,7 @@ export default function MovieSearchPage() {
             className={styles.input}
             type="text"
             placeholder="Search"
+            aria-label="Search movies"
             value={searchParams}
             onChange={(e) => setSearchParams(e.target.value)}
             required
