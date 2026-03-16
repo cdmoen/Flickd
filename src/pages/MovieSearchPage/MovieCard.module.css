@@ -95,3 +95,27 @@
   background: #1742b0;
   transform: translateY(-2px);
 }
+
+.watchlistButton {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(
+    180deg,
+    var(--color-amber-hover),
+    var(--color-terra-hover)
+  );
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.watchlistButton:hover {
+  background: linear-gradient(
+    180deg,
+    var(--color-terra-hover),
+    var(--color-amber-hover)
+  );
+}

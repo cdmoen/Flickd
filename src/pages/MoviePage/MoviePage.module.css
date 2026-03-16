@@ -1,0 +1,29 @@
+.watchlistButton {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(
+    180deg,
+    var(--color-amber-hover),
+    var(--color-terra-hover)
+  );
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.watchlistButton:hover {
+  background: linear-gradient(
+    180deg,
+    var(--color-terra-hover),
+    var(--color-amber-hover)
+  );
+}
+
+.alreadyAdded {
+  margin: 1rem 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}

@@ -7,6 +7,7 @@ import { fetchMovieInfo } from "../../modules/fetchers";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { useWatchlist } from "../../hooks/useWatchlist";
 import styles from "./MoviePage.module.css";
 
 export default function MoviePage() {
@@ -15,13 +16,13 @@ export default function MoviePage() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { watchlist, addFilm } = useWatchlist(user?.uid);
 
   useEffect(() => {
     async function fetchMovie() {
       try {
         setLoading(true);
         setError(null);
-        console.log("MOVIE ID OBJECT IS THIS:   " + movieID);
         const data = await fetchMovieInfo(movieID);
         setMovie(data);
       } catch (err) {
@@ -32,7 +33,7 @@ export default function MoviePage() {
     }
 
     fetchMovie();
-  }, [movieID]); // <-- correct dependency
+  }, [movieID]);
 
   if (loading) return <p className="loading">Loading movie...</p>;
   if (error) return <p className="error">Error: {error}</p>;
@@ -41,11 +42,33 @@ export default function MoviePage() {
   // Now that movie is loaded, compute helpers safely
   const direc = director(movie);
   const stars = topThreeStars(movie);
+  const poster = `https://image.tmdb.org/t/p/w780/${movie.backdrop_path ? movie.backdrop_path : "ss4GSbqZy2xKumjWD48dU2cZQ31.jpg"}`;
+  const year = movie.release_date.slice(0, 4);
   const youtubeCode = youtubeTrailer(movie);
+  const filmForWatchlist = {
+    id: movieID,
+    title: movie.title,
+    poster: poster,
+    year: year,
+  };
+  const isInWatchlist = watchlist.some((f) => f.id === String(movieID));
 
   return (
     <div className="movie-container">
       <h1>{movie.title}</h1>
+      {user && !isInWatchlist && (
+        <button
+          className={styles.watchlistButton}
+          onClick={() => addFilm(filmForWatchlist)}
+        >
+          Add to My Watchlist
+        </button>
+      )}
+
+      {user && isInWatchlist && (
+        <p className={styles.alreadyAdded}>Already in your watchlist</p>
+      )}
+
       <img
         className="movie-poster"
         src={`https://image.tmdb.org/t/p/w780/${movie.backdrop_path || "ss4GSbqZy2xKumjWD48dU2cZQ31.jpg"}`}

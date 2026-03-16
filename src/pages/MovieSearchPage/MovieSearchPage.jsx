@@ -1,12 +1,17 @@
 import { useState } from "react";
 import MovieCard from "./MovieCard";
 import { fetchMovieSearch } from "../../modules/fetchers";
+import { useWatchlist } from "../../hooks/useWatchlist";
+import { useAuth } from "../../contexts/AuthContext";
+
 import styles from "./MovieSearchPage.module.css";
 
 export default function MovieSearchPage() {
+  const { user, logout, profile, loading } = useAuth();
   const [searchParams, setSearchParams] = useState("");
   const [searchResults, setSearchResults] = useState(null);
   const [movieIDs, setMovieIDs] = useState([]);
+  const { watchlist, addFilm, removeFilm } = useWatchlist(user?.uid);
 
   // Search TMDB database for a film
   async function handleSubmit(e) {
@@ -45,7 +50,11 @@ export default function MovieSearchPage() {
         <ul className={styles.resultsList}>
           {movieIDs.map((movieID) => (
             <li key={movieID}>
-              <MovieCard movieID={movieID} />
+              <MovieCard
+                movieID={movieID}
+                watchlist={watchlist}
+                addFilm={addFilm}
+              />
             </li>
           ))}
         </ul>
