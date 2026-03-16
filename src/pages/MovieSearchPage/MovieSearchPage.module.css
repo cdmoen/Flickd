@@ -24,7 +24,7 @@
   font-weight: 600;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  background: linear-gradient(180deg, #D97721, #9E4738);
+  background: linear-gradient(180deg, #d97721, #9e4738);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -54,7 +54,11 @@
 
 .button {
   padding: 0.75rem 1.25rem;
-  background: linear-gradient(180deg, var(--color-amber-hover), var(--color-terra-hover));
+  background: linear-gradient(
+    180deg,
+    var(--color-amber-hover),
+    var(--color-terra-hover)
+  );
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -63,28 +67,35 @@
   text-decoration: none;
   transition: background 0.2s ease;
 }
- 
+
 .button:hover {
-  background: linear-gradient(180deg, var(--color-terra-hover), var(--color-amber-hover));
+  background: linear-gradient(
+    180deg,
+    var(--color-terra-hover),
+    var(--color-amber-hover)
+  );
 }
 
 .button:active {
   background: #12368f;
 }
 
+/* ── Results grid ── */
+
 .resultsList {
   list-style: none;
   padding: 0;
   margin: 2rem 0 0 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .resultsList li {
   list-style: none;
 }
 
+/* ── Mobile breakpoints (unchanged) ── */
 
 @media screen and (max-width: 320px) {
   .container {
@@ -114,7 +125,6 @@
   .button {
     width: 100%;
   }
-
 }
 
 @media screen and (min-width: 321px) and (max-width: 767px) {
@@ -137,12 +147,10 @@
   .button {
     width: 100%;
   }
-  
 }
 
 @media screen and (min-width: 768px) {
   .container {
     padding: 2rem;
   }
-
 }

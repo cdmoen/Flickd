@@ -83,8 +83,13 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
           )}
         </div>
 
-        <p className={styles.description}>Director: {direct}</p>
-        <p className={styles.description}>Starring: {stars}</p>
+        <p className={styles.description}>
+          <strong>Director:</strong>
+          {direct}
+        </p>
+        <p className={styles.description}>
+          <strong>Starring:</strong> {stars}
+        </p>
       </section>
 
       {trailerIsVisible && (
