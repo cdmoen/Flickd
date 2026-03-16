@@ -51,6 +51,7 @@ export default function MovieSearchPage() {
           {movieIDs.map((movieID) => (
             <li key={movieID}>
               <MovieCard
+                user={user}
                 movieID={movieID}
                 watchlist={watchlist}
                 addFilm={addFilm}

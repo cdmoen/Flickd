@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./MovieCard.module.css";
 
-export default function MovieCard({ movieID, watchlist, addFilm }) {
+export default function MovieCard({ user, movieID, watchlist, addFilm }) {
   const navigate = useNavigate();
   const [trailerIsVisible, setTrailerIsVisible] = useState(false);
   const [movieInfo, setMovieInfo] = useState(null);
@@ -72,7 +72,7 @@ export default function MovieCard({ movieID, watchlist, addFilm }) {
         >
           Watch Trailer
         </button>
-        {!isInWatchlist && (
+        {user && !isInWatchlist && (
           <button
             className={styles.watchlistButton}
             onClick={() => addFilm(filmForWatchlist)}

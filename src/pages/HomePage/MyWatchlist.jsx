@@ -28,11 +28,7 @@ export default function MyWatchlist({ watchlist, onBack }) {
       <div className={styles.filmList}>
         {watchlist.map((film) => (
           <div key={film.id} className={styles.filmItem}>
-            <img
-              src={`https://image.tmdb.org/t/p/w300${film.posterPath}`}
-              alt={film.title}
-              className={styles.poster}
-            />
+            <img src={film.poster} alt={film.title} className={styles.poster} />
             <div className={styles.info}>
               <p className={styles.filmTitle}>{film.title}</p>
               <p className={styles.filmNote}>{film.releaseDate}</p>
