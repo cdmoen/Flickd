@@ -9,7 +9,7 @@ import styles from "./MovieCard.module.css";
 export default function MovieCard({ user, movieID, watchlist, addFilm }) {
   const navigate = useNavigate();
   const [trailerIsVisible, setTrailerIsVisible] = useState(false);
-  const [movieInfo, setMovieInfo] = useState(null);
+  const [movie, setmovie] = useState(null);
   const [error, setError] = useState(null);
 
   function handleMovieClick(movieID) {
@@ -20,7 +20,7 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
     async function loadMovie() {
       try {
         const data = await fetchMovieDetails(movieID);
-        setMovieInfo(data);
+        setmovie(data);
       } catch (err) {
         console.error(err);
         setError(err);
@@ -33,17 +33,19 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
     return <p>Error loading movie.</p>;
   }
 
-  if (!movieInfo) {
+  if (!movie) {
     return <p>Loading...</p>;
   }
 
-  const title = movieInfo.title;
-  const year = movieInfo.release_date.slice(0, 4);
-  const description = movieInfo.description;
-  const poster = `https://image.tmdb.org/t/p/w780/${movieInfo.backdrop_path ? movieInfo.backdrop_path : "ss4GSbqZy2xKumjWD48dU2cZQ31.jpg"}`;
-  const stars = topThreeStars(movieInfo);
-  const direct = director(movieInfo);
-  const youtubeCode = youtubeTrailer(movieInfo);
+  const title = movie.title;
+  const year = movie.release_date.slice(0, 4);
+  const description = movie.description;
+  const poster = movie.backdrop_path
+    ? `https://image.tmdb.org/t/p/w185/${movie.backdrop_path}`
+    : "/images/placeholder.svg";
+  const stars = topThreeStars(movie);
+  const direct = director(movie);
+  const youtubeCode = youtubeTrailer(movie);
   const filmForWatchlist = {
     id: movieID,
     title,

@@ -2,8 +2,8 @@ import styles from "./FilmSearchResultCard.module.css";
 
 export default function FilmSearchResultCard({ movie, onAdd }) {
   const posterUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
-    : "https://image.tmdb.org/t/p/w200/ss4GSbqZy2xKumjWD48dU2cZQ31.jpg";
+    ? `https://image.tmdb.org/t/p/w185${movie.poster_path}`
+    : "/images/placeholder.svg";
 
   const releaseYear = movie.release_date ? movie.release_date.slice(0, 4) : "—";
 

@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import AvatarPicker from "./AvatarPicker";
 import MyWatchlist from "./MyWatchlist";
 import FriendsCard from "./FriendsCard";
 import GroupsCard from "./GroupsCard";
 import WatchlistCard from "./WatchlistCard";
-import { NavLink } from "react-router-dom";
 import { useWatchlist } from "../../hooks/useWatchlist";
 import styles from "./HomePage.module.css";
 

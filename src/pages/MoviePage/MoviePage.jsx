@@ -42,7 +42,9 @@ export default function MoviePage() {
   // Now that movie is loaded, compute helpers safely
   const direc = director(movie);
   const stars = topThreeStars(movie);
-  const poster = `https://image.tmdb.org/t/p/w780/${movie.backdrop_path ? movie.backdrop_path : "ss4GSbqZy2xKumjWD48dU2cZQ31.jpg"}`;
+  const poster = movie.backdrop_path
+    ? `https://image.tmdb.org/t/p/w185/${movie.backdrop_path}`
+    : "/images/placeholder.svg";
   const year = movie.release_date.slice(0, 4);
   const youtubeCode = youtubeTrailer(movie);
   const filmForWatchlist = {
@@ -71,7 +73,7 @@ export default function MoviePage() {
 
       <img
         className="movie-poster"
-        src={`https://image.tmdb.org/t/p/w780/${movie.backdrop_path || "ss4GSbqZy2xKumjWD48dU2cZQ31.jpg"}`}
+        src={poster}
         alt={`${movie.title} Poster`}
       />
 
