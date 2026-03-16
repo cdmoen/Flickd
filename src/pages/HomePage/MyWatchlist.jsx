@@ -27,7 +27,7 @@ export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
   }
 
   return (
-    <div className={styles.root} onClick={setEditMode(false)}>
+    <div className={styles.root} onClick={() => setEditMode(false)}>
       <div className={styles.hero}>
         <div className={styles.topRow}>
           <button className={styles.back} onClick={onBack}>
