@@ -30,21 +30,26 @@ export default function MovieSearchPage() {
 
   return (
     <main className={styles.container}>
-      <h2 className={styles.title}>Search Movies</h2>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="Search"
-          value={searchParams}
-          onChange={(e) => setSearchParams(e.target.value)}
-          required
-        />
-        <button className={styles.button} type="submit">
-          Submit
-        </button>
-      </form>
+      <div className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.title}>Search Movies</h2>
+        </div>
+
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="Search"
+            value={searchParams}
+            onChange={(e) => setSearchParams(e.target.value)}
+            required
+          />
+          <button className={styles.button} type="submit">
+            Search
+          </button>
+        </form>
+      </div>
 
       {searchResults && (
         <ul className={styles.resultsList}>
