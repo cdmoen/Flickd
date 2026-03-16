@@ -3,7 +3,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import styles from "./MyWatchlist.module.css";
 
 export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
-  navigate = useNavigate();
+  const navigate = useNavigate();
   const [editMode, setEditMode] = useState(false);
   const pressTimer = useRef(null);
 
