@@ -1,6 +1,6 @@
 import { database } from "../firebase";
 import { ref, set } from "firebase/database";
-import { fetchMovieInfo } from "../fetchers";
+import { fetchMovieDetails } from "../fetchers";
 import {
   director,
   topThreeStars,
