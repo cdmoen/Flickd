@@ -45,7 +45,9 @@ export function topThreeStars(movieInfo) {
 // Takes in movieInfo object and returns director
 export function director(movieInfo) {
   const crew = movieInfo.credits.crew;
-  const directors = crew.map((member) => member.job === "Director");
+  const directors = crew.map((member) =>
+    member.job === "Director" ? member.name : null,
+  );
   console.log("directors:  ");
   console.log(directors);
 
