@@ -22,18 +22,18 @@
   padding: 0;
   font-size: 1.2rem;
   font-weight: 600;
-  background: var(--color-text-primary);
+  background: var(--color-blue-soft-bg);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   cursor: pointer;
   text-align: left;
-  text-decoration: underline;
   line-height: 1.2;
 }
 
 .nameButton:hover {
   text-decoration: underline;
+  background: var(--color-text-primary);
 }
 
 .actions {

@@ -14,6 +14,7 @@ export default function GroupCard({ group, onDelete, onInvite }) {
           onClick={() => navigate(`/groups/${group.id}`)}
         >
           {group.name}
+          {"→"}
         </button>
 
         <div className={styles.actions}>
@@ -41,7 +42,8 @@ export default function GroupCard({ group, onDelete, onInvite }) {
         <div className={styles.backdrop}>
           <div className={styles.modal}>
             <p className={styles.modalText}>
-              Are you sure you want to delete <strong>{group.name}</strong>? This cannot be undone.
+              Are you sure you want to delete <strong>{group.name}</strong>?
+              This cannot be undone.
             </p>
             <div className={styles.modalButtons}>
               <button
