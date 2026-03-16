@@ -35,7 +35,7 @@ export function topThreeStars(movieInfo) {
   const topTenCast = cast.slice(0, 10);
 
   const topThreeStars = [...topTenCast]
-    .sort((a, b) => a.popularity - b.popularity)
+    .sort((a, b) => b.popularity - a.popularity)
     .slice(0, 3);
   const names = topThreeStars.map((e) => e.name).join(", ");
 
@@ -45,6 +45,10 @@ export function topThreeStars(movieInfo) {
 // Takes in movieInfo object and returns director
 export function director(movieInfo) {
   const crew = movieInfo.credits.crew;
+  const directors = crew.map((member) => member.job === "Director");
+  console.log("directors:  ");
+  console.log(directors);
+
   const director = crew.find((member) => member.job === "Director");
   if (!director) {
     return null;
