@@ -24,13 +24,19 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
 
   async function handleAdd(movie) {
     await onAdd(movie); // parent decides what to do with it
+    handleClose();
+  }
+
+  function handleClose() {
+    setQuery("");
+    setResults([]);
     onClose();
   }
 
   if (!isOpen) return null;
 
   return (
-    <div className={styles.backdrop} onClick={onClose}>
+    <div className={styles.backdrop} onClick={handleClose}>
       <div className={styles.sheet} onClick={(e) => e.stopPropagation()}>
         <h2>Add a Film</h2>
         <form onSubmit={handleSearch} className={styles.searchBar}>

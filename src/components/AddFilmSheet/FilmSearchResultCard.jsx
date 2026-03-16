@@ -14,7 +14,6 @@ export default function FilmSearchResultCard({ movie, onAdd }) {
       <div className={styles.info}>
         <h3>{movie.title}</h3>
         <p>{releaseYear}</p>
-        <p>Genres: {movie.genre_ids.join(", ")}</p>
       </div>
 
       <button className={styles.addButton} onClick={onAdd}>

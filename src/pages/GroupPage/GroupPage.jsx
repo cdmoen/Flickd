@@ -73,8 +73,6 @@ export default function GroupPage() {
       </div>
 
       <AddFilmSheet
-        groupId={groupId}
-        uid={uid}
         onClose={() => setAddFilmSheetIsOpen(false)}
         isOpen={addFilmSheetIsOpen}
         onAdd={(movie) => addFilmToGroup(groupId, uid, movie.id)}

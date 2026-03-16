@@ -33,9 +33,18 @@ export default function MyWatchlist({
     removeFilm(filmId);
   }
 
-  function handleAddFilm(e, movie) {
-    e.stopPropagation();
-    addFilm(movie);
+  function handleAddFilm(movie) {
+    addFilm({
+      id: movie.id,
+      title: movie.title,
+      poster: movie.poster_path
+        ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
+        : "/images/placeholder.svg",
+      backdrop: movie.backdrop_path
+        ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+        : "/images/backdrop_placeholder.svg",
+      year: movie.release_date?.slice(0, 4),
+    });
     setAddFilmSheetIsOpen(false);
   }
 
@@ -57,7 +66,7 @@ export default function MyWatchlist({
             )}
             <button
               className={styles.addBtn}
-              onClick={() => setAddFilmOpen(true)}
+              onClick={() => setAddFilmSheetIsOpen(true)}
             >
               + Add Film
             </button>
