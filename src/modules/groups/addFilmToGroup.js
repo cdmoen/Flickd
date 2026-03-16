@@ -12,6 +12,8 @@ export async function addFilmToGroup(groupId, uid, tmdbId) {
   let directorName;
   let topThreeStarsNames;
   let youtubeTrailerLink;
+  let posterPortrait;
+  let posterLandscape;
 
   // 1. Fetch metadata from TMDB
   try {
@@ -20,6 +22,9 @@ export async function addFilmToGroup(groupId, uid, tmdbId) {
     console.log("fetchMovieInfo from TMDB failed");
     return false;
   }
+
+  console.log(film);
+
   // 2. Build the Firebase path
   // Using tmdbId as the filmId keeps things simple and avoids duplicates
   const filmRef = ref(database, `groups/${groupId}/films/${tmdbId}`);
