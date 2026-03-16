@@ -22,7 +22,7 @@
   padding: 0;
   font-size: 1.2rem;
   font-weight: 600;
-  background: var(--color-blue-soft-bg);
+  background: var(--color-blue);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -33,7 +33,10 @@
 
 .nameButton:hover {
   text-decoration: underline;
-  background: var(--color-text-primary);
+  background: var(--color-blue-soft-bg);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .actions {

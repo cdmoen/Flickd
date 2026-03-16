@@ -14,7 +14,7 @@ export default function GroupCard({ group, onDelete, onInvite }) {
           onClick={() => navigate(`/groups/${group.id}`)}
         >
           {group.name}
-          {"→"}
+          {" →"}
         </button>
 
         <div className={styles.actions}>
