@@ -38,72 +38,60 @@ export default function FilmCard({ film, filmId, groupId, uid, profile }) {
   }
 
   return (
-    <>
-      <div className={styles.card}>
-        <img
-          src={film.posterURL}
-          className={styles.poster}
-          onClick={() => handleMovieClick(filmId)}
-        />
+    <div className={styles.card}>
+      <img
+        src={film.posterURL}
+        className={styles.poster}
+        onClick={() => handleMovieClick(filmId)}
+      />
 
-        <div className={styles.info}>
-          <h3 className={styles.title} onClick={() => handleMovieClick(filmId)}>
-            {film.title}
-          </h3>
+      <div className={styles.info}>
+        <h3 className={styles.title} onClick={() => handleMovieClick(filmId)}>
+          {film.title}
+        </h3>
 
-          <div className={styles.actions}>
-            <button onClick={() => setCommentsOpen(true)}>Comments</button>
-            <button onClick={() => setRatingsOpen(true)}>Ratings</button>
-            <button onClick={() => setSeenOpen(true)}>Viewed</button>
-          </div>
+        <div className={styles.actions}>
+          <button
+            className={styles.actionBtn}
+            onClick={() => setCommentsOpen(true)}
+          >
+            Comments
+          </button>
+          <button
+            className={styles.actionBtn}
+            onClick={() => setRatingsOpen(true)}
+          >
+            Ratings
+          </button>
+          <button
+            className={styles.actionBtn}
+            onClick={() => setSeenOpen(true)}
+          >
+            Viewed
+          </button>
+        </div>
 
-          {/* NEW QUICK ACTIONS */}
-          <div className={styles.quickActions}>
-            <button onClick={handleViewed}>I've Viewed This</button>
+        <div className={styles.quickActions}>
+          <button className={styles.viewedBtn} onClick={handleViewed}>
+            I've Viewed This
+          </button>
 
-            <div className={styles.ratingRow}>
-              {[1, 2, 3, 4, 5].map((n) => (
-                <button
-                  key={n}
-                  className={styles.ratingStar}
-                  onClick={() => handleQuickRating(n)}
-                >
-                  {n}★
-                </button>
-              ))}
-              <button onClick={() => handleDelete()}>Remove Film</button>
-            </div>
+          <div className={styles.ratingRow}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button
+                key={n}
+                className={styles.ratingStar}
+                onClick={() => handleQuickRating(n)}
+              >
+                {n}★
+              </button>
+            ))}
+            <button className={styles.removeBtn} onClick={handleDelete}>
+              Remove
+            </button>
           </div>
         </div>
       </div>
-
-      <CommentsSheet
-        isOpen={commentsOpen}
-        onClose={() => setCommentsOpen(false)}
-        groupId={groupId}
-        filmId={filmId}
-        uid={uid}
-        profile={profile}
-        friends={friends}
-      />
-
-      <RatingsSheet
-        isOpen={ratingsOpen}
-        onClose={() => setRatingsOpen(false)}
-        groupId={groupId}
-        filmId={filmId}
-        profile={profile}
-        friends={friends}
-      />
-
-      <SeenSheet
-        isOpen={seenOpen}
-        onClose={() => setSeenOpen(false)}
-        groupId={groupId}
-        filmId={filmId}
-        profile={profile}
-        friends={friends}
-      />
-    </>
+    </div>
   );
 }
