@@ -7,6 +7,7 @@ import {
   markFilmAsViewed,
   rateFilm,
 } from "../../modules/groups/filmInteractions";
+import { removeFilmFromGroup } from "../../modules/groups/removeFilmFromGroup";
 import { useFriends } from "../../hooks/useFriends";
 import styles from "./FilmCard.module.css";
 
@@ -30,6 +31,10 @@ export default function FilmCard({ film, filmId, groupId, uid, profile }) {
 
   function handleMovieClick(filmId) {
     navigate(`/movies/${filmId}`);
+  }
+
+  async function handleDelete() {
+    await removeFilmFromGroup(groupId, filmId);
   }
 
   return (
@@ -66,6 +71,7 @@ export default function FilmCard({ film, filmId, groupId, uid, profile }) {
                   {n}★
                 </button>
               ))}
+              <button onClick={() => handleDelete()}>Remove Film</button>
             </div>
           </div>
         </div>
