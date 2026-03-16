@@ -15,7 +15,8 @@ export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
     clearTimeout(pressTimer.current);
   }
 
-  function handleCardClick(filmId) {
+  function handleCardClick(e, filmId) {
+    e.stopPropagation();
     if (editMode) return;
     navigate(`/movies/${filmId}`);
   }
@@ -56,44 +57,45 @@ export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
           </p>
         </div>
       </div>
-
-      {watchlist.length === 0 ? (
-        <div className={styles.empty}>
-          <p className={styles.emptyText}>Nothing here yet.</p>
-          <p className={styles.emptySub}>
-            Add a film to start your collection.
-          </p>
-        </div>
-      ) : (
-        <div className={styles.grid}>
-          {watchlist.map((film, index) => (
-            <div
-              key={film.id}
-              className={`${styles.card} ${editMode ? styles.cardEditMode : ""}`}
-              style={{ animationDelay: `${index * 0.04}s` }}
-              onClick={() => handleCardClick(film.id)}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-            >
-              <button
-                className={styles.removeBadge}
-                onClick={(e) => handleRemove(e, film.id)}
+      <div className={styles.pageBody} onClick={() => setEditMode(false)}>
+        {watchlist.length === 0 ? (
+          <div className={styles.empty}>
+            <p className={styles.emptyText}>Nothing here yet.</p>
+            <p className={styles.emptySub}>
+              Add a film to start your collection.
+            </p>
+          </div>
+        ) : (
+          <div className={styles.grid}>
+            {watchlist.map((film, index) => (
+              <div
+                key={film.id}
+                className={`${styles.card} ${editMode ? styles.cardEditMode : ""}`}
+                style={{ animationDelay: `${index * 0.04}s` }}
+                onClick={(e) => handleCardClick(e, film.id)}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
               >
-                ×
-              </button>
-              <img
-                src={film.poster}
-                alt={film.title}
-                className={styles.poster}
-              />
-              <div className={styles.overlay}>
-                <p className={styles.cardTitle}>{film.title}</p>
-                <p className={styles.cardYear}>{film.releaseDate}</p>
+                <button
+                  className={styles.removeBadge}
+                  onClick={(e) => handleRemove(e, film.id)}
+                >
+                  ×
+                </button>
+                <img
+                  src={film.poster}
+                  alt={film.title}
+                  className={styles.poster}
+                />
+                <div className={styles.overlay}>
+                  <p className={styles.cardTitle}>{film.title}</p>
+                  <p className={styles.cardYear}>{film.releaseDate}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
