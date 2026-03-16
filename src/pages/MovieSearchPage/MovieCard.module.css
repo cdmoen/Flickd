@@ -135,6 +135,16 @@
   filter: brightness(1.12);
 }
 
+.addedMessage {
+  font-size: 11px;
+  color: #e07b2a;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0;
+  padding: 9px 0;
+}
+
 /* ── Meta text ── */
 
 .description {

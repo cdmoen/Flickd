@@ -7,7 +7,7 @@ import {
   youtubeTrailer,
 } from "../movieDatabaseHelpers";
 
-export async function addFilmToGroup(groupId, uid, tmdbId) {
+export async function addFilmToGroup(groupId, uid, filmId) {
   let film;
   let directorName;
   let topThreeStarsNames;
@@ -15,15 +15,15 @@ export async function addFilmToGroup(groupId, uid, tmdbId) {
 
   // 1. Fetch metadata from TMDB
   try {
-    film = await fetchMovieDetails(tmdbId);
+    film = await fetchMovieDetails(filmId);
   } catch (err) {
-    console.log("fetchMovieInfo from TMDB failed");
+    console.log("fetchMovieDetails from TMDB failed");
     return false;
   }
 
   // 2. Build the Firebase path
   // Using tmdbId as the filmId keeps things simple and avoids duplicates
-  const filmRef = ref(database, `groups/${groupId}/films/${tmdbId}`);
+  const filmRef = ref(database, `groups/${groupId}/films/${filmId}`);
 
   // Extract director, top three stars, and trailer link from movie object:
   try {
@@ -36,7 +36,7 @@ export async function addFilmToGroup(groupId, uid, tmdbId) {
   // 3. Write the film object into Firebase
   await set(filmRef, {
     title: film.title,
-    tmdbId: film.id,
+    id: film.id,
     poster: `https://image.tmdb.org/t/p/w342/${film.poster_path}`,
     backdrop: `https://image.tmdb.org/t/p/w1280/${film.backdrop_path}`,
     addedBy: uid,

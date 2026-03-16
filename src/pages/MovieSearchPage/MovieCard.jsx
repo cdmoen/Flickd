@@ -78,14 +78,17 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
           >
             ▶ Trailer
           </button>
-          {user && !isInWatchlist && (
-            <button
-              className={styles.watchlistButton}
-              onClick={() => addFilm(filmForWatchlist)}
-            >
-              + Watchlist
-            </button>
-          )}
+          {user &&
+            (isInWatchlist ? (
+              <p className={styles.addedMessage}>✓ Watchlist</p>
+            ) : (
+              <button
+                className={styles.watchlistButton}
+                onClick={() => addFilm(filmForWatchlist)}
+              >
+                + Watchlist
+              </button>
+            ))}
         </div>
 
         <p className={styles.description}>
