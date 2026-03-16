@@ -42,8 +42,11 @@ export default function MoviePage() {
   // Now that movie is loaded, compute helpers safely
   const direc = director(movie);
   const stars = topThreeStars(movie);
-  const poster = movie.backdrop_path
-    ? `https://image.tmdb.org/t/p/w342/${movie.backdrop_path}`
+  const backdrop = movie.backdrop_path
+    ? `https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`
+    : "/images/backdrop_placeholder.svg";
+  const poster = movie.poster_path
+    ? `https://image.tmdb.org/t/p/w342/${movie.poster_path}`
     : "/images/placeholder.svg";
   const year = movie.release_date.slice(0, 4);
   const youtubeCode = youtubeTrailer(movie);
@@ -51,6 +54,7 @@ export default function MoviePage() {
     id: movieID,
     title: movie.title,
     poster: poster,
+    backdrop: backdrop,
     year: year,
   };
   const isInWatchlist = watchlist.some((f) => f.id === String(movieID));

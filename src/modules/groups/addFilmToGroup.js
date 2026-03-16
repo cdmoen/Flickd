@@ -23,8 +23,6 @@ export async function addFilmToGroup(groupId, uid, tmdbId) {
     return false;
   }
 
-  console.log(film);
-
   // 2. Build the Firebase path
   // Using tmdbId as the filmId keeps things simple and avoids duplicates
   const filmRef = ref(database, `groups/${groupId}/films/${tmdbId}`);
