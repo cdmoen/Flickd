@@ -212,22 +212,32 @@
   .hero {
     padding: 40px 40px 28px;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 24px;
   }
 
   .topRow {
-    display: contents;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    order: -1;
   }
+
   .back {
     align-self: flex-start;
   }
 
   .addBtn {
-    align-self: flex-end;
+    align-self: flex-start;
     font-size: 12px;
     padding: 11px 24px;
+  }
+
+  .heading {
+    flex: 1;
+    text-align: right;
   }
 
   .title {
