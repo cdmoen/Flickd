@@ -64,8 +64,8 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
         onClick={() => handleMovieClick(movieID)}
       >
         <picture>
-          <source media="(min-width: 768px)" srcSet={backdrop} />
-          <img className={styles.poster} src={poster} alt={title} />
+          <source media="(min-width: 768px)" srcSet={poster} />
+          <img className={styles.poster} src={backdrop} alt={title} />
         </picture>
       </div>
 
