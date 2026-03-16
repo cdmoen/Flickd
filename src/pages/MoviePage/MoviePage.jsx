@@ -57,7 +57,7 @@ export default function MoviePage() {
     backdrop: backdrop,
     year: year,
   };
-  const isInWatchlist = watchlist.some((f) => f.id === String(movieID));
+  const isInWatchlist = watchlist.some((f) => f.id == String(movieID));
 
   return (
     <div className="movie-container">
