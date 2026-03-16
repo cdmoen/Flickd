@@ -12,8 +12,6 @@ export async function addFilmToGroup(groupId, uid, tmdbId) {
   let directorName;
   let topThreeStarsNames;
   let youtubeTrailerLink;
-  let posterPortrait;
-  let posterLandscape;
 
   // 1. Fetch metadata from TMDB
   try {
@@ -39,7 +37,8 @@ export async function addFilmToGroup(groupId, uid, tmdbId) {
   await set(filmRef, {
     title: film.title,
     tmdbId: film.id,
-    posterURL: `https://image.tmdb.org/t/p/w342/${film.poster_path}`,
+    poster: `https://image.tmdb.org/t/p/w342/${film.poster_path}`,
+    backdrop: `https://image.tmdb.org/t/p/w1280/${film.backdrop_path}`,
     addedBy: uid,
     genres: film.genres
       .map((genre) => genre.name)

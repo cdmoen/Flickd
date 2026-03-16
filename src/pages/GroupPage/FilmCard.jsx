@@ -40,7 +40,7 @@ export default function FilmCard({ film, filmId, groupId, uid, profile }) {
   return (
     <div className={styles.card}>
       <img
-        src={film.posterURL}
+        src={film.poster}
         className={styles.poster}
         onClick={() => handleMovieClick(filmId)}
       />
