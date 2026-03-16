@@ -1,8 +1,15 @@
 import { useState, useRef } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
+import AddFilmSheet from "../../components/AddFilmSheet/AddFilmSheet";
 import styles from "./MyWatchlist.module.css";
 
-export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
+export default function MyWatchlist({
+  watchlist,
+  addFilm,
+  removeFilm,
+  onBack,
+}) {
+  const [addFilmSheetIsOpen, setAddFilmSheetIsOpen] = useState(false);
   const navigate = useNavigate();
   const [editMode, setEditMode] = useState(false);
   const pressTimer = useRef(null);
@@ -26,6 +33,12 @@ export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
     removeFilm(filmId);
   }
 
+  function handleAddFilm(e, movie) {
+    e.stopPropagation();
+    addFilm(movie);
+    setAddFilmSheetIsOpen(false);
+  }
+
   return (
     <div className={styles.root} onClick={() => setEditMode(false)}>
       <div className={styles.hero}>
@@ -42,9 +55,12 @@ export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
                 Done
               </button>
             )}
-            <NavLink to="/movies" className={styles.addBtn}>
+            <button
+              className={styles.addBtn}
+              onClick={() => setAddFilmOpen(true)}
+            >
               + Add Film
-            </NavLink>
+            </button>
           </div>
         </div>
         <div className={styles.heading}>
@@ -57,7 +73,11 @@ export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
           </p>
         </div>
       </div>
-
+      <AddFilmSheet
+        isOpen={addFilmSheetIsOpen}
+        onClose={() => setAddFilmSheetIsOpen(false)}
+        onAdd={(movie) => handleAddFilm(e, movie)}
+      />
       {watchlist.length === 0 ? (
         <div className={styles.empty}>
           <p className={styles.emptyText}>Nothing here yet.</p>

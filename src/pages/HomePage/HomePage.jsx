@@ -30,8 +30,9 @@ export default function HomePage() {
       {showWatchlist && (
         <MyWatchlist
           watchlist={watchlist}
-          onBack={() => setShowWatchlist(false)}
+          addFilm={addFilm}
           removeFilm={removeFilm}
+          onBack={() => setShowWatchlist(false)}
         />
       )}
     </main>
