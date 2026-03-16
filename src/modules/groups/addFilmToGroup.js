@@ -15,7 +15,7 @@ export async function addFilmToGroup(groupId, uid, tmdbId) {
 
   // 1. Fetch metadata from TMDB
   try {
-    film = await fetchMovieInfo(tmdbId);
+    film = await fetchMovieDetails(tmdbId);
   } catch (err) {
     console.log("fetchMovieInfo from TMDB failed");
     return false;
