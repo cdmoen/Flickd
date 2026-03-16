@@ -55,7 +55,7 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
     backdrop: backdrop,
     year: year,
   };
-  const isInWatchlist = watchlist.some((f) => f.id === String(movieID));
+  const isInWatchlist = watchlist.some((f) => f.id == String(movieID));
 
   return (
     <section className={styles.card}>
