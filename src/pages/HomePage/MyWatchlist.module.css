@@ -146,6 +146,9 @@
   animation: fadeUp 0.35s ease both;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 @keyframes fadeUp {
