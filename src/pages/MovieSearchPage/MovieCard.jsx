@@ -84,11 +84,11 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
         </div>
 
         <p className={styles.description}>
-          <strong>Director:</strong>
+          <strong>Director: </strong>
           {direct}
         </p>
         <p className={styles.description}>
-          <strong>Starring:</strong> {stars}
+          <strong>Starring: </strong> {stars}
         </p>
       </section>
 
