@@ -59,6 +59,8 @@ export default function MoviePage() {
   };
   const isInWatchlist = watchlist.some((f) => f.id == String(movieID));
 
+  console.log(movie);
+
   return (
     <div className="movie-container">
       <h1>{movie.title}</h1>
