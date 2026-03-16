@@ -3,7 +3,7 @@ import {
   director,
   topThreeStars,
 } from "../../modules/movieDatabaseHelpers";
-import { fetchMovieInfo } from "../../modules/fetchers";
+import { fetchMovieDetails } from "../../modules/fetchers";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -23,7 +23,7 @@ export default function MoviePage() {
       try {
         setLoading(true);
         setError(null);
-        const data = await fetchMovieInfo(movieID);
+        const data = await fetchMovieDetails(movieID);
         setMovie(data);
       } catch (err) {
         setError(err.message);

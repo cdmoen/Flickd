@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import MovieCard from "./MovieCard";
 import { fetchMovieSearch } from "../../modules/fetchers";
 import { useWatchlist } from "../../hooks/useWatchlist";
@@ -6,31 +6,55 @@ import { useAuth } from "../../contexts/AuthContext";
 
 import styles from "./MovieSearchPage.module.css";
 
+const BATCH_SIZE = 5; // how many MovieCards will show at a time
+
 export default function MovieSearchPage() {
   const { user, logout, profile, loading } = useAuth();
   const [searchParams, setSearchParams] = useState("");
   const [searchResults, setSearchResults] = useState(null);
   const [movieIDs, setMovieIDs] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
   const { watchlist, addFilm, removeFilm } = useWatchlist(user?.uid);
+  const sentinelRef = useRef(null);
 
-  // Search TMDB database for a film
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      // search for movies using fetchMovieSearch
       const data = await fetchMovieSearch(searchParams);
-      // searchResults is the full search response object containing lots of info
       setSearchResults(data);
-      // movieIDs is just an array of IDs for every movie in the search results
       setMovieIDs(data.results.map((movie) => movie.id));
+      setVisibleCount(BATCH_SIZE); // reset on new search
     } catch (err) {
       console.error(err);
     }
   }
 
+  // Intersection Observer -- Triggers more MovieCards to render when scrolling
+  useEffect(() => {
+    if (!sentinelRef.current) return;
+    const hasMore = visibleCount < movieIDs.length;
+    if (!hasMore) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisibleCount((prev) =>
+            Math.min(prev + BATCH_SIZE, movieIDs.length),
+          );
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(sentinelRef.current);
+    return () => observer.disconnect();
+  }, [visibleCount, movieIDs]);
+
+  const visibleIDs = movieIDs.slice(0, visibleCount);
+  const hasMore = visibleCount < movieIDs.length;
+
   return (
     <main className={styles.container}>
-
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.title}>Search Movies</h2>
@@ -53,18 +77,23 @@ export default function MovieSearchPage() {
       </div>
 
       {searchResults && (
-        <ul className={styles.resultsList}>
-          {movieIDs.map((movieID) => (
-            <li key={movieID}>
-              <MovieCard
-                user={user}
-                movieID={movieID}
-                watchlist={watchlist}
-                addFilm={addFilm}
-              />
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul className={styles.resultsList}>
+            {visibleIDs.map((movieID) => (
+              <li key={movieID}>
+                <MovieCard
+                  user={user}
+                  movieID={movieID}
+                  watchlist={watchlist}
+                  addFilm={addFilm}
+                />
+              </li>
+            ))}
+          </ul>
+
+          {/* sentinel — only rendered when more results exist */}
+          {hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
+        </>
       )}
     </main>
   );

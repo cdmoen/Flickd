@@ -70,7 +70,7 @@ export async function fetchMovieSearch(searchParams) {
 
 /*
 ==============================
-    FETCH MOVIE INFO
+    FETCH MOVIE DETAILS
 ==============================
 
 This fetcher takes in a single TMDB movieID and returns the following information about the movie:
@@ -169,7 +169,7 @@ This fetcher takes in a single TMDB movieID and returns the following informatio
 }
 */
 
-export async function fetchMovieInfo(movieID) {
+export async function fetchMovieDetails(movieID) {
   const response = await fetch(
     `/api/tmdb?path=movie/${movieID}&append_to_response=credits,videos&language=en-US`,
   );

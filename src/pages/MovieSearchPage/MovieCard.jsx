@@ -1,6 +1,6 @@
 import { youtubeTrailer } from "../../modules/movieDatabaseHelpers";
 import { director } from "../../modules/movieDatabaseHelpers";
-import { fetchMovieInfo } from "../../modules/fetchers";
+import { fetchMovieDetails } from "../../modules/fetchers";
 import { topThreeStars } from "../../modules/movieDatabaseHelpers";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
   useEffect(() => {
     async function loadMovie() {
       try {
-        const data = await fetchMovieInfo(movieID);
+        const data = await fetchMovieDetails(movieID);
         setMovieInfo(data);
       } catch (err) {
         console.error(err);
@@ -66,20 +66,22 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
           <h3 className={styles.title}>{title}</h3>
           <p className={styles.year}>{year}</p>
         </div>
-        <button
-          className={styles.trailerButton}
-          onClick={() => setTrailerIsVisible(true)}
-        >
-          Watch Trailer
-        </button>
-        {user && !isInWatchlist && (
+        <div className={styles.actions}>
           <button
-            className={styles.watchlistButton}
-            onClick={() => addFilm(filmForWatchlist)}
+            className={styles.trailerButton}
+            onClick={() => setTrailerIsVisible(true)}
           >
-            Add to My Watchlist
+            ▶ Trailer
           </button>
-        )}
+          {user && !isInWatchlist && (
+            <button
+              className={styles.watchlistButton}
+              onClick={() => addFilm(filmForWatchlist)}
+            >
+              + Watchlist
+            </button>
+          )}
+        </div>
 
         <p className={styles.description}>Director: {direct}</p>
         <p className={styles.description}>Starring: {stars}</p>
