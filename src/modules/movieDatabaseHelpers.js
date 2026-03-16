@@ -48,9 +48,6 @@ export function director(movieInfo) {
   const directors = crew.map((member) =>
     member.job === "Director" ? member.name : null,
   );
-  console.log("directors:  ");
-  console.log(directors);
-
   const director = crew.find((member) => member.job === "Director");
   if (!director) {
     return null;
