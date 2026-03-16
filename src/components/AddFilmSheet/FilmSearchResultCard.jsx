@@ -16,7 +16,7 @@ export default function FilmSearchResultCard({ movie, onAdd }) {
         <p>{releaseYear}</p>
       </div>
 
-      <button className={styles.addButton} onClick={onAdd}>
+      <button className={styles.addButton} onClick={() => onAdd()}>
         Add
       </button>
     </div>
