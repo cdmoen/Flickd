@@ -92,6 +92,33 @@ export default function FilmCard({ film, filmId, groupId, uid, profile }) {
           </div>
         </div>
       </div>
+      <CommentsSheet
+        isOpen={commentsOpen}
+        onClose={() => setCommentsOpen(false)}
+        groupId={groupId}
+        filmId={filmId}
+        uid={uid}
+        profile={profile}
+        friends={friends}
+      />
+
+      <RatingsSheet
+        isOpen={ratingsOpen}
+        onClose={() => setRatingsOpen(false)}
+        groupId={groupId}
+        filmId={filmId}
+        profile={profile}
+        friends={friends}
+      />
+
+      <SeenSheet
+        isOpen={seenOpen}
+        onClose={() => setSeenOpen(false)}
+        groupId={groupId}
+        filmId={filmId}
+        profile={profile}
+        friends={friends}
+      />
     </div>
   );
 }
