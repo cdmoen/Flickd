@@ -41,7 +41,7 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
   const year = movie.release_date.slice(0, 4);
   const description = movie.description;
   const poster = movie.backdrop_path
-    ? `https://image.tmdb.org/t/p/w185/${movie.backdrop_path}`
+    ? `https://image.tmdb.org/t/p/w342/${movie.backdrop_path}`
     : "/images/placeholder.svg";
   const stars = topThreeStars(movie);
   const direct = director(movie);

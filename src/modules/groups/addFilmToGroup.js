@@ -36,7 +36,7 @@ export async function addFilmToGroup(groupId, uid, tmdbId) {
   await set(filmRef, {
     title: film.title,
     tmdbId: film.id,
-    posterURL: `https://image.tmdb.org/t/p/w200/${film.poster_path}`,
+    posterURL: `https://image.tmdb.org/t/p/w342/${film.poster_path}`,
     addedBy: uid,
     genres: film.genres
       .map((genre) => genre.name)
