@@ -85,7 +85,7 @@ export default function MyWatchlist({
       <AddFilmSheet
         isOpen={addFilmSheetIsOpen}
         onClose={() => setAddFilmSheetIsOpen(false)}
-        onAdd={(movie) => handleAddFilm(e, movie)}
+        onAdd={(movie) => handleAddFilm(movie)}
       />
       {watchlist.length === 0 ? (
         <div className={styles.empty}>
