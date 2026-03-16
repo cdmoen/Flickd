@@ -3,7 +3,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import styles from "./MyWatchlist.module.css";
 
 export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
-  const navigate = useNavigate();
+  navigate = useNavigate();
   const [editMode, setEditMode] = useState(false);
   const pressTimer = useRef(null);
 
@@ -16,12 +16,12 @@ export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
   }
 
   function handleCardClick(filmId) {
-    if (editMode) return; // clicks are swallowed in edit mode — only the × badge removes
+    if (editMode) return;
     navigate(`/movies/${filmId}`);
   }
 
   function handleRemove(e, filmId) {
-    e.stopPropagation(); // prevent click bubbling up to the card's onClick
+    e.stopPropagation();
     removeFilm(filmId);
   }
 
@@ -74,16 +74,13 @@ export default function MyWatchlist({ watchlist, onBack, removeFilm }) {
               onClick={() => handleCardClick(film.id)}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
-              onContextMenu={(e) => e.preventDefault()}
             >
-              {editMode && (
-                <button
-                  className={styles.removeBadge}
-                  onClick={(e) => handleRemove(e, film.id)}
-                >
-                  ×
-                </button>
-              )}
+              <button
+                className={styles.removeBadge}
+                onClick={(e) => handleRemove(e, film.id)}
+              >
+                ×
+              </button>
               <img
                 src={film.poster}
                 alt={film.title}
