@@ -16,7 +16,7 @@ export default function MyWatchlist({ watchlist, onBack }) {
         <div className={styles.heading}>
           <p className={styles.eyebrow}>Your collection</p>
           <h1 className={styles.title}>
-            My <em>Watchlist</em>
+            My <span>Watchlist</span>
           </h1>
           <p className={styles.meta}>
             {watchlist.length} film{watchlist.length !== 1 ? "s" : ""}

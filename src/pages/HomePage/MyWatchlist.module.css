@@ -1,21 +1,17 @@
-/* MyWatchlist.module.css */
-
-@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap");
-
 /* ── Base (mobile first) ── */
 
 .root {
-  background: #0a0a0f;
+  background: #0f1923;
   min-height: 100vh;
-  font-family: "DM Sans", sans-serif;
-  color: #e8e6e0;
+  font-family: "Open Sans", sans-serif;
+  color: #e8e4dc;
 }
 
 /* ── Hero ── */
 
 .hero {
   padding: 24px 20px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .topRow {
@@ -27,14 +23,14 @@
 
 .back {
   background: none;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: rgba(255, 255, 255, 0.5);
-  font-family: "DM Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 8px 14px;
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition:
@@ -43,52 +39,53 @@
 }
 
 .back:hover {
-  border-color: rgba(255, 255, 255, 0.4);
-  color: #e8e6e0;
+  border-color: #e07b2a;
+  color: #e07b2a;
 }
 
 .addBtn {
-  background: #c9a84c;
-  color: #0a0a0f;
+  background: linear-gradient(135deg, #e07b2a, #c9521a);
+  color: #fff;
   border: none;
-  font-family: "DM Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 9px 16px;
-  border-radius: 2px;
+  padding: 9px 18px;
+  border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
   -webkit-tap-highlight-color: transparent;
-  transition: background 0.2s;
+  transition: filter 0.2s;
 }
 
 .addBtn:hover {
-  background: #dbb95a;
+  filter: brightness(1.12);
 }
 
 .eyebrow {
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #c9a84c;
+  color: #e07b2a;
   margin: 0 0 6px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .title {
-  font-family: "DM Serif Display", serif;
-  font-size: 36px;
-  font-weight: 400;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 38px;
+  font-weight: 700;
   line-height: 1;
   margin: 0 0 8px;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
+  color: #fff;
 }
 
-.title em {
-  font-style: italic;
-  color: #c9a84c;
+.title span {
+  color: #e07b2a;
 }
 
 .meta {
@@ -112,9 +109,10 @@
 .card {
   position: relative;
   aspect-ratio: 2 / 3;
-  border-radius: 3px;
+  border-radius: 6px;
   overflow: hidden;
-  background: #1a1a22;
+  background: #1a2535;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   animation: fadeUp 0.35s ease both;
   -webkit-tap-highlight-color: transparent;
 }
@@ -137,14 +135,14 @@
   display: block;
 }
 
-/* Always visible on mobile — hover only on desktop */
+/* Always visible on mobile */
 .overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.82) 0%,
-    rgba(0, 0, 0, 0.2) 40%,
+    rgba(10, 18, 30, 0.92) 0%,
+    rgba(10, 18, 30, 0.25) 45%,
     transparent 70%
   );
   display: flex;
@@ -154,18 +152,20 @@
 }
 
 .cardTitle {
-  font-family: "DM Serif Display", serif;
-  font-size: 11px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
   line-height: 1.2;
   color: #fff;
   margin: 0 0 2px;
+  letter-spacing: 0.02em;
 }
 
 .cardYear {
   font-size: 10px;
-  color: #c9a84c;
+  color: #e07b2a;
   letter-spacing: 0.06em;
-  font-weight: 300;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -177,16 +177,17 @@
 }
 
 .emptyText {
-  font-family: "DM Serif Display", serif;
-  font-size: 20px;
-  font-style: italic;
-  color: rgba(255, 255, 255, 0.25);
+  font-family: "Rajdhani", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.2);
   margin: 0 0 6px;
+  letter-spacing: 0.04em;
 }
 
 .emptySub {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.15);
   font-weight: 300;
   margin: 0;
 }
@@ -201,7 +202,7 @@
   }
 
   .cardTitle {
-    font-size: 12px;
+    font-size: 13px;
   }
 }
 
@@ -209,7 +210,7 @@
 
 @media (min-width: 768px) {
   .hero {
-    padding: 48px 40px 32px;
+    padding: 40px 40px 28px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -219,7 +220,6 @@
   .topRow {
     display: contents;
   }
-
   .back {
     align-self: flex-start;
   }
@@ -227,21 +227,21 @@
   .addBtn {
     align-self: flex-end;
     font-size: 12px;
-    padding: 12px 24px;
+    padding: 11px 24px;
   }
 
   .title {
-    font-size: clamp(36px, 4vw, 52px);
+    font-size: clamp(38px, 4vw, 54px);
     margin-bottom: 10px;
   }
 
   .grid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 16px;
-    padding: 40px;
+    gap: 14px;
+    padding: 32px 40px;
   }
 
-  /* Overlay hidden by default on desktop, revealed on hover */
+  /* Overlay hidden on desktop, revealed on hover */
   .overlay {
     opacity: 0;
     transition: opacity 0.3s;
