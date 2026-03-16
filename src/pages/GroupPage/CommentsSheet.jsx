@@ -58,7 +58,12 @@ export default function CommentsSheet({
 
         <div className={styles.header}>
           <p className={styles.eyebrow}>Discussion</p>
-          <h2 className={styles.title}>Comments</h2>
+          <div className={styles.titleRow}>
+            <h2 className={styles.title}>Comments</h2>
+            <button className={styles.backBtn} onClick={onClose}>
+              ← Back
+            </button>
+          </div>
         </div>
 
         <div className={styles.list}>
