@@ -1,11 +1,4 @@
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+/* ── Shared styles ── */
 
 .form {
   display: flex;
@@ -14,12 +7,6 @@
   padding: 0.5rem 0;
   box-sizing: border-box;
   width: 100%;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .form {
-    animation: fadeIn 0.4s ease both;
-  }
 }
 
 .input {
@@ -32,9 +19,7 @@
   background: var(--color-surface);
   color: var(--color-text-primary);
   box-sizing: border-box;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input:focus {
@@ -45,11 +30,7 @@
 
 .button {
   padding: 0.5rem 1rem;
-  background: linear-gradient(
-    180deg,
-    var(--color-accept),
-    var(--color-accept-hover)
-  );
+  background: linear-gradient(180deg, var(--color-accept), var(--color-accept-hover));
   color: #ffffff;
   border: none;
   border-radius: 6px;

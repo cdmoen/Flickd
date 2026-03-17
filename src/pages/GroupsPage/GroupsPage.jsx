@@ -1,34 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ref, onValue } from "firebase/database";
 import { useAuth } from "../../contexts/AuthContext";
 import { database } from "../../modules/firebase";
+
 import { useUserGroups } from "../../hooks/useUserGroups";
 import { useIncomingInviteGroups } from "../../hooks/useIncomingInviteGroups";
 import { useFriends } from "../../hooks/useFriends";
 import { useGroupOutgoingInvites } from "../../hooks/useGroupOutgoingInvites";
+
 import { cancelGroupInvite } from "../../modules/groups/cancelGroupInvite";
 import { acceptGroupInvite } from "../../modules/groups/acceptGroupInvite";
 import { rejectGroupInvite } from "../../modules/groups/rejectGroupInvite";
 import { deleteGroup } from "../../modules/groups/deleteGroup";
+
 import UserGroupsList from "./UserGroupsList";
 import IncomingInvitesList from "./IncomingInvitesList";
 import OutgoingInvitesList from "./OutgoingInvitesList";
 import CreateGroup from "./CreateGroup";
 import FriendPickerSheet from "./FriendPickerSheet";
+
 import styles from "./GroupsPage.module.css";
 
 export default function GroupsPage() {
   const { user } = useAuth();
   const uid = user?.uid;
+
   const { userGroups, loading } = useUserGroups(uid);
   const { friends } = useFriends(uid);
+
   const [incomingInvites, setIncomingInvites] = useState({});
   const [outgoingInvites, setOutgoingInvites] = useState({});
+
   const incomingInviteGroups = useIncomingInviteGroups(incomingInvites);
+
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [selectedGroupId, setSelectedGroupId] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [showForm, setShowForm] = useState(false);
+
   const invited = useGroupOutgoingInvites(uid, selectedGroupId);
   const filteredFriends = friends.filter((f) => !invited.includes(f.uid));
 
@@ -51,10 +60,16 @@ export default function GroupsPage() {
     };
   }, [uid]);
 
-  const userGroupMap = {};
-  for (const g of userGroups) {
-    userGroupMap[g.id] = g;
-  }
+  const userGroupMap = useMemo(() => {
+    const map = {};
+    for (const g of userGroups) map[g.id] = g;
+    return map;
+  }, [userGroups]);
+
+  const incomingGroupMap = useMemo(
+    () => incomingInviteGroups,
+    [incomingInviteGroups],
+  );
 
   function handleDelete(group) {
     deleteGroup(group.id, uid);
@@ -73,6 +88,7 @@ export default function GroupsPage() {
 
   return (
     <main className={styles.container}>
+
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>Create a Group</h2>
@@ -102,11 +118,12 @@ export default function GroupsPage() {
       </div>
 
       <div className={styles.topRow}>
+
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Group Invites</h2>
           <IncomingInvitesList
             incomingInvites={incomingInvites}
-            incomingInviteGroups={incomingInviteGroups}
+            incomingGroupMap={incomingGroupMap}
             friends={friends}
             uid={uid}
             acceptGroupInvite={acceptGroupInvite}
@@ -124,6 +141,7 @@ export default function GroupsPage() {
             cancelGroupInvite={cancelGroupInvite}
           />
         </div>
+
       </div>
 
       <FriendPickerSheet
@@ -134,6 +152,7 @@ export default function GroupsPage() {
         uid={uid}
         filteredFriends={filteredFriends}
       />
+
     </main>
   );
 }

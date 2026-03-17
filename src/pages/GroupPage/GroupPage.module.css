@@ -1,28 +1,3 @@
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .groupPage {
-    animation: fadeUp 0.3s ease both;
-  }
-
-  .groupHeader {
-    animation: fadeUp 0.3s ease 0.05s both;
-  }
-
-  .filmList {
-    animation: fadeUp 0.3s ease 0.12s both;
-  }
-}
-
 .groupPage {
   display: flex;
   flex-direction: column;
