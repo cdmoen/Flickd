@@ -6,7 +6,7 @@ import { useAuth } from "../../contexts/AuthContext";
 
 import styles from "./MovieSearchPage.module.css";
 
-const BATCH_SIZE = 5; // how many MovieCards will show at a time
+const BATCH_SIZE = 5;
 
 export default function MovieSearchPage() {
   const { user, logout, profile, loading } = useAuth();
@@ -14,6 +14,7 @@ export default function MovieSearchPage() {
   const [searchResults, setSearchResults] = useState(null);
   const [movieIDs, setMovieIDs] = useState([]);
   const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
+  const [activeTrailer, setActiveTrailer] = useState(null);
   const { watchlist, addFilm, removeFilm } = useWatchlist(user?.uid);
   const sentinelRef = useRef(null);
 
@@ -23,13 +24,12 @@ export default function MovieSearchPage() {
       const data = await fetchMovieSearch(searchParams);
       setSearchResults(data);
       setMovieIDs(data.results.map((movie) => movie.id));
-      setVisibleCount(BATCH_SIZE); // reset on new search
+      setVisibleCount(BATCH_SIZE);
     } catch (err) {
       console.error(err);
     }
   }
 
-  // Intersection Observer -- Triggers more MovieCards to render when scrolling
   useEffect(() => {
     if (!sentinelRef.current) return;
     const hasMore = visibleCount < movieIDs.length;
@@ -86,14 +86,28 @@ export default function MovieSearchPage() {
                   movieID={movieID}
                   watchlist={watchlist}
                   addFilm={addFilm}
+                  onTrailerClick={setActiveTrailer}
                 />
               </li>
             ))}
           </ul>
 
-          {/* sentinel — only rendered when more results exist */}
           {hasMore && <div ref={sentinelRef} style={{ height: 1 }} />}
         </>
+      )}
+
+      {activeTrailer && (
+        <div
+          className={styles.modalBackdrop}
+          onClick={() => setActiveTrailer(null)}
+        >
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <iframe
+              src={`https://www.youtube.com/embed/${activeTrailer}?autoplay=1`}
+              allowFullScreen
+            />
+          </div>
+        </div>
       )}
     </main>
   );

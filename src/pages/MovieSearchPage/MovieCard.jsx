@@ -6,9 +6,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./MovieCard.module.css";
 
-export default function MovieCard({ user, movieID, watchlist, addFilm }) {
+export default function MovieCard({
+  user,
+  movieID,
+  watchlist,
+  addFilm,
+  onTrailerClick,
+}) {
   const navigate = useNavigate();
-  const [trailerIsVisible, setTrailerIsVisible] = useState(false);
   const [movie, setmovie] = useState(null);
   const [error, setError] = useState(null);
 
@@ -77,7 +82,7 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
         <div className={styles.actions}>
           <button
             className={styles.trailerButton}
-            onClick={() => setTrailerIsVisible(true)}
+            onClick={() => onTrailerClick(youtubeCode)}
           >
             ▶ Trailer
           </button>
@@ -102,22 +107,6 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
           <strong>Starring: </strong> {stars}
         </p>
       </section>
-
-      {trailerIsVisible && (
-        <div
-          className={styles.modal}
-          onClick={() => setTrailerIsVisible(false)}
-        >
-          <iframe
-            src={
-              youtubeCode
-                ? `https://www.youtube.com/embed/${youtubeCode}`
-                : "https://www.youtube.com/embed/Aq5WXmQQooo"
-            }
-            allowFullScreen
-          ></iframe>
-        </div>
-      )}
     </section>
   );
 }

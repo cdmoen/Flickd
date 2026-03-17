@@ -58,17 +58,27 @@ export function director(movieInfo) {
 // Takes in movieInfo object and returns youtube embed code for best quality
 // official trailer, (or unofficial trailer of no official trailers available)
 export function youtubeTrailer(movieInfo) {
+  // movieInfo is a movie object. Inside it is an array of video objects.
+  // movieInfo.videos.results is an array of video objects with properties like 'key', 'size', 'site', 'type', 'official'
+
+  // Filter the results array for 'trailer' videos. If no trailers found, return null.
   const trailers = movieInfo.videos.results.filter((v) => v.type === "Trailer");
   if (trailers.length === 0) return null;
 
+  // Filter for 'official' trailers. If no official trailers, keep looking for the best trailer.
   const officialTrailers = trailers.filter((v) => v.official === true);
   const pool = officialTrailers.length > 0 ? officialTrailers : trailers;
+
+  // Filter for YouTube trailers only, for ease of use. If no youtube trailers, give up and return null.
   const youtubeResults = pool.filter((v) => v.site === "YouTube");
   if (youtubeResults.length === 0) return null;
 
+  // Sort a copy of the remaining YouTube trailers by size (bigger = better video quality)
   const youtubeResultsSorted = [...youtubeResults].sort(
     (a, b) => b.size - a.size,
   );
+
+  // Return the highest quality video
   const youtubeCode = youtubeResultsSorted[0].key;
 
   return youtubeCode;
