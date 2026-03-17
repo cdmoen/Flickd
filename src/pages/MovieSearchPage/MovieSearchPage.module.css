@@ -115,10 +115,10 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  animation: fadeIn 0.2s ease both;
+  animation: backdropFadeIn 0.2s ease both;
 }
 
-@keyframes fadeIn {
+@keyframes backdropFadeIn {
   from {
     opacity: 0;
   }
