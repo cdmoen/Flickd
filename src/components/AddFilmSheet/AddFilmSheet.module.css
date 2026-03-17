@@ -36,8 +36,8 @@
 }
 
 .dragHandle {
-  width: 66px;
-  height: 40px;
+  width: 36px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,6 +150,14 @@
 /* Centered modal for desktop instead of a bottom-up sheet */
 
 @media (min-width: 768px) {
+  .dragHandle {
+    display: none;
+  }
+
+  .dragHandle::after {
+    display: none;
+  }
+
   .backdrop {
     align-items: center;
     justify-content: center;
