@@ -33,11 +33,22 @@
 
 .dragHandle {
   width: 36px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  flex-shrink: 0;
+  cursor: grab;
+}
+
+.dragHandle::after {
+  content: "";
+  width: 36px;
   height: 4px;
   background: var(--color-border);
   border-radius: 2px;
-  margin: 0 auto 4px;
-  flex-shrink: 0;
+  display: block;
 }
 
 @keyframes slideUp {
