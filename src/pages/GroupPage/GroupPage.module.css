@@ -10,10 +10,6 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .groupPage {
-    animation: fadeUp 0.3s ease both;
-  }
-
   .groupHeader {
     animation: fadeUp 0.3s ease 0.05s both;
   }
