@@ -28,6 +28,16 @@
   gap: 16px;
   overflow: hidden;
   animation: slideUp 0.25s cubic-bezier(0.32, 0.72, 0, 1) both;
+  will-change: transform;
+}
+
+.dragHandle {
+  width: 36px;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+  margin: 0 auto 4px;
+  flex-shrink: 0;
 }
 
 @keyframes slideUp {
