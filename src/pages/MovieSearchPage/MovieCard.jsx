@@ -39,10 +39,7 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
 
   const title = movie.title;
   const year = movie.release_date.slice(0, 4);
-  const backdropLarge = movie.backdrop_path
-    ? `https://image.tmdb.org/t/p/w780/${movie.backdrop_path}`
-    : "/images/backdrop_placeholder.svg";
-  const backdropSmall = movie.backdrop_path
+  const backdrop = movie.backdrop_path
     ? `https://image.tmdb.org/t/p/w780/${movie.backdrop_path}`
     : "/images/backdrop_placeholder.svg";
   const poster = movie.poster_path
@@ -55,7 +52,7 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
     id: movieID,
     title,
     poster: poster,
-    backdrop: backdropSmall,
+    backdrop: backdrop,
     year: year,
   };
   const isInWatchlist = watchlist.some((f) => f.id == String(movieID));
@@ -68,8 +65,7 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
       >
         <picture>
           <source media="(min-width: 768px)" srcSet={poster} />
-          <source media="(min-width: 450px)" srcSet={backdropLarge} />
-          <img className={styles.poster} src={backdropSmall} alt={title} />
+          <img className={styles.poster} src={backdrop} alt={title} />
         </picture>
       </div>
 
