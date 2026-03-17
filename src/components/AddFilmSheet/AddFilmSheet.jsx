@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { fetchMovieSearch } from "../../modules/fetchers";
 import FilmSearchResultCard from "./FilmSearchResultCard";
 import styles from "./AddFilmSheet.module.css";
@@ -10,8 +10,24 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
 
   // ===== Drag-to-close logic =====
   const sheetRef = useRef(null);
+  const handleRef = useRef(null);
   const dragStart = useRef(null);
   const [dragY, setDragY] = useState(0);
+
+  useEffect(() => {
+    const handle = handleRef.current;
+    if (!handle) return;
+
+    handle.addEventListener("touchstart", handleTouchStart, { passive: true });
+    handle.addEventListener("touchmove", handleTouchMove, { passive: false });
+    handle.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+    return () => {
+      handle.removeEventListener("touchstart", handleTouchStart);
+      handle.removeEventListener("touchmove", handleTouchMove);
+      handle.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [dragY]);
 
   function handleTouchStart(e) {
     dragStart.current = e.touches[0].clientY;
@@ -73,11 +89,8 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
           transition: dragY > 0 ? "none" : undefined,
         }}
         onClick={(e) => e.stopPropagation()}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
       >
-        <div className={styles.dragHandle} />
+        <div ref={handleRef} className={styles.dragHandle} />
         <h2>Add a Film</h2>
         <form onSubmit={handleSearch} className={styles.searchBar}>
           <input
