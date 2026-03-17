@@ -43,7 +43,7 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
     ? `https://image.tmdb.org/t/p/w780/${movie.backdrop_path}`
     : "/images/backdrop_placeholder.svg";
   const backdropSmall = movie.backdrop_path
-    ? `https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`
+    ? `https://image.tmdb.org/t/p/w780/${movie.backdrop_path}`
     : "/images/backdrop_placeholder.svg";
   const poster = movie.poster_path
     ? `https://image.tmdb.org/t/p/w342/${movie.poster_path}`
