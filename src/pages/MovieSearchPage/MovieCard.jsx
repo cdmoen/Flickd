@@ -55,7 +55,7 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
     id: movieID,
     title,
     poster: poster,
-    backdrop: backdrop,
+    backdrop: backdropSmall,
     year: year,
   };
   const isInWatchlist = watchlist.some((f) => f.id == String(movieID));
