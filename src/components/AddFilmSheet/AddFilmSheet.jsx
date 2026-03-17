@@ -12,6 +12,7 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
   const sheetRef = useRef(null);
   const handleRef = useRef(null);
   const dragStart = useRef(null);
+  const dragYRef = useRef(0);
   const [dragY, setDragY] = useState(0);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
       handle.removeEventListener("touchmove", handleTouchMove);
       handle.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [dragY]);
+  }, [isOpen]);
 
   function handleTouchStart(e) {
     dragStart.current = e.touches[0].clientY;
@@ -36,14 +37,17 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
   function handleTouchMove(e) {
     e.preventDefault();
     const delta = e.touches[0].clientY - dragStart.current;
-    setDragY(delta);
+    if (delta > 0) {
+      dragYRef.current = delta;
+      setDragY(delta);
+    }
   }
 
   function handleTouchEnd() {
-    if (dragY > 10) {
-      // threshold — if dragged more than 120px, close
+    if (dragYRef.current > 80) {
       handleClose();
     }
+    dragYRef.current = 0;
     setDragY(0); // snap back if not past threshold
   }
 
@@ -64,7 +68,7 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
   }
 
   async function handleAdd(movie) {
-    await onAdd(movie); // parent decides what to do with it
+    await onAdd(movie);
     handleClose();
   }
 
@@ -75,15 +79,14 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
   }
 
   if (!isOpen) return null;
-
   return (
     <div className={styles.backdrop} onClick={handleClose}>
       <div
         ref={sheetRef}
-        className={styles.sheet}
+        className={`${styles.sheet} ${dragY === 0 ? styles.sheetAnimateIn : ""}`}
         style={{
-          transform: dragY === 0 ? undefined : `translateY(${dragY}px)`,
-          transition: dragY === 0 ? undefined : "none",
+          transform: dragY > 0 ? `translateY(${dragY}px)` : undefined,
+          transition: dragY > 0 ? "none" : undefined,
         }}
         onClick={(e) => e.stopPropagation()}
       >
