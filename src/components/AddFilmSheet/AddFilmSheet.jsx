@@ -36,14 +36,11 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
   function handleTouchMove(e) {
     e.preventDefault();
     const delta = e.touches[0].clientY - dragStart.current;
-    if (delta > 0) {
-      // only allow dragging down, not up
-      setDragY(delta);
-    }
+    setDragY(delta);
   }
 
   function handleTouchEnd() {
-    if (dragY > 120) {
+    if (dragY > 10) {
       // threshold — if dragged more than 120px, close
       handleClose();
     }
@@ -85,8 +82,8 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
         ref={sheetRef}
         className={styles.sheet}
         style={{
-          transform: dragY > 0 ? `translateY(${dragY}px)` : undefined,
-          transition: dragY > 0 ? "none" : undefined,
+          transform: dragY === 0 ? undefined : `translateY(${dragY}px)`,
+          transition: dragY === 0 ? undefined : "none",
         }}
         onClick={(e) => e.stopPropagation()}
       >
