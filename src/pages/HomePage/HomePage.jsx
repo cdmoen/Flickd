@@ -8,12 +8,9 @@ import { useWatchlist } from "../../hooks/useWatchlist";
 import styles from "./HomePage.module.css";
 
 export default function HomePage() {
-  const { user, logout, profile, loading } = useAuth();
-  const [pickerOpen, setPickerOpen] = useState(false);
+  const { user, loading } = useAuth();
   const [showWatchlist, setShowWatchlist] = useState(false);
   const { watchlist, addFilm, removeFilm } = useWatchlist(user?.uid);
-  const [title, setTitle] = useState("");
-  const [note, setNote] = useState("");
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
 
