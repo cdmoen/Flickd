@@ -57,12 +57,12 @@ export function director(movieInfo) {
 
 // Takes in movieInfo object and returns youtube embed code
 export function youtubeTrailer(movieInfo) {
-  const firstYoutubeLink = movieInfo.videos.results.find(
-    (trailer) => trailer.site === "YouTube",
-  );
-  if (!firstYoutubeLink) {
-    return null;
-  }
-  const youtubeCode = firstYoutubeLink.key;
-  return youtubeCode;
+  const trailers = movieInfo.videos.results.filter((v) => v.type === "Trailer");
+  if (trailers.length === 0) return null;
+
+  const officialTrailers = trailers.filter((v) => v.official === true);
+  const pool = officialTrailers.length > 0 ? officialTrailers : trailers;
+  const youtubeResult = pool.find((v) => v.site === "YouTube");
+
+  return youtubeResult ? youtubeResult.key : null;
 }
