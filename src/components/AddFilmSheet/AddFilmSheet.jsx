@@ -18,6 +18,7 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
   }
 
   function handleTouchMove(e) {
+    e.preventDefault();
     const delta = e.touches[0].clientY - dragStart.current;
     if (delta > 0) {
       // only allow dragging down, not up
