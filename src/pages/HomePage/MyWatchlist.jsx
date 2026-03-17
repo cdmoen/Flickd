@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
+import AddFilmSheet from "../../components/AddFilmSheet/AddFilmSheet";
 import styles from "./MyWatchlist.module.css";
 
 export default function MyWatchlist({
@@ -7,9 +8,8 @@ export default function MyWatchlist({
   addFilm,
   removeFilm,
   onBack,
-  addFilmSheetIsOpen,
-  setAddFilmSheetIsOpen,
 }) {
+  const [addFilmSheetIsOpen, setAddFilmSheetIsOpen] = useState(false);
   const navigate = useNavigate();
   const [editMode, setEditMode] = useState(false);
   const pressTimer = useRef(null);
@@ -31,6 +31,21 @@ export default function MyWatchlist({
   function handleRemove(e, filmId) {
     e.stopPropagation();
     removeFilm(filmId);
+  }
+
+  function handleAddFilm(movie) {
+    addFilm({
+      id: movie.id,
+      title: movie.title,
+      poster: movie.poster_path
+        ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
+        : "/images/placeholder.svg",
+      backdrop: movie.backdrop_path
+        ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+        : "/images/backdrop_placeholder.svg",
+      year: movie.release_date?.slice(0, 4),
+    });
+    setAddFilmSheetIsOpen(false);
   }
 
   return (
@@ -67,7 +82,11 @@ export default function MyWatchlist({
           </p>
         </div>
       </div>
-
+      <AddFilmSheet
+        isOpen={addFilmSheetIsOpen}
+        onClose={() => setAddFilmSheetIsOpen(false)}
+        onAdd={(movie) => handleAddFilm(movie)}
+      />
       {watchlist.length === 0 ? (
         <div className={styles.empty}>
           <p className={styles.emptyText}>Nothing here yet.</p>
