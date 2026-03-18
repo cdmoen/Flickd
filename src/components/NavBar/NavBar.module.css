@@ -20,6 +20,7 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  padding: 0.25rem 0.5rem;
   text-decoration: none;
   color: var(--color-text-primary);
   font-size: 1.05rem;
@@ -68,10 +69,10 @@
 }
 
 .themeToggle {
+  padding: 0.25rem 0.5rem;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.8rem;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -91,7 +92,15 @@
 
   .logo { height: 30px; }
   .searchIcon { height: 1.5rem; width: 1.5rem; }
-  .themeToggle { font-size: 1.2rem; }
+
+  .accountIcon {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  .themeToggle { 
+    font-size: 1.5rem;
+  }
 }
 
 
@@ -104,7 +113,13 @@
 
   .logo { height: 40px; }
   .searchIcon { height: 2rem; width: 2rem; }
-  .themeToggle { font-size: 1.4rem; }
+
+  .accountIcon {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .themeToggle { font-size: 2rem; }
 }
 
 
@@ -116,7 +131,14 @@
 
   .logo { height: 50px; }
   .linkText { display: inline; }
-  .searchIcon { width: 2rem; height: 2rem; }
+  .searchIcon { width: 2.5em; height: 2.5rem; }
+
+  .accountIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .themeToggle { font-size: 2.5rem; }
 }
 
 
@@ -132,10 +154,28 @@
   .linkText { display: inline; }
   .searchIcon { width: 2.5rem; height: 2.5rem; }
 
+  .accountIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .themeToggle { 
+    font-size: 2rem; 
+    margin-left: auto;
+  }
+
+}
+
+@media screen and (min-width: 1025px) {
   .loginStatus {
     display: flex;
     align-items: center;
     gap: 1rem;
+  }
+
+  .themeToggle { 
+    font-size: 2rem; 
     margin-left: auto;
   }
+
 }

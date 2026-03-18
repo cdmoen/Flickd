@@ -58,7 +58,6 @@ export default function FriendsPage() {
 
   return (
     <div className={styles.container}>
-
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Your Friends</h2>
         {Object.keys(friends).length === 0 ? (
@@ -85,6 +84,7 @@ export default function FriendsPage() {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Add Friends</h2>
         <SearchUsers
+          uid={uid}
           friends={friends}
           incoming={incoming}
           outgoing={outgoing}
@@ -93,7 +93,6 @@ export default function FriendsPage() {
       </div>
 
       <div className={styles.topRow}>
-
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Incoming Requests</h2>
           {Object.keys(incoming).length === 0 ? (
@@ -147,11 +146,7 @@ export default function FriendsPage() {
             </ul>
           )}
         </div>
-
       </div>
-
-      
-
     </div>
   );
 }

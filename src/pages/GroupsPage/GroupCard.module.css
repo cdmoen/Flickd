@@ -22,18 +22,21 @@
   padding: 0;
   font-size: 1.2rem;
   font-weight: 600;
-  background: var(--color-blue-hover);
+  background: var(--color-blue);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   cursor: pointer;
   text-align: left;
-  text-decoration: underline;
   line-height: 1.2;
 }
 
 .nameButton:hover {
   text-decoration: underline;
+  background: var(--color-blue-soft-bg);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .actions {
@@ -42,7 +45,11 @@
 }
 
 .inviteButton {
-  background: linear-gradient(180deg, var(--color-accept), var(--color-accept-hover));
+  background: linear-gradient(
+    180deg,
+    var(--color-accept),
+    var(--color-accept-hover)
+  );
   color: #ffffff;
   border: none;
   padding: 0.4rem 0.8rem;
@@ -58,7 +65,11 @@
 }
 
 .deleteButton {
-  background: linear-gradient(180deg, var(--color-amber-hover), var(--color-terra-hover));
+  background: linear-gradient(
+    180deg,
+    var(--color-amber-hover),
+    var(--color-terra-hover)
+  );
   color: #ffffff;
   border: 1px solid var(--color-terra);
   padding: 0.4rem 0.8rem;
@@ -79,7 +90,6 @@
   border-top: 1px solid var(--color-border);
   padding-top: 0.75rem;
 }
-
 
 /* warning for deleting a group */
 .backdrop {
@@ -135,7 +145,11 @@
 
 .confirmButton {
   padding: 0.5rem 1rem;
-  background: linear-gradient(180deg, var(--color-amber-hover), var(--color-terra-hover));
+  background: linear-gradient(
+    180deg,
+    var(--color-amber-hover),
+    var(--color-terra-hover)
+  );
   color: #ffffff;
   border: 1px solid var(--color-terra);
   border-radius: 6px;
@@ -147,7 +161,6 @@
 .confirmButton:hover {
   opacity: 0.85;
 }
-
 
 /* ── max 320px ── */
 @media screen and (max-width: 320px) {

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import AvatarPicker from "./AvatarPicker";
-import styles from "./HomePage.module.css";
+import AvatarPicker from "../HomePage/AvatarPicker";
+import styles from "./UserAccountPage.module.css";
 
-export default function HomePage() {
+export default function UserAccount() {
   const { user, logout, profile, loading } = useAuth();
   const [pickerOpen, setPickerOpen] = useState(false);
 
@@ -12,6 +12,11 @@ export default function HomePage() {
   return (
     <main className={styles.container}>
 
+      <section className={styles.section}>
+        <h1 className={styles.title}>My Account</h1>
+      
+
+      
       <div className={styles.profileRow}>
         <section className={styles.avatarSection} onClick={() => setPickerOpen(true)}>
           <div className={styles.avatarWrapper}>
@@ -42,6 +47,7 @@ export default function HomePage() {
       {pickerOpen && <AvatarPicker uid={user.uid} onClose={() => setPickerOpen(false)} />}
 
       <button className={styles.logoutBtn} onClick={logout}>Logout</button>
+      </section>
     </main>
   );
 }
