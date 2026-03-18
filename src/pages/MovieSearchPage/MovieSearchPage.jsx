@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import MovieCard from "./MovieCard";
 import { fetchMovieSearch } from "../../modules/fetchers";
 import { useWatchlist } from "../../hooks/useWatchlist";
@@ -96,24 +97,26 @@ export default function MovieSearchPage() {
         </>
       )}
 
-      {activeTrailer && (
-        <div
-          className={styles.trailerModalBackdrop}
-          onClick={() => setActiveTrailer(null)}
-        >
+      {activeTrailer &&
+        createPortal(
           <div
-            className={styles.trailerModal}
-            onClick={(e) => e.stopPropagation()}
+            className={styles.trailerModalBackdrop}
+            onClick={() => setActiveTrailer(null)}
           >
-            <iframe
-              src={`https://www.youtube.com/embed/${activeTrailer}?autoplay=1`}
-              allowFullScreen
-              allow="autoplay; encrypted-media"
-              title="Movie Trailer"
-            />
-          </div>
-        </div>
-      )}
+            <div
+              className={styles.trailerModal}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${activeTrailer}?autoplay=1`}
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                title="Movie Trailer"
+              />
+            </div>
+          </div>,
+          document.body,
+        )}
     </main>
   );
 }
