@@ -58,10 +58,6 @@ export default function NavBar() {
           Welcome, {profile?.username}!
         </span>
 
-        <button className={styles.themeToggle} onClick={toggleTheme}>
-          {theme === "light" ? "🌙" : "☀️"}
-        </button>
-
         <NavLink to="/account">
           <img
             src="/images/faces.png"
@@ -70,7 +66,13 @@ export default function NavBar() {
             className={styles.accountIcon}
           />
           <span className={styles.linkText}>Account</span>
-        </NavLink>
+          </NavLink>
+          
+        <button className={styles.themeToggle} onClick={toggleTheme}>
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
+
+        
         
       </nav>
     </>
