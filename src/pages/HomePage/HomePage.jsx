@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import AvatarPicker from "./AvatarPicker";
 import MyWatchlist from "./MyWatchlist";
 import FriendsCard from "./FriendsCard";
 import GroupsCard from "./GroupsCard";

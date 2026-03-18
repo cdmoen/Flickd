@@ -62,9 +62,16 @@ export default function NavBar() {
           {theme === "light" ? "🌙" : "☀️"}
         </button>
 
-        <span className={styles.logoutBtn} onClick={logout}>
-          Logout
-        </span>
+        <NavLink to="/account">
+          <img
+            src="/images/faces.png"
+            alt="User Account Icon"
+            title="User Account"
+            className={styles.accountIcon}
+          />
+          <span className={styles.linkText}>Account</span>
+        </NavLink>
+        
       </nav>
     </>
   );

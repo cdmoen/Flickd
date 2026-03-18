@@ -1,5 +1,10 @@
 /* ── Shared styles ── */
 
+.section {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
 .container {
   max-width: 420px;
   display: flex;
