@@ -98,13 +98,18 @@ export default function MovieSearchPage() {
 
       {activeTrailer && (
         <div
-          className={styles.modalBackdrop}
+          className={styles.trailerModalBackdrop}
           onClick={() => setActiveTrailer(null)}
         >
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+          <div
+            className={styles.trailerModal}
+            onClick={(e) => e.stopPropagation()}
+          >
             <iframe
               src={`https://www.youtube.com/embed/${activeTrailer}?autoplay=1`}
               allowFullScreen
+              allow="autoplay; encrypted-media"
+              title="Movie Trailer"
             />
           </div>
         </div>
