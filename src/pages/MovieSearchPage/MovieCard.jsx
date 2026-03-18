@@ -1,15 +1,20 @@
 import { youtubeTrailer } from "../../modules/movieDatabaseHelpers";
 import { director } from "../../modules/movieDatabaseHelpers";
-import { fetchMovieInfo } from "../../modules/fetchers";
+import { fetchMovieDetails } from "../../modules/fetchers";
 import { topThreeStars } from "../../modules/movieDatabaseHelpers";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./MovieCard.module.css";
 
-export default function MovieCard({ user, movieID, watchlist, addFilm }) {
+export default function MovieCard({
+  user,
+  movieID,
+  watchlist,
+  addFilm,
+  onTrailerClick,
+}) {
   const navigate = useNavigate();
-  const [trailerIsVisible, setTrailerIsVisible] = useState(false);
-  const [movieInfo, setMovieInfo] = useState(null);
+  const [movie, setmovie] = useState(null);
   const [error, setError] = useState(null);
 
   function handleMovieClick(movieID) {
@@ -19,8 +24,8 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
   useEffect(() => {
     async function loadMovie() {
       try {
-        const data = await fetchMovieInfo(movieID);
-        setMovieInfo(data);
+        const data = await fetchMovieDetails(movieID);
+        setmovie(data);
       } catch (err) {
         console.error(err);
         setError(err);
@@ -33,24 +38,29 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
     return <p>Error loading movie.</p>;
   }
 
-  if (!movieInfo) {
+  if (!movie) {
     return <p>Loading...</p>;
   }
 
-  const title = movieInfo.title;
-  const year = movieInfo.release_date.slice(0, 4);
-  const description = movieInfo.description;
-  const poster = `https://image.tmdb.org/t/p/w780/${movieInfo.backdrop_path ? movieInfo.backdrop_path : "ss4GSbqZy2xKumjWD48dU2cZQ31.jpg"}`;
-  const stars = topThreeStars(movieInfo);
-  const direct = director(movieInfo);
-  const youtubeCode = youtubeTrailer(movieInfo);
+  const title = movie.title;
+  const year = movie.release_date.slice(0, 4);
+  const backdrop = movie.backdrop_path
+    ? `https://image.tmdb.org/t/p/w780/${movie.backdrop_path}`
+    : "/images/backdrop_placeholder.svg";
+  const poster = movie.poster_path
+    ? `https://image.tmdb.org/t/p/w342/${movie.poster_path}`
+    : "/images/placeholder.svg";
+  const stars = topThreeStars(movie);
+  const direct = director(movie);
+  const youtubeCode = youtubeTrailer(movie);
   const filmForWatchlist = {
     id: movieID,
     title,
     poster: poster,
+    backdrop: backdrop,
     year: year,
   };
-  const isInWatchlist = watchlist.some((f) => f.id === String(movieID));
+  const isInWatchlist = watchlist.some((f) => f.id == String(movieID));
 
   return (
     <section className={styles.card}>
@@ -58,7 +68,10 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
         className={styles.posterWrapper}
         onClick={() => handleMovieClick(movieID)}
       >
-        <img className={styles.poster} src={poster} />
+        <picture>
+          <source media="(min-width: 768px)" srcSet={poster} />
+          <img className={styles.poster} src={backdrop} alt={title} />
+        </picture>
       </div>
 
       <section className={styles.info}>
@@ -66,40 +79,34 @@ export default function MovieCard({ user, movieID, watchlist, addFilm }) {
           <h3 className={styles.title}>{title}</h3>
           <p className={styles.year}>{year}</p>
         </div>
-        <button
-          className={styles.trailerButton}
-          onClick={() => setTrailerIsVisible(true)}
-        >
-          Watch Trailer
-        </button>
-        {user && !isInWatchlist && (
+        <div className={styles.actions}>
           <button
-            className={styles.watchlistButton}
-            onClick={() => addFilm(filmForWatchlist)}
+            className={styles.trailerButton}
+            onClick={() => onTrailerClick(youtubeCode)}
           >
-            Add to My Watchlist
+            ▶ Trailer
           </button>
-        )}
-
-        <p className={styles.description}>Director: {direct}</p>
-        <p className={styles.description}>Starring: {stars}</p>
-      </section>
-
-      {trailerIsVisible && (
-        <div
-          className={styles.modal}
-          onClick={() => setTrailerIsVisible(false)}
-        >
-          <iframe
-            src={
-              youtubeCode
-                ? `https://www.youtube.com/embed/${youtubeCode}`
-                : "https://www.youtube.com/embed/Aq5WXmQQooo"
-            }
-            allowFullScreen
-          ></iframe>
+          {user &&
+            (isInWatchlist ? (
+              <p className={styles.addedMessage}>✓ Watchlist</p>
+            ) : (
+              <button
+                className={styles.watchlistButton}
+                onClick={() => addFilm(filmForWatchlist)}
+              >
+                + Watchlist
+              </button>
+            ))}
         </div>
-      )}
+
+        <p className={styles.description}>
+          <strong>Director: </strong>
+          {direct}
+        </p>
+        <p className={styles.description}>
+          <strong>Starring: </strong> {stars}
+        </p>
+      </section>
     </section>
   );
 }
