@@ -128,11 +128,7 @@
 }
 
 .trailerModal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
+  position: relative;
   width: 100%;
   max-width: 800px;
   aspect-ratio: 16 / 9;
@@ -140,7 +136,6 @@
   border-radius: 10px;
   overflow: hidden;
   background: #000;
-  z-index: 201;
 }
 
 .trailerModal iframe {
