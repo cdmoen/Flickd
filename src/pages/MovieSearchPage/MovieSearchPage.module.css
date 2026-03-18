@@ -134,6 +134,7 @@
   border-radius: 10px;
   overflow: hidden;
   background: #000;
+  position: fixed;
 }
 
 .modal iframe {
