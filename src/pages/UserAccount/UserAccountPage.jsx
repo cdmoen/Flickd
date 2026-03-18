@@ -12,10 +12,11 @@ export default function UserAccount() {
   return (
     <main className={styles.container}>
 
-      <section>
+      <section className={styles.section}>
         <h1 className={styles.title}>My Account</h1>
-      </section>
+      
 
+      
       <div className={styles.profileRow}>
         <section className={styles.avatarSection} onClick={() => setPickerOpen(true)}>
           <div className={styles.avatarWrapper}>
@@ -46,6 +47,7 @@ export default function UserAccount() {
       {pickerOpen && <AvatarPicker uid={user.uid} onClose={() => setPickerOpen(false)} />}
 
       <button className={styles.logoutBtn} onClick={logout}>Logout</button>
+      </section>
     </main>
   );
 }

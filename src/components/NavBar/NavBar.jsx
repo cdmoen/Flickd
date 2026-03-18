@@ -54,11 +54,8 @@ export default function NavBar() {
           <span className={styles.linkText}>Search</span>
         </NavLink>
 
-        <span className={styles.loginStatus}>
-          Welcome, {profile?.username}!
-        </span>
-
-        <NavLink to="/account">
+        <NavLink to="/account"
+        className={styles.link}>
           <img
             src="/images/faces.png"
             alt="User Account Icon"
@@ -67,12 +64,14 @@ export default function NavBar() {
           />
           <span className={styles.linkText}>Account</span>
           </NavLink>
-          
+
         <button className={styles.themeToggle} onClick={toggleTheme}>
           {theme === "light" ? "🌙" : "☀️"}
         </button>
 
-        
+        <span className={styles.loginStatus}>
+          Welcome, {profile?.username}!
+        </span>
         
       </nav>
     </>
