@@ -88,7 +88,7 @@ export default function MovieSearchPage() {
                   watchlist={watchlist}
                   addFilm={addFilm}
                   onTrailerClick={setActiveTrailer}
-                  style={`animationDelay: ${i + 1 * 3}s`}
+                  style={{ animationDelay: `${i * 30}ms` }}
                 />
               </li>
             ))}
