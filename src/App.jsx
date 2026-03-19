@@ -14,7 +14,7 @@ import Layout from "./components/Layout/Layout";
 import MoviePage from "./pages/MoviePage/MoviePage";
 import HomePage from "./pages/HomePage/HomePage";
 import GroupPage from "./pages/GroupPage/GroupPage";
-import UserAccount from "./pages/UserAccount/UserAccountPage";
+import UserAccountPage from "./pages/UserAccountPage/UserAccountPage";
 
 function App() {
   const { user } = useAuth();
@@ -35,7 +35,7 @@ function App() {
             <Route path="/friends" element={<FriendsPage />} />
             <Route path="/groups" element={<GroupsPage />} />
             <Route path="/groups/:groupId" element={<GroupPage />} />
-            <Route path="/account" element={<UserAccount />} />
+            <Route path="/account" element={<UserAccountPage />} />
           </Route>
         </Route>
       </Routes>
