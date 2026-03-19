@@ -39,7 +39,7 @@ export default function MovieCard({
   }
 
   if (!movie) {
-    return <p>Loading...</p>;
+    return <p className={styles.loading}>Loading...</p>;
   }
 
   const title = movie.title;

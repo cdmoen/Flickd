@@ -66,6 +66,10 @@
   flex-wrap: wrap;
 }
 
+.loading {
+  opacity: 0.1;
+}
+
 .title {
   font-family: "Rajdhani", sans-serif;
   font-size: 20px;
