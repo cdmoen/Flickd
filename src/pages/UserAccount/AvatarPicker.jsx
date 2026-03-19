@@ -21,7 +21,9 @@ export default function AvatarPicker({ uid, onClose }) {
   return (
     <div className={styles.backdrop} onClick={onClose}>
       <div className={styles.sheet} onClick={(e) => e.stopPropagation()}>
-        <h2 className={styles.header}>Choose an Avatar</h2>
+        <div className={styles.header}>
+          <h2>Choose an Avatar</h2>
+        </div>
 
         <div className={styles.grid}>
           {avatarList.map((url) => (

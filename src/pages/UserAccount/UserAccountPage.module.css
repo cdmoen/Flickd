@@ -57,7 +57,7 @@
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-  justify-content: center
+  justify-content: center;
 }
 
 .avatarWrapper {
@@ -135,18 +135,28 @@
 .logoutBtn {
   width: 100%;
   padding: 0.65rem;
-  background: linear-gradient(180deg, var(--color-amber-hover), var(--color-terra-hover));
+  background: linear-gradient(
+    180deg,
+    var(--color-amber-hover),
+    var(--color-terra-hover)
+  );
   color: #ffffff;
   border: 1px solid var(--color-terra);
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .logoutBtn:hover {
-  background: linear-gradient(180deg, var(--color-terra-hover), var(--color-amber-hover));
+  background: linear-gradient(
+    180deg,
+    var(--color-terra-hover),
+    var(--color-amber-hover)
+  );
   color: #ffffff;
 }
 
