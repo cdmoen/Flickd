@@ -74,14 +74,20 @@
 
 .themeToggle {
   padding: 0.25rem 0.5rem;
-  background: none;
+  background: transparent;
   border: none;
   cursor: pointer;
-  line-height: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   transition: background 0.2s ease;
 }
+
+.themeIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 
 .themeToggle:hover {
   /* background: var(--color-surface); */
@@ -106,8 +112,9 @@
     width: 1.5rem;
   }
 
-  .themeToggle {
-    font-size: 1.5rem;
+  .themeIcon {
+    width: 1.5rem;
+    height: 1.5rem; 
   }
 }
 
@@ -131,9 +138,10 @@
     width: 2rem;
   }
 
-  .themeToggle {
-    font-size: 2rem;
-  }
+  .themeIcon {
+    width: 2rem;
+    height: 2rem;
+}
 }
 
 /* ── 768px – 1023px ── */
@@ -158,9 +166,10 @@
     height: 2.5rem;
   }
 
-  .themeToggle {
-    font-size: 2.5rem;
-  }
+  .themeIcon { 
+    width: 2.5rem;
+    height: 2.5rem;
+}
 }
 
 /* ── 1024px and up ── */
@@ -187,10 +196,10 @@
     height: 2.5rem;
   }
 
-  .themeToggle {
-    font-size: 2rem;
-    margin-left: auto;
-  }
+  .themeIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+}
 }
 
 @media screen and (min-width: 1025px) {
@@ -200,8 +209,8 @@
     gap: 1rem;
   }
 
-  .themeToggle {
-    font-size: 2rem;
-    margin-left: auto;
-  }
+  .themeIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+}
 }
