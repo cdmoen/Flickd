@@ -80,7 +80,7 @@ export default function MovieSearchPage() {
       {searchResults && (
         <>
           <ul className={styles.resultsList}>
-            {visibleIDs.map((movieID) => (
+            {visibleIDs.map((movieID, i) => (
               <li key={movieID}>
                 <MovieCard
                   user={user}
@@ -88,6 +88,7 @@ export default function MovieSearchPage() {
                   watchlist={watchlist}
                   addFilm={addFilm}
                   onTrailerClick={setActiveTrailer}
+                  style={`animationDelay: ${i * 30}ms`}
                 />
               </li>
             ))}
