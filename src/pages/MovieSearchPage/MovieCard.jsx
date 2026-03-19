@@ -12,6 +12,7 @@ export default function MovieCard({
   watchlist,
   addFilm,
   onTrailerClick,
+  style,
 }) {
   const navigate = useNavigate();
   const [movie, setmovie] = useState(null);
@@ -63,7 +64,7 @@ export default function MovieCard({
   const isInWatchlist = watchlist.some((f) => f.id == String(movieID));
 
   return (
-    <section className={styles.card}>
+    <section className={styles.card} style={style}>
       <div
         className={styles.posterWrapper}
         onClick={() => handleMovieClick(movieID)}
