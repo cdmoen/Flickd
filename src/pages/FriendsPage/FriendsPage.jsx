@@ -18,6 +18,7 @@ export default function FriendsPage() {
   const [incoming, setIncoming] = useState({});
   const [outgoing, setOutgoing] = useState({});
   const [usernames, setUsernames] = useState({});
+  const [searchFormActive, setSearchFormActive] = useState(false);
 
   async function getUsername(otherUid) {
     if (!otherUid) return "(unknown)";
@@ -57,7 +58,7 @@ export default function FriendsPage() {
   }, [uid]);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={setSearchFormActive(false)}>
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Your Friends</h2>
         {Object.keys(friends).length === 0 ? (
@@ -84,6 +85,8 @@ export default function FriendsPage() {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Add Friends</h2>
         <SearchUsers
+          searchFormActive={searchFormActive}
+          setSearchFormActive={setSearchFormActive}
           uid={uid}
           friends={friends}
           incoming={incoming}

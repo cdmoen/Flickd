@@ -6,11 +6,14 @@ import {
   startAt,
   endAt,
   get,
+  set,
 } from "firebase/database";
 import { database } from "../../modules/firebase";
 import styles from "./SearchUsers.module.css";
 
 export default function SearchUsers({
+  searchFormActive,
+  setSearchFormActive,
   uid,
   friends,
   incoming,
@@ -68,35 +71,44 @@ export default function SearchUsers({
       <input
         type="text"
         placeholder="Search username..."
-        value={term}
+        value={searchFormActive && term}
+        onClick={(e) => {
+          e.stopPropagation();
+          setSearchFormActive(true);
+        }}
         onChange={handleSearch}
         className={styles.searchInput}
       />
 
-      <div className={styles.results}>
-        {results.map((user) => {
-          const status = getStatus(user.uid);
+      {searchFormActive && (
+        <div className={styles.results}>
+          {results.map((user) => {
+            const status = getStatus(user.uid);
 
-          return (
-            <div key={user.uid} className={styles.resultRow}>
-              <span className={styles.username}>{user.username}</span>
+            return (
+              <div key={user.uid} className={styles.resultRow}>
+                <span className={styles.username}>{user.username}</span>
 
-              <span className={`${styles.status} ${status.className}`}>
-                {status.label}
-              </span>
+                <span className={`${styles.status} ${status.className}`}>
+                  {status.label}
+                </span>
 
-              {status.label === "Not friends" && (
-                <button
-                  className={styles.addButton}
-                  onClick={() => onSendRequest(user.uid)}
-                >
-                  Add Friend
-                </button>
-              )}
-            </div>
-          );
-        })}
-      </div>
+                {status.label === "Not friends" && (
+                  <button
+                    className={styles.addButton}
+                    onClick={() => {
+                      onSendRequest(user.uid);
+                      setSearchFormActive(false);
+                    }}
+                  >
+                    Add Friend
+                  </button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

@@ -14,7 +14,7 @@ import Layout from "./components/Layout/Layout";
 import MoviePage from "./pages/MoviePage/MoviePage";
 import HomePage from "./pages/HomePage/HomePage";
 import GroupPage from "./pages/GroupPage/GroupPage";
-import UserAccount from "./pages/UserAccount/UserAccountPage";
+import UserAccountPage from "./pages/UserAccount/UserAccountPage";
 
 function App() {
   const { user } = useAuth();
