@@ -1,5 +1,9 @@
 .backdrop {
   position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
   display: flex;
@@ -22,8 +26,21 @@
 }
 
 @keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .header {
@@ -31,7 +48,7 @@
   margin-bottom: 1rem;
   font-size: 1.1rem;
   font-weight: 600;
-  background: linear-gradient(180deg, #D97721, #9E4738);
+  background: linear-gradient(180deg, #d97721, #9e4738);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -71,7 +88,11 @@
 }
 
 .inviteButton {
-  background: linear-gradient(180deg, var(--color-accept), var(--color-accept-hover));
+  background: linear-gradient(
+    180deg,
+    var(--color-accept),
+    var(--color-accept-hover)
+  );
   color: #ffffff;
   border: none;
   padding: 0.4rem 0.8rem;
@@ -93,7 +114,6 @@
   padding: 1rem 0;
 }
 
-
 /* ── max 320px ── */
 @media screen and (max-width: 320px) {
   .sheet {
@@ -107,7 +127,7 @@
   }
 
   .inviteButton {
-    width: auto;        /* ← changed from 100% */
+    width: auto; /* ← changed from 100% */
     white-space: nowrap;
   }
 }
@@ -122,6 +142,13 @@
     flex-direction: row;
     align-items: center;
   }
+  .dragHandle {
+    display: none;
+  }
+
+  .backdrop {
+    justify-content: center;
+  }
 }
 
 /* ── 768px and up ── */
@@ -131,5 +158,12 @@
     border-radius: 16px;
     align-self: center;
     border: 1px solid var(--color-border);
+    animation: fadeIn 0.25s ease-out;
+  }
+  .dragHandle {
+    display: none;
+  }
+  .backdrop {
+    justify-content: center;
   }
 }

@@ -1,5 +1,6 @@
 import { inviteToGroup } from "../../modules/groups/inviteToGroup";
 import { useGroupOutgoingInvites } from "../../hooks/useGroupOutgoingInvites";
+import { createPortal } from "react-dom";
 import styles from "./FriendPickerSheet.module.css";
 
 export default function FriendPickerSheet({
@@ -28,14 +29,13 @@ export default function FriendPickerSheet({
     (friend) => friend.uid !== group.createdBy,
   );
 
-  return (
+  return createPortal(
     <div className={styles.backdrop} onClick={onClose}>
       <div
         className={styles.sheet}
         onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
       >
         <div className={styles.header}>
-          <div className={styles.dragHandle} />
           <h2>Invite Friends</h2>
         </div>
 
@@ -57,6 +57,7 @@ export default function FriendPickerSheet({
           ))}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
