@@ -12,8 +12,6 @@ import { database } from "../../modules/firebase";
 import styles from "./SearchUsers.module.css";
 
 export default function SearchUsers({
-  term,
-  setTerm,
   searchFormActive,
   setSearchFormActive,
   uid,
@@ -23,6 +21,7 @@ export default function SearchUsers({
   onSendRequest,
 }) {
   const [results, setResults] = useState([]);
+  const [term, setTerm] = useState("");
 
   async function handleSearch(e) {
     const value = e.target.value;

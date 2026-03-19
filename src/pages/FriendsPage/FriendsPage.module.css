@@ -28,31 +28,21 @@
   gap: 1rem;
 }
 
+.searchSection {
+  background: var(--color-card-bg);
+  border-radius: 12px;
+  padding: 1rem 2rem 1rem 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .topRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   align-items: start;
-}
-
-.searchUsersTopRow {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  align-items: space-between;
-  justify-content: space-between;
-}
-
-.closeBtn {
-  all: unset; /* remove all default button styles */
-  cursor: pointer;
-  font-size: 1rem; /* tweak size */
-  padding: 0.25rem; /* small click target */
-  color: var(--color-text-muted);
-}
-
-.closeBtn:hover {
-  color: var(--color-text-primary);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -206,6 +196,38 @@
 .logoutButton:hover {
   background: var(--color-terra);
   color: #ffffff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease both;
+}
+
+.modalSheet {
+  width: 50%;
+  max-height: 75vh;
+  background: var(--color-surface);
+  border-radius: 16px;
+  padding: 24px 20px;
+  gap: 16px;
+  z-index: 101;
+  overflow: auto;
+  animation: fadeUp 0.3s ease both;
 }
 
 /* ── max 767px — stack topRow ── */
