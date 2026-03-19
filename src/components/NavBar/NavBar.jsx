@@ -65,7 +65,19 @@ export default function NavBar() {
         </NavLink>
 
         <button className={styles.themeToggle} onClick={toggleTheme}>
-          {theme === "light" ? "🌙" : "☀️"}
+          {theme === "light" ? 
+            <img
+              src="/images/moon.png"
+              alt="Dark Theme"
+              title="Switch to Dark Theme"
+              className={styles.themeIcon}
+            /> : 
+            <img
+              src="/images/sun.png"
+              alt="Light Theme"
+              title="Switch to Light Theme"
+              className={styles.themeIcon}
+            />}
         </button>
 
         <span className={styles.loginStatus}>
