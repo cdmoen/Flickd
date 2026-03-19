@@ -13,8 +13,8 @@ export default function GroupCard({ group, onDelete, onInvite }) {
           className={styles.nameButton}
           onClick={() => navigate(`/groups/${group.id}`)}
         >
-          {group.name}
-          {" →"}
+          <span className={styles.nameButtonText}>{group.name}</span>
+          <span className={styles.arrow}>{" →"}</span>
         </button>
 
         <div className={styles.actions}>
