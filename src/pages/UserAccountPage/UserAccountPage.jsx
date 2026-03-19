@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 import AvatarPicker from "./AvatarPicker";
 import styles from "./UserAccountPage.module.css";
 
-export default function UserAccount() {
+export default function UserAccountPage() {
   const { user, logout, profile, loading } = useAuth();
   const [pickerOpen, setPickerOpen] = useState(false);
 
