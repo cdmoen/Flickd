@@ -157,7 +157,10 @@ export default function FriendsPage() {
             className={styles.modalBackdrop}
             onClick={() => setSearchFormActive(false)}
           >
-            <div className={styles.modalSheet}>
+            <div
+              className={styles.modalSheet}
+              onClick={(e) => e.stopPropagation()}
+            >
               <SearchUsers
                 searchFormActive={searchFormActive}
                 setSearchFormActive={setSearchFormActive}

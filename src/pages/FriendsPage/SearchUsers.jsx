@@ -72,10 +72,6 @@ export default function SearchUsers({
         type="text"
         placeholder="Search username..."
         value={searchFormActive ? term : ""}
-        onClick={(e) => {
-          e.stopPropagation();
-          setSearchFormActive(true);
-        }}
         onChange={handleSearch}
         className={styles.searchInput}
       />
@@ -98,8 +94,6 @@ export default function SearchUsers({
                     className={styles.addButton}
                     onClick={() => {
                       onSendRequest(user.uid);
-                      setSearchFormActive(false);
-                      setTerm("");
                     }}
                   >
                     Add Friend

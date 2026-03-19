@@ -15,7 +15,9 @@
   background: var(--color-surface);
   color: var(--color-text-primary);
   box-sizing: border-box; /* ← fixes overflow */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .searchInput:focus {
@@ -66,7 +68,11 @@
 
 .addButton {
   padding: 0.35rem 0.75rem;
-  background: linear-gradient(180deg, var(--color-accept), var(--color-accept-hover));
+  background: linear-gradient(
+    180deg,
+    var(--color-accept),
+    var(--color-accept-hover)
+  );
   color: #ffffff;
   border: none;
   border-radius: 6px;
@@ -76,7 +82,11 @@
 }
 
 .addButton:hover {
-  background: linear-gradient(180deg, var(--color-accept-hover), var(--color-accept));
+  background: linear-gradient(
+    180deg,
+    var(--color-accept-hover),
+    var(--color-accept)
+  );
 }
 
 /* ── max 320px ── */
