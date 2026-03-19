@@ -19,11 +19,11 @@ export default function NavBar() {
         <NavLink to="/home">
           <picture>
             <source
-              media="(max-width: 390px)"
+              media="(max-width: 412px)"
               srcSet="/images/logo-f-play.png"
             />
             <source
-              media="(min-width: 391px)"
+              media="(min-width: 412px)"
               srcSet="/images/logo-flickd-play.png"
             />
             <img
@@ -54,8 +54,7 @@ export default function NavBar() {
           <span className={styles.linkText}>Search</span>
         </NavLink>
 
-        <NavLink to="/account"
-        className={styles.link}>
+        <NavLink to="/account" className={styles.link}>
           <img
             src="/images/faces.png"
             alt="User Account Icon"
@@ -63,7 +62,7 @@ export default function NavBar() {
             className={styles.accountIcon}
           />
           <span className={styles.linkText}>Account</span>
-          </NavLink>
+        </NavLink>
 
         <button className={styles.themeToggle} onClick={toggleTheme}>
           {theme === "light" ? "🌙" : "☀️"}
@@ -72,7 +71,6 @@ export default function NavBar() {
         <span className={styles.loginStatus}>
           Welcome, {profile?.username}!
         </span>
-        
       </nav>
     </>
   );
