@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ref, onValue, get } from "firebase/database";
+import { ref, onValue, get, set } from "firebase/database";
 import { useAuth } from "../../contexts/AuthContext";
 import { database } from "../../modules/firebase";
 import SearchUsers from "./SearchUsers";
@@ -18,6 +18,7 @@ export default function FriendsPage() {
   const [incoming, setIncoming] = useState({});
   const [outgoing, setOutgoing] = useState({});
   const [usernames, setUsernames] = useState({});
+  const [term, setTerm] = useState("");
   const [searchFormActive, setSearchFormActive] = useState(false);
 
   async function getUsername(otherUid) {
@@ -58,9 +59,13 @@ export default function FriendsPage() {
   }, [uid]);
 
   return (
-    <div className={styles.container} onClick={setSearchFormActive(false)}>
+    <div
+      className={styles.container}
+      onClick={() => setSearchFormActive(false)}
+    >
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Your Friends</h2>
+
         {Object.keys(friends).length === 0 ? (
           <p className={styles.empty}>No friends yet.</p>
         ) : (
@@ -83,8 +88,23 @@ export default function FriendsPage() {
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Add Friends</h2>
+        <div className={styles.searchUsersTopRow}>
+          <h2 className={styles.sectionTitle}>Add Friends</h2>
+          {searchFormActive && (
+            <button
+              className={styles.closeBtn}
+              onClick={() => {
+                setSearchFormActive(false);
+                setTerm("");
+              }}
+            >
+              ✕
+            </button>
+          )}
+        </div>
         <SearchUsers
+          term={term}
+          setTerm={setTerm}
           searchFormActive={searchFormActive}
           setSearchFormActive={setSearchFormActive}
           uid={uid}
