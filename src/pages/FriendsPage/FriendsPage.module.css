@@ -35,6 +35,26 @@
   align-items: start;
 }
 
+.searchUsersTopRow {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: space-between;
+  justify-content: space-between;
+}
+
+.closeBtn {
+  all: unset; /* remove all default button styles */
+  cursor: pointer;
+  font-size: 1rem; /* tweak size */
+  padding: 0.25rem; /* small click target */
+  color: var(--color-text-muted);
+}
+
+.closeBtn:hover {
+  color: var(--color-text-primary);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .container {
     animation: fadeUp 0.3s ease both;

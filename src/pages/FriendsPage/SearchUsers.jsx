@@ -12,6 +12,8 @@ import { database } from "../../modules/firebase";
 import styles from "./SearchUsers.module.css";
 
 export default function SearchUsers({
+  term,
+  setTerm,
   searchFormActive,
   setSearchFormActive,
   uid,
@@ -20,7 +22,6 @@ export default function SearchUsers({
   outgoing,
   onSendRequest,
 }) {
-  const [term, setTerm] = useState("");
   const [results, setResults] = useState([]);
 
   async function handleSearch(e) {
@@ -71,7 +72,7 @@ export default function SearchUsers({
       <input
         type="text"
         placeholder="Search username..."
-        value={searchFormActive && term}
+        value={searchFormActive ? term : ""}
         onClick={(e) => {
           e.stopPropagation();
           setSearchFormActive(true);
@@ -99,6 +100,7 @@ export default function SearchUsers({
                     onClick={() => {
                       onSendRequest(user.uid);
                       setSearchFormActive(false);
+                      setTerm("");
                     }}
                   >
                     Add Friend
