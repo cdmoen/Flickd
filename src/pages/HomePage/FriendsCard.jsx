@@ -18,7 +18,11 @@ export default function FriendsCard() {
         </p>
       </div>
 
-      <NavLink to="/friends" className={styles.cardBtn}>
+      <NavLink 
+        to="/friends" 
+        className={styles.cardBtn}
+        aria-label="Add friends"
+      >
         Add Friends
       </NavLink>
     </div>
