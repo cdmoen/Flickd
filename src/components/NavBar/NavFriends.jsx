@@ -23,9 +23,9 @@ export default function NavFriends() {
   }, [user]);
 
   return (
- <NavLink
+    <NavLink
       to="/friends"
-    className={({ isActive }) =>
+      className={({ isActive }) =>
       [
         styles.friendsButton,
         hasRequests ? styles.pending : "",
@@ -35,6 +35,8 @@ export default function NavFriends() {
         .join(" ")
     }
     >
+      {/* Friend icon with both image and text for multiple screen sizes
+              Smaller is icon only, Larger is icon and text */}
       <img
         src="/images/ticket.png"
         alt="Friend Icon"

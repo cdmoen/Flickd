@@ -20,6 +20,7 @@
   color: var(--color-text-primary);
 }
 
+/* Hide link text */
 .linkText {
   display: none;
 }
@@ -50,16 +51,29 @@
 
 /* ── max 320px ── */
 @media screen and (max-width: 320px) {
-  .friendIcon { width: 1.5rem; height: 1.5rem; }
+  .friendIcon { 
+    width: 1.5rem; 
+    height: 1.5rem; 
+  }
 }
 
 /* ── 321px – 767px ── */
 @media screen and (min-width: 321px) and (max-width: 767px) {
-  .friendIcon { width: 2rem; height: 2rem; }
+  .friendIcon { 
+    width: 2rem; 
+    height: 2rem; 
+  }
 }
 
 /* ── 768px and up ── */
 @media screen and (min-width: 768px) {
-  .linkText { display: inline; }
-  .friendIcon { width: 40px; height: 40px; }
+  /* Show link text */
+  .linkText { 
+    display: inline; 
+  }
+  
+  .friendIcon { 
+    width: 40px; 
+    height: 40px; 
+  }
 }

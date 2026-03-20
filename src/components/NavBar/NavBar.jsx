@@ -16,8 +16,12 @@ export default function NavBar() {
   return (
     <>
       <nav className={styles.navbar}>
-        <NavLink to="/home">
+        <NavLink 
+          to="/home"
+        >
           <picture>
+            {/* Responsive logo: show smaller logo on mobile, larger logo on desktop */}
+
             <source
               media="(max-width: 412px)"
               srcSet="/images/logo-f-play.png"
@@ -45,6 +49,9 @@ export default function NavBar() {
             isActive ? `${styles.link} ${styles.active}` : styles.link
           }
         >
+          {/* Search icon with both image and text for multiple screen sizes
+              Smaller is icon only, Larger is icon and text */}
+
           <img
             src="/images/search.png"
             alt="Search Icon"
@@ -54,7 +61,12 @@ export default function NavBar() {
           <span className={styles.linkText}>Search</span>
         </NavLink>
 
-        <NavLink to="/account" className={styles.link}>
+        <NavLink 
+          to="/account" 
+          className={styles.link}
+        >
+          {/* User account icon with both image and text for multiple screen sizes
+              Smaller is icon only, Larger is icon and text */}
           <img
             src="/images/faces.png"
             alt="User Account Icon"
@@ -64,6 +76,7 @@ export default function NavBar() {
           <span className={styles.linkText}>Account</span>
         </NavLink>
 
+        {/* Theme toggle button with icon that changes based on current theme */}
         <button className={styles.themeToggle} onClick={toggleTheme}>
           {theme === "light" ? 
             <img
@@ -80,6 +93,8 @@ export default function NavBar() {
             />}
         </button>
 
+        {/* Show Welcome message with username only on larger screens,
+            hide on smaller */}
         <span className={styles.loginStatus}>
           Welcome, {profile?.username}!
         </span>

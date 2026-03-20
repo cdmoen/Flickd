@@ -40,6 +40,7 @@
   background: var(--color-surface);
 }
 
+/* Hide link text on smaller screens */
 .linkText {
   display: none;
 }
@@ -68,6 +69,7 @@
   background: var(--color-amber);
 }
 
+/* Hide login status on smaller screens */
 .loginStatus {
   display: none;
 }
@@ -88,6 +90,11 @@
   height: 1.5rem;
 }
 
+.accountIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 
 .themeToggle:hover {
   /* background: var(--color-surface); */
@@ -102,20 +109,7 @@
   .logo {
     height: 30px;
   }
-  .searchIcon {
-    height: 1.5rem;
-    width: 1.5rem;
-  }
-
-  .accountIcon {
-    height: 1.5rem;
-    width: 1.5rem;
-  }
-
-  .themeIcon {
-    width: 1.5rem;
-    height: 1.5rem; 
-  }
+  
 }
 
 /* ── 321px – 767px ── */
@@ -128,20 +122,13 @@
   .logo {
     height: 40px;
   }
-  .searchIcon {
-    height: 2rem;
-    width: 2rem;
-  }
-
-  .accountIcon {
-    height: 2rem;
-    width: 2rem;
-  }
-
+  .searchIcon,
+  .accountIcon,
   .themeIcon {
-    width: 2rem;
     height: 2rem;
-}
+    width: 2rem;
+  }
+
 }
 
 /* ── 768px – 1023px ── */
@@ -153,23 +140,18 @@
   .logo {
     height: 50px;
   }
+  /* Show link text*/
   .linkText {
     display: inline;
   }
-  .searchIcon {
+
+  .searchIcon,
+  .accountIcon,
+  .themeIcon {
     width: 2.5em;
     height: 2.5rem;
   }
 
-  .accountIcon {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
-  .themeIcon { 
-    width: 2.5rem;
-    height: 2.5rem;
-}
 }
 
 /* ── 1024px and up ── */
@@ -183,23 +165,19 @@
   .logo {
     height: 50px;
   }
+
+  /* Show link text */
   .linkText {
     display: inline;
   }
-  .searchIcon {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
 
-  .accountIcon {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
+  .searchIcon,
+  .accountIcon,
   .themeIcon {
     width: 2.5rem;
     height: 2.5rem;
-}
+  }
+
 }
 
 @media screen and (min-width: 1025px) {
@@ -212,5 +190,5 @@
   .themeIcon {
     width: 2.5rem;
     height: 2.5rem;
-}
+  }
 }

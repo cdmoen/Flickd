@@ -166,6 +166,8 @@
   color: var(--color-text-muted);
 }
 
+/* ── Responsive styles ── */
+
 @media screen and (max-width: 320px) {
   .container {
     padding: 1rem;

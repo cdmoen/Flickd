@@ -32,6 +32,8 @@ export default function NavGroups() {
          ${isActive ? styles.active : ""}`
       }
     >
+      {/* Groups icon with both image and text for multiple screen sizes
+          Smaller is icon only, Larger is icon and text */}
       <img
         src="/images/roll.png"
         alt="Groups Icon"
