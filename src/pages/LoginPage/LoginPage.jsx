@@ -46,18 +46,29 @@ export default function LoginPage() {
       {error && <p className={styles.error}>{error}</p>}
 
       <form className={styles.form} onSubmit={handleSubmit}>
+        <label htmlFor="email" className={styles.visuallyHidden}>
+          Email Address
+        </label>
         <input
+          id="email"
           className={styles.input}
           type="email"
           placeholder="Email"
+          required
+          autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
+        <label htmlFor="password" className={styles.visuallyHidden}>
+          Password
+        </label>
         <input
+          id="password"
           className={styles.input}
           type="password"
           placeholder="Password"
+          required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -67,7 +78,11 @@ export default function LoginPage() {
         </button>
       </form>
 
-      <Link className={styles.link} to="/register">
+      <Link 
+        className={styles.link} 
+        to="/register"
+        aria-label="Create account"
+      >
         Create account
       </Link>
     </main>
