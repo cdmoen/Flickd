@@ -93,7 +93,11 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
         <div ref={handleRef} className={styles.dragHandle} />
         <h2>Add a Film</h2>
         <form onSubmit={handleSearch} className={styles.searchBar}>
+          <label htmlFor="film-search" className={styles.visuallyHidden}>
+            Search Films
+          </label>
           <input
+            id="film-search"
             type="text"
             placeholder="Search films..."
             value={query}
