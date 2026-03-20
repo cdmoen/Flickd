@@ -79,6 +79,7 @@ export default function GroupsPage() {
           <button
             onClick={() => setShowForm((prev) => !prev)}
             className={showForm ? styles.cancelButton : styles.createButton}
+            aria-label="Toggle Create Group Form"
           >
             {showForm ? "Cancel" : "Create a New Group"}
           </button>

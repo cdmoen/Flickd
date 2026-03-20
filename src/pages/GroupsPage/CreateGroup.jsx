@@ -26,7 +26,11 @@ export default function CreateGroup() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      <label htmlFor="groupName" className={styles.visuallyHidden}>
+        Group Name
+      </label>
       <input
+        id="groupName"
         className={styles.input}
         type="text"
         placeholder="Group name"
@@ -35,7 +39,12 @@ export default function CreateGroup() {
         required
       />
 
-      <button className={styles.button} type="submit" disabled={loading}>
+      <button 
+        className={styles.button} 
+        type="submit" 
+        disabled={loading}
+        aria-label="Create group"
+      >
         {loading ? "Creating..." : "Create"}
       </button>
 

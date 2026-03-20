@@ -12,6 +12,7 @@ export default function GroupCard({ group, onDelete, onInvite }) {
         <button
           className={styles.nameButton}
           onClick={() => navigate(`/groups/${group.id}`)}
+          aria-label={`View details for group ${group.name}`}
         >
           <span className={styles.nameButtonText}>{group.name}</span>
           <span className={styles.arrow}>{" →"}</span>
@@ -21,6 +22,7 @@ export default function GroupCard({ group, onDelete, onInvite }) {
           <button
             className={styles.inviteButton}
             onClick={() => onInvite(group)}
+            aria-label={`Invite friend to group ${group.name}`}
           >
             Invite Friend
           </button>
@@ -28,6 +30,7 @@ export default function GroupCard({ group, onDelete, onInvite }) {
           <button
             className={styles.deleteButton}
             onClick={() => setShowConfirm(true)}
+            aria-label={`Delete group ${group.name}`}
           >
             Delete Group
           </button>
@@ -49,6 +52,7 @@ export default function GroupCard({ group, onDelete, onInvite }) {
               <button
                 className={styles.cancelButton}
                 onClick={() => setShowConfirm(false)}
+                aria-label="Cancel delete group"
               >
                 Cancel
               </button>
@@ -60,6 +64,7 @@ export default function GroupCard({ group, onDelete, onInvite }) {
                   onDelete(group);
                   setShowConfirm(false);
                 }}
+                aria-label="Confirm delete group"
               >
                 Delete
               </button>
