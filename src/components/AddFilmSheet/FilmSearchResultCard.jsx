@@ -16,7 +16,11 @@ export default function FilmSearchResultCard({ movie, onAdd }) {
         <p>{releaseYear}</p>
       </div>
 
-      <button className={styles.addButton} onClick={() => onAdd()}>
+      <button 
+        className={styles.addButton} 
+        onClick={() => onAdd()}
+        aria-label={`Add ${movie.title}`}
+      >
         Add
       </button>
     </div>
