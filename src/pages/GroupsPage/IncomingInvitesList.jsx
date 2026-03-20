@@ -31,12 +31,14 @@ export default function IncomingInvitesList({
               <button
                 className={styles.acceptButton}
                 onClick={() => acceptGroupInvite(uid, groupId)}
+                aria-label="Accept Group Invite"
               >
                 Accept
               </button>
               <button
                 className={styles.rejectButton}
                 onClick={() => rejectGroupInvite(uid, groupId)}
+                aria-label="Reject Group Invite"
               >
                 Reject
               </button>
