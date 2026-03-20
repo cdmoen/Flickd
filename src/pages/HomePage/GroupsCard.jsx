@@ -18,7 +18,11 @@ export default function GroupsCard() {
         </p>
       </div>
 
-      <NavLink to="/groups" className={styles.cardBtn}>
+      <NavLink 
+        to="/groups" 
+        className={styles.cardBtn}
+        aria-label="Add groups"
+      >
         Add Groups
       </NavLink>
     </div>
