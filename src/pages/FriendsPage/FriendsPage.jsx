@@ -75,6 +75,7 @@ export default function FriendsPage() {
                 <button
                   className={styles.rejectButton}
                   onClick={() => deleteFriend(uid, friendUid)}
+                  aria-label={`Remove ${usernames[friendUid] || "friend"}`}
                 >
                   Remove
                 </button>
@@ -91,6 +92,7 @@ export default function FriendsPage() {
           onClick={() => {
             setSearchFormActive(true);
           }}
+          aria-label="Search for users to add as friends"
         >
           Search
         </button>
@@ -112,12 +114,14 @@ export default function FriendsPage() {
                     <button
                       className={styles.acceptButton}
                       onClick={() => acceptFriendRequest(uid, otherUid)}
+                      aria-label={`Accept friend request from ${usernames[otherUid] || 'user'}`}
                     >
                       Accept
                     </button>
                     <button
                       className={styles.rejectButton}
                       onClick={() => rejectFriendRequest(uid, otherUid)}
+                      aria-label={`Reject friend request from ${usernames[otherUid] || 'user'}`}
                     >
                       Reject
                     </button>
@@ -142,6 +146,7 @@ export default function FriendsPage() {
                   <button
                     className={styles.rejectButton}
                     onClick={() => cancelFriendRequest(uid, otherUid)}
+                    aria-label={`Cancel friend request to ${usernames[otherUid] || 'user'}`}
                   >
                     Cancel
                   </button>

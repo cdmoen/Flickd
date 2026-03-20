@@ -68,7 +68,11 @@ export default function SearchUsers({
 
   return (
     <div className={styles.container}>
+      <label htmlFor="search" className={styles.visuallyHidden}>
+        Search for users to add as friends
+      </label>
       <input
+        id="search"
         type="text"
         placeholder="Search username..."
         value={searchFormActive ? term : ""}
@@ -95,6 +99,7 @@ export default function SearchUsers({
                     onClick={() => {
                       onSendRequest(user.uid);
                     }}
+                    aria-label={`Send friend request to ${user.username}`}
                   >
                     Add Friend
                   </button>
