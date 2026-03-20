@@ -55,35 +55,59 @@ export default function RegisterPage() {
       {error && <p className={styles.error}>{error}</p>}
 
       <form className={styles.form} onSubmit={handleSubmit}>
+        <label htmlFor="email" className={styles.visuallyHidden}>
+          Email Address
+        </label>
         <input
+          id="email"
           className={styles.input}
           type="email"
           placeholder="Email"
+          autoComplete="email"
+          required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
+        <label htmlFor="password" className={styles.visuallyHidden}>
+          Password
+        </label>
         <input
+          id="password"
           className={styles.input}
           type="password"
           placeholder="Password"
+          required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
+        <label htmlFor="username" className={styles.visuallyHidden}>
+          Display Name
+        </label>
         <input
+          id="username"
           className={styles.input}
           type="text"
           placeholder="Display Name"
+          autoComplete="username"
+          required
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
 
-          <button className={styles.button} type="submit">
-            Create account
+          <button 
+            className={styles.button} 
+            type="submit"
+          >
+              Create account
           </button>
 
-          <NavLink to="/login" className={styles.loginbutton}>
+          <NavLink 
+            to="/login" 
+            className={styles.loginbutton}
+            aria-label="Go to Login Page"
+          >
             Login
           </NavLink>
       </form>
