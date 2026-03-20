@@ -40,6 +40,7 @@ export default function GroupPage() {
         <button
           className={styles.backButton}
           onClick={() => navigate("/groups")}
+          aria-label="Back to groups list"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <path
@@ -54,7 +55,11 @@ export default function GroupPage() {
 
         <h1>{group.name}</h1>
 
-        <button className={styles.addFilmBtn} onClick={handleAddFilm}>
+        <button 
+          className={styles.addFilmBtn} 
+          onClick={handleAddFilm}
+          aria-label="Add film to group"
+        >
           Add Film
         </button>
       </header>
