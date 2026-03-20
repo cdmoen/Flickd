@@ -52,7 +52,11 @@ export default function MyWatchlist({
     <div className={styles.root} onClick={() => setEditMode(false)}>
       <div className={styles.hero}>
         <div className={styles.topRow}>
-          <button className={styles.back} onClick={onBack}>
+          <button 
+            className={styles.back} 
+            onClick={onBack}
+            aria-label="Back to Home"
+          >
             ← Back
           </button>
           <div className={styles.topRowRight}>
@@ -60,6 +64,7 @@ export default function MyWatchlist({
               <button
                 className={styles.doneBtn}
                 onClick={() => setEditMode(false)}
+                aria-label="Done editing watchlist"
               >
                 Done
               </button>
@@ -67,6 +72,7 @@ export default function MyWatchlist({
             <button
               className={styles.addBtn}
               onClick={() => setAddFilmSheetIsOpen(true)}
+              aria-label="Add film to watchlist"
             >
               + Add Film
             </button>
@@ -108,6 +114,7 @@ export default function MyWatchlist({
               <button
                 className={styles.removeBadge}
                 onClick={(e) => handleRemove(e, film.id)}
+                aria-label={`Remove ${film.title} from watchlist`}
               >
                 ×
               </button>
