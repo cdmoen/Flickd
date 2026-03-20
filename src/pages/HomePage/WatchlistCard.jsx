@@ -17,7 +17,11 @@ export default function WatchlistCard({ onOpen }) {
         </p>
       </div>
 
-      <button className={styles.cardBtn} onClick={onOpen}>
+      <button 
+        className={styles.cardBtn} 
+        onClick={onOpen} 
+        aria-label="View my watchlist"
+      >
         My Watchlist
       </button>
     </div>
