@@ -34,6 +34,7 @@ export default function FriendPickerSheet({
       <div
         className={styles.sheet}
         onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+        aria-label="Invite Friends to Group" 
       >
         <div className={styles.header}>
           <h2>Invite Friends</h2>
@@ -50,6 +51,7 @@ export default function FriendPickerSheet({
               <button
                 className={styles.inviteButton}
                 onClick={() => handleInvite(friend.uid)}
+                aria-label={`Invite ${friend.username} to group ${group.name}`}
               >
                 Invite
               </button>
