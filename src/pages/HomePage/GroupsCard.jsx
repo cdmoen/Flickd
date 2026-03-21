@@ -3,10 +3,10 @@ import styles from "./HomePage.module.css";
 
 export default function GroupsCard() {
   return (
-    <div className={styles.card}>
+    <article className={styles.card}>
       <h2 className={styles.cardTitle}>Groups</h2>
 
-      <div className={styles.cardRow}>
+      <section className={styles.cardRow}>
         <img
           src="/images/roll.png"
           alt="Groups Icon"
@@ -16,7 +16,7 @@ export default function GroupsCard() {
         <p className={styles.cardContent}>
           Create a group to share watchlists.
         </p>
-      </div>
+      </section>
 
       <NavLink 
         to="/groups" 
@@ -25,6 +25,6 @@ export default function GroupsCard() {
       >
         Add Groups
       </NavLink>
-    </div>
+    </article>
   );
 }
