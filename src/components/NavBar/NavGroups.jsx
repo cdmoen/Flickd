@@ -36,7 +36,7 @@ export default function NavGroups() {
           Smaller is icon only, Larger is icon and text */}
       <img
         src="/images/roll.png"
-        alt="Groups Icon"
+        alt="Link to Groups Page"
         title="Groups"
         className={styles.groupsIcon}
       />

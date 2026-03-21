@@ -39,7 +39,7 @@ export default function NavFriends() {
               Smaller is icon only, Larger is icon and text */}
       <img
         src="/images/ticket.png"
-        alt="Friend Icon"
+        alt="Link to Friends Page"
         title="Friends"
         className={styles.friendIcon}
       />

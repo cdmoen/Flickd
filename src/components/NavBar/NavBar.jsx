@@ -32,7 +32,7 @@ export default function NavBar() {
             />
             <img
               src="/images/logo-f-play.png"
-              alt="Logo"
+              alt="Link to Flickd Home"
               title="Flickd Home"
               className={styles.logo}
             />
@@ -54,7 +54,7 @@ export default function NavBar() {
 
           <img
             src="/images/search.png"
-            alt="Search Icon"
+            alt="Link to Movie Search"
             title="Search Movies"
             className={styles.searchIcon}
           />
@@ -69,7 +69,7 @@ export default function NavBar() {
               Smaller is icon only, Larger is icon and text */}
           <img
             src="/images/faces.png"
-            alt="User Account Icon"
+            alt="Link to User Account"
             title="User Account"
             className={styles.accountIcon}
           />
@@ -77,17 +77,18 @@ export default function NavBar() {
         </NavLink>
 
         {/* Theme toggle button with icon that changes based on current theme */}
-        <button className={styles.themeToggle} onClick={toggleTheme}>
+        <button 
+          className={styles.themeToggle} onClick={toggleTheme}>
           {theme === "light" ? 
             <img
               src="/images/moon.png"
-              alt="Dark Theme"
+              alt="Button for Dark Theme"
               title="Switch to Dark Theme"
               className={styles.themeIcon}
             /> : 
             <img
               src="/images/sun.png"
-              alt="Light Theme"
+              alt="Button for Light Theme"
               title="Switch to Light Theme"
               className={styles.themeIcon}
             />}

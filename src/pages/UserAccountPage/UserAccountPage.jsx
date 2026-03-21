@@ -17,7 +17,7 @@ export default function UserAccountPage() {
 
         <div className={styles.profileRow}>
           <section
-            aria-label={"Change account avatar"}
+            aria-label="Change account avatar"
             className={styles.avatarSection}
             onClick={() => setPickerOpen(true)}
           >
@@ -66,7 +66,7 @@ export default function UserAccountPage() {
           )}
 
         <button 
-          aria-label={"Logout of your account"}
+          aria-label="Logout of your account"
           className={styles.logoutBtn} 
           onClick={logout}
         >
