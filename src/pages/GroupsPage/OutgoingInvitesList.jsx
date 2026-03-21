@@ -25,6 +25,7 @@ export default function OutgoingInvitesList({
             <button
               className={styles.rejectButton}
               onClick={() => cancelGroupInvite(uid, groupId, friendUid)}
+              aria-label={`Cancel invite to ${groupName} for ${friends.find((i) => i.uid === friendUid)?.username}`}
             >
               Cancel
             </button>
