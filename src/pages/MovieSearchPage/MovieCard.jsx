@@ -68,6 +68,7 @@ export default function MovieCard({
       <div
         className={styles.posterWrapper}
         onClick={() => handleMovieClick(movieID)}
+        aria-label="View movie details"
       >
         <picture>
           <source media="(min-width: 768px)" srcSet={poster} />
@@ -84,6 +85,7 @@ export default function MovieCard({
           <button
             className={styles.trailerButton}
             onClick={() => onTrailerClick(youtubeCode)}
+            aria-label="Watch trailer"
           >
             ▶ Trailer
           </button>
@@ -94,6 +96,7 @@ export default function MovieCard({
               <button
                 className={styles.watchlistButton}
                 onClick={() => addFilm(filmForWatchlist)}
+                aria-label="Add to watchlist"
               >
                 + Watchlist
               </button>
