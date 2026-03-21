@@ -2,10 +2,10 @@ import styles from "./HomePage.module.css";
 
 export default function WatchlistCard({ onOpen }) {
   return (
-    <div className={styles.card}>
+    <article className={styles.card}>
       <h2 className={styles.cardTitle}>My Watchlist</h2>
 
-      <div className={styles.cardRow}>
+      <section className={styles.cardRow}>
         <img
           src="/images/glasses.png"
           alt="Watchlist Icon"
@@ -15,7 +15,7 @@ export default function WatchlistCard({ onOpen }) {
         <p className={styles.cardContent}>
           The movies you want to watch. Your personal watchlist!
         </p>
-      </div>
+      </section>
 
       <button 
         className={styles.cardBtn} 
@@ -24,6 +24,6 @@ export default function WatchlistCard({ onOpen }) {
       >
         My Watchlist
       </button>
-    </div>
+    </article>
   );
 }
