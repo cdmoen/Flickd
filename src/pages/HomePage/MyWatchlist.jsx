@@ -49,9 +49,9 @@ export default function MyWatchlist({
   }
 
   return (
-    <div className={styles.root} onClick={() => setEditMode(false)}>
-      <div className={styles.hero}>
-        <div className={styles.topRow}>
+    <main className={styles.root} onClick={() => setEditMode(false)}>
+      <section className={styles.hero}>
+        <nav className={styles.topRow}>
           <button 
             className={styles.back} 
             onClick={onBack}
@@ -59,7 +59,7 @@ export default function MyWatchlist({
           >
             ← Back
           </button>
-          <div className={styles.topRowRight}>
+          <section className={styles.topRowRight}>
             {editMode && (
               <button
                 className={styles.doneBtn}
@@ -76,9 +76,9 @@ export default function MyWatchlist({
             >
               + Add Film
             </button>
-          </div>
-        </div>
-        <div className={styles.heading}>
+          </section>
+        </nav>
+        <header className={styles.heading}>
           <p className={styles.eyebrow}>Your collection</p>
           <h1 className={styles.title}>
             My <span>Watchlist</span>
@@ -86,24 +86,25 @@ export default function MyWatchlist({
           <p className={styles.meta}>
             {watchlist.length} film{watchlist.length !== 1 ? "s" : ""}
           </p>
-        </div>
-      </div>
+        </header>
+      </section>
+      
       <AddFilmSheet
         isOpen={addFilmSheetIsOpen}
         onClose={() => setAddFilmSheetIsOpen(false)}
         onAdd={(movie) => handleAddFilm(movie)}
       />
       {watchlist.length === 0 ? (
-        <div className={styles.empty}>
+        <section className={styles.empty}>
           <p className={styles.emptyText}>Nothing here yet.</p>
           <p className={styles.emptySub}>
             Add a film to start your collection.
           </p>
-        </div>
+        </section>
       ) : (
-        <div className={styles.grid}>
+        <article className={styles.grid}>
           {watchlist.map((film, index) => (
-            <div
+            <section
               key={film.id}
               className={`${styles.card} ${editMode ? styles.cardEditMode : ""}`}
               style={{ animationDelay: `${index * 0.04}s` }}
@@ -123,14 +124,14 @@ export default function MyWatchlist({
                 alt={film.title}
                 className={styles.poster}
               />
-              <div className={styles.overlay}>
+              <section className={styles.overlay}>
                 <p className={styles.cardTitle}>{film.title}</p>
                 <p className={styles.cardYear}>{film.releaseDate}</p>
-              </div>
-            </div>
+              </section>
+            </section>
           ))}
-        </div>
+        </article>
       )}
-    </div>
+    </main>
   );
 }
