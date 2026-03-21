@@ -59,8 +59,8 @@ export default function FriendsPage() {
   }, [uid]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.section}>
+    <main className={styles.container}>
+      <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Your Friends</h2>
 
         {Object.keys(friends).length === 0 ? (
@@ -83,9 +83,9 @@ export default function FriendsPage() {
             ))}
           </ul>
         )}
-      </div>
+      </section>
 
-      <div className={styles.searchSection}>
+      <section className={styles.searchSection}>
         <h2 className={styles.sectionTitle}>Find a Friend</h2>
         <button
           className={styles.rejectButton}
@@ -96,10 +96,10 @@ export default function FriendsPage() {
         >
           Search
         </button>
-      </div>
+      </section>
 
-      <div className={styles.topRow}>
-        <div className={styles.section}>
+      <article className={styles.topRow}>
+        <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Incoming Requests</h2>
           {Object.keys(incoming).length === 0 ? (
             <p className={styles.empty}>No incoming requests.</p>
@@ -110,7 +110,7 @@ export default function FriendsPage() {
                   <span className={styles.username}>
                     {usernames[otherUid] || "Loading..."}
                   </span>
-                  <div className={styles.buttonRow}>
+                  <section className={styles.buttonRow}>
                     <button
                       className={styles.acceptButton}
                       onClick={() => acceptFriendRequest(uid, otherUid)}
@@ -125,14 +125,14 @@ export default function FriendsPage() {
                     >
                       Reject
                     </button>
-                  </div>
+                  </section>
                 </li>
               ))}
             </ul>
           )}
-        </div>
+        </section>
 
-        <div className={styles.section}>
+        <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Outgoing Requests</h2>
           {Object.keys(outgoing).length === 0 ? (
             <p className={styles.empty}>No outgoing requests.</p>
@@ -154,15 +154,16 @@ export default function FriendsPage() {
               ))}
             </ul>
           )}
-        </div>
-      </div>
+        </section>
+      </article>
+
       {searchFormActive &&
         createPortal(
-          <div
+          <article
             className={styles.modalBackdrop}
             onClick={() => setSearchFormActive(false)}
           >
-            <div
+            <section
               className={styles.modalSheet}
               onClick={(e) => e.stopPropagation()}
             >
@@ -175,10 +176,10 @@ export default function FriendsPage() {
                 outgoing={outgoing}
                 onSendRequest={(otherUid) => sendFriendRequest(uid, otherUid)}
               />
-            </div>
-          </div>,
+            </section>
+          </article>,
           document.body,
         )}
-    </div>
+    </main>
   );
 }
