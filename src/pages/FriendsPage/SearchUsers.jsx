@@ -67,7 +67,7 @@ export default function SearchUsers({
   }
 
   return (
-    <div className={styles.container}>
+    <article className={styles.container}>
       <label htmlFor="search" className={styles.visuallyHidden}>
         Search for users to add as friends
       </label>
@@ -81,12 +81,12 @@ export default function SearchUsers({
       />
 
       {searchFormActive && (
-        <div className={styles.results}>
+        <section className={styles.results}>
           {results.map((user) => {
             const status = getStatus(user.uid);
 
             return (
-              <div key={user.uid} className={styles.resultRow}>
+              <section key={user.uid} className={styles.resultRow}>
                 <span className={styles.username}>{user.username}</span>
 
                 <span className={`${styles.status} ${status.className}`}>
@@ -104,11 +104,11 @@ export default function SearchUsers({
                     Add Friend
                   </button>
                 )}
-              </div>
+              </section>
             );
           })}
-        </div>
+        </section>
       )}
-    </div>
+    </article>
   );
 }
