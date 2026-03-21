@@ -62,16 +62,23 @@ export default function MovieSearchPage() {
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
+          <label htmlFor="search" className={styles.visuallyHidden}>
+            Search Movies
+          </label>
           <input
+            id="search"
             className={styles.input}
             type="text"
             placeholder="Search"
-            aria-label="Search movies"
             value={searchParams}
             onChange={(e) => setSearchParams(e.target.value)}
             required
           />
-          <button className={styles.button} type="submit">
+          <button 
+            className={styles.button} 
+            type="submit"
+            aria-label="Search movies"
+          >
             Search
           </button>
         </form>
