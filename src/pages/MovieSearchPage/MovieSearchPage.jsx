@@ -110,10 +110,12 @@ export default function MovieSearchPage() {
           <div
             className={styles.trailerModalBackdrop}
             onClick={() => setActiveTrailer(null)}
+            aria-label="Close trailer modal"
           >
             <div
               className={styles.trailerModal}
               onClick={(e) => e.stopPropagation()}
+              aria-label="Movie trailer"
             >
               <iframe
                 src={`https://www.youtube.com/embed/${activeTrailer}?autoplay=1`}
