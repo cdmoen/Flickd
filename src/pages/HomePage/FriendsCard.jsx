@@ -3,10 +3,10 @@ import styles from "./HomePage.module.css";
 
 export default function FriendsCard() {
   return (
-    <div className={styles.card}>
+    <article className={styles.card}>
       <h2 className={styles.cardTitle}>Friends</h2>
 
-      <div className={styles.cardRow}>
+      <section className={styles.cardRow}>
         <img
           src="/images/ticket.png"
           alt="Friends Icon"
@@ -16,7 +16,7 @@ export default function FriendsCard() {
         <p className={styles.cardContent}>
           Add friends to share your group watchlists.
         </p>
-      </div>
+      </section>
 
       <NavLink 
         to="/friends" 
@@ -25,6 +25,6 @@ export default function FriendsCard() {
       >
         Add Friends
       </NavLink>
-    </div>
+    </article>
   );
 }
