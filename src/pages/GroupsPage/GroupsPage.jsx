@@ -86,13 +86,13 @@ export default function GroupsPage() {
         </header>
 
         {showForm && (
-          <div className={styles.formWrapper}>
+          <section className={styles.formWrapper}>
             <CreateGroup />
-          </div>
+          </section>
         )}
       </section>
 
-      <section className={styles.section}>
+      <article className={styles.section}>
         <h2 className={styles.sectionTitle}>Your Groups</h2>
         <UserGroupsList
           loading={loading}
@@ -100,10 +100,10 @@ export default function GroupsPage() {
           onDelete={handleDelete}
           onInvite={handleInvite}
         />
-      </section>
+      </article>
 
-      <div className={styles.topRow}>
-        <div className={styles.section}>
+      <article className={styles.topRow}>
+        <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Group Invites</h2>
           <IncomingInvitesList
             incomingInvites={incomingInvites}
@@ -113,9 +113,9 @@ export default function GroupsPage() {
             acceptGroupInvite={acceptGroupInvite}
             rejectGroupInvite={rejectGroupInvite}
           />
-        </div>
+        </section>
 
-        <div className={styles.section}>
+        <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Pending Invitations</h2>
           <OutgoingInvitesList
             outgoingInvites={outgoingInvites}
@@ -124,8 +124,8 @@ export default function GroupsPage() {
             uid={uid}
             cancelGroupInvite={cancelGroupInvite}
           />
-        </div>
-      </div>
+        </section>
+      </article>
 
       <FriendPickerSheet
         isOpen={isPickerOpen}
