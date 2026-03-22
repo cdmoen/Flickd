@@ -73,8 +73,8 @@ export default function GroupsPage() {
 
   return (
     <main className={styles.container}>
-      <div className={styles.section}>
-        <div className={styles.sectionHeader}>
+      <section className={styles.section}>
+        <header className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>Create a Group</h2>
           <button
             onClick={() => setShowForm((prev) => !prev)}
@@ -83,16 +83,16 @@ export default function GroupsPage() {
           >
             {showForm ? "Cancel" : "Create a New Group"}
           </button>
-        </div>
+        </header>
 
         {showForm && (
           <div className={styles.formWrapper}>
             <CreateGroup />
           </div>
         )}
-      </div>
+      </section>
 
-      <div className={styles.section}>
+      <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Your Groups</h2>
         <UserGroupsList
           loading={loading}
@@ -100,7 +100,7 @@ export default function GroupsPage() {
           onDelete={handleDelete}
           onInvite={handleInvite}
         />
-      </div>
+      </section>
 
       <div className={styles.topRow}>
         <div className={styles.section}>
