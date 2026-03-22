@@ -7,8 +7,8 @@ export default function GroupCard({ group, onDelete, onInvite }) {
   const [showConfirm, setShowConfirm] = useState(false);
 
   return (
-    <main className={styles.card}>
-      <div className={styles.header}>
+    <article className={styles.card}>
+      <section className={styles.header}>
         <button
           className={styles.nameButton}
           onClick={() => navigate(`/groups/${group.id}`)}
@@ -18,7 +18,7 @@ export default function GroupCard({ group, onDelete, onInvite }) {
           <span className={styles.arrow}>{" →"}</span>
         </button>
 
-        <div className={styles.actions}>
+        <section className={styles.actions}>
           <button
             className={styles.inviteButton}
             onClick={() => onInvite(group)}
@@ -34,12 +34,12 @@ export default function GroupCard({ group, onDelete, onInvite }) {
           >
             Delete Group
           </button>
-        </div>
-      </div>
+        </section>
+      </section>
 
-      <div className={styles.meta}>
+      <section className={styles.meta}>
         <span>Created: {new Date(group.createdAt).toLocaleString()}</span>
-      </div>
+      </section>
 
       {showConfirm && (
         <div className={styles.backdrop}>
@@ -72,6 +72,6 @@ export default function GroupCard({ group, onDelete, onInvite }) {
           </div>
         </div>
       )}
-    </main>
+    </article>
   );
 }
