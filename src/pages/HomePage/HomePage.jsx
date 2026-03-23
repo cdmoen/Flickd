@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import MyWatchlist from "./MyWatchlist";
 import FriendsCard from "./FriendsCard";
@@ -9,29 +9,49 @@ import styles from "./HomePage.module.css";
 
 export default function HomePage() {
   const { user, loading } = useAuth();
-  const [showWatchlist, setShowWatchlist] = useState(false);
   const { watchlist, addFilm, removeFilm } = useWatchlist(user?.uid);
+  const [showCards, setShowCards] = useState(true);
+  const watchlistRef = useRef(null);
+  const topRef = useRef(null);
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
 
+  function handleOpenWatchlist() {
+    setShowCards(false);
+    setTimeout(() => {
+      watchlistRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  }
+
+  function handleBack() {
+    setShowCards(true);
+    setTimeout(() => {
+      topRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  }
+
   return (
     <main className={styles.container}>
-      {!showWatchlist && (
+
+      <div ref={topRef} />
+
+      {showCards && (
         <div className={styles.cardGrid}>
-          <WatchlistCard onOpen={() => setShowWatchlist(true)} />
+          <WatchlistCard onOpen={handleOpenWatchlist} />
           <FriendsCard />
           <GroupsCard />
         </div>
       )}
 
-      {showWatchlist && (
+      <div ref={watchlistRef}>
         <MyWatchlist
           watchlist={watchlist}
           addFilm={addFilm}
           removeFilm={removeFilm}
-          onBack={() => setShowWatchlist(false)}
+          onBack={handleBack}
         />
-      )}
+      </div>
+
     </main>
   );
 }

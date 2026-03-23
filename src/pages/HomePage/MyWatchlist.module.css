@@ -8,10 +8,13 @@
 }
 
 .root {
-  background: #0f1923;
+  background: var(--color-card-bg);
   min-height: 100vh;
   font-family: "Open Sans", sans-serif;
   color: #e8e4dc;
+  margin-top: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
   animation: fadeIn 0.6s ease both;
 }
 
@@ -93,7 +96,10 @@
 }
 
 .title span {
-  color: #e07b2a;
+  background: linear-gradient(180deg, #d97721, #9e4738);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .meta {

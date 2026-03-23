@@ -13,7 +13,7 @@ export default function WatchlistCard({ onOpen }) {
           className={styles.cardIcon}
         />
         <p className={styles.cardContent}>
-          The movies you want to watch. Your personal watchlist!
+          Your personal watchlist!
         </p>
       </section>
 

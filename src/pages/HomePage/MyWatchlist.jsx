@@ -1,14 +1,9 @@
 import { useState, useRef } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AddFilmSheet from "../../components/AddFilmSheet/AddFilmSheet";
 import styles from "./MyWatchlist.module.css";
 
-export default function MyWatchlist({
-  watchlist,
-  addFilm,
-  removeFilm,
-  onBack,
-}) {
+export default function MyWatchlist({ watchlist, addFilm, removeFilm, onBack }) {
   const [addFilmSheetIsOpen, setAddFilmSheetIsOpen] = useState(false);
   const navigate = useNavigate();
   const [editMode, setEditMode] = useState(false);
@@ -48,13 +43,20 @@ export default function MyWatchlist({
     setAddFilmSheetIsOpen(false);
   }
 
+  function handleBack() {
+    onBack();
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100);
+  }
+
   return (
     <main className={styles.root} onClick={() => setEditMode(false)}>
       <section className={styles.hero}>
         <nav className={styles.topRow}>
-          <button 
-            className={styles.back} 
-            onClick={onBack}
+          <button
+            className={styles.back}
+            onClick={handleBack}
             aria-label="Back to Home"
           >
             ← Back
@@ -88,12 +90,13 @@ export default function MyWatchlist({
           </p>
         </header>
       </section>
-      
+
       <AddFilmSheet
         isOpen={addFilmSheetIsOpen}
         onClose={() => setAddFilmSheetIsOpen(false)}
         onAdd={(movie) => handleAddFilm(movie)}
       />
+
       {watchlist.length === 0 ? (
         <section className={styles.empty}>
           <p className={styles.emptyText}>Nothing here yet.</p>
