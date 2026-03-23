@@ -2,7 +2,9 @@
 
 Flickd is a social movie discovery web app built with React, Firebase, and the TMDB API.Users can search for films, view detailed movie information, manage a personal watchlist, and connect with friends to share recommendations.The app includes a secure TMDB proxy, real‑time social features, and a clean, responsive UI with theme switching.
 
-# Features
+---
+
+# FEATURES
 
 ## Authentication
 
@@ -70,6 +72,8 @@ Comments with timestamps
 
 Bottom‑sheet modals for comments, ratings, and seen status
 
+---
+
 # UI / UX
 
 Responsive layout
@@ -82,7 +86,9 @@ Smooth animations for cards, modals, and transitions
 
 React Portals for modals
 
-# Tech Stack
+---
+
+# TECH STACK
 
 ## Frontend
 
@@ -104,6 +110,8 @@ Vercel Serverless Functions
 
 TMDB API (proxied through Vercel)
 
+---
+
 # APIs
 
 /api/tmdb — secure proxy to TMDB
@@ -113,169 +121,64 @@ Prevents exposing API keys
 Accepts a path query parameter
 
 Example:
-
 /api/tmdb?path=/movie/550
 
-# Project Setup
+---
+
+# PROJECT SETUP
 
 1. Clone the repository
 
-git clone https://github.com/yourusername/flickd.git
-cd flickd
+`git clone https://github.com/cdmoen/Flickd.git`
 
-2. Install dependencies
+2. Navigate to the project directory
 
-npm install
+`cd Flickd`
 
-3. Environment variables
+3. Install dependencies
 
-Create a .env file with:
+`npm install`
 
-VITE_FIREBASE_API_KEY=...
-VITE_FIREBASE_AUTH_DOMAIN=...
-VITE_FIREBASE_DATABASE_URL=...
-VITE_FIREBASE_PROJECT_ID=...
-VITE_FIREBASE_STORAGE_BUCKET=...
-VITE_FIREBASE_MESSAGING_SENDER_ID=...
-VITE_FIREBASE_APP_ID=...
+4. Enable TMDB Fetches Locally
+   1. Navigate to src/modules/fetchers.js
+   2. Comment out lines 102-127 (production fetchers)
+   3. Uncomment lines 135-171 (fetchers for local development)
+   4. Add your own TMDB Auth Token in line 135
 
-No TMDB key is needed on the client — it is handled by the Vercel backend.
+5. Run the development server
 
-4. Run the development server
+`npm run dev`
 
-npm run dev
+---
 
-5. Deployment
+# KNOWN LIMITATIONS
 
-Frontend can be deployed to Vercel or Netlify
-
-Serverless TMDB proxy runs automatically on Vercel under /api/tmdb
-
-📡 API Documentation
-
-GET /api/tmdb
-
-A serverless proxy to TMDB’s API.
-
-Query Parameters
-
-Name
-
-Description
-
-path
-
-The TMDB API path (e.g., /movie/550)
-
-Example
-
-/api/tmdb?path=/search/movie&query=blade+runner
-
-Notes
-
-Automatically attaches the TMDB Bearer token server‑side
-
-Prevents exposing API keys in the client bundle
-
-Subject to TMDB rate limits
-
-Folder Structure (with explanations)
-
-src/
-├── components/ # Reusable UI components shared across pages
-│ ├── AddFilmSheet/ # Bottom-sheet UI for adding films to groups
-│ ├── Layout/ # Global layout wrapper (header, spacing, theming)
-│ └── NavBar/ # Top navigation bar (links, theme toggle, auth)
-│
-├── contexts/ # React Context providers (AuthContext, ThemeContext)
-│
-├── database node references/ # Reference-only folder documenting Firebase paths
-│ ├── friends/ # Structure of friend-related database nodes
-│ └── users/ # Structure of user-related database nodes
-│
-├── hooks/ # Custom hooks for modular logic (watchlist, groups, auth)
-│
-├── modules/ # Business logic separated by domain
-│ ├── friends/ # sendFriendRequest, acceptFriendRequest, etc.
-│ ├── groups/ # group creation, film management, comments, ratings
-│ └── users/ # username lookups, user helpers
-│
-├── pages/ # Route-level pages (each page = one screen)
-│ ├── AboutPage/ # Static about page
-│ ├── FriendsPage/ # Friend list + incoming/outgoing requests
-│ ├── GroupPage/ # Individual group with shared film list
-│ ├── GroupsPage/ # List of groups the user belongs to
-│ ├── HomePage/ # Landing page
-│ ├── LoginPage/ # Authentication
-│ ├── MoviePage/ # Movie detail page (trailer, cast, director)
-│ ├── MovieSearchPage/ # Search UI for movies
-│ ├── RegisterPage/ # Account creation
-│ └── UserAccountPage/ # User settings (theme, logout)
-│
-└── routes/ # Route guards and wrappers
-├── AuthRedirect/ # Redirects logged-in users away from login/register
-└── ProtectedRoute/ # Blocks access to pages unless authenticated
-
-Architecture Diagram
-
-                   ┌──────────────────────────────┐
-                   │            Pages              │
-                   │  (UI Screens / Route Views)   │
-                   └───────────────┬──────────────┘
-                                   │
-                                   ▼
-                   ┌──────────────────────────────┐
-                   │            Hooks              │
-                   │  (useWatchlist, useGroups,   │
-                   │   useAuth, useUsernames...)  │
-                   └───────────────┬──────────────┘
-                                   │
-                                   ▼
-                   ┌──────────────────────────────┐
-                   │           Modules             │
-                   │  (friends/, groups/, users/)  │
-                   │  Pure functions for business  │
-                   │  logic: addFilm, sendRequest, │
-                   │  getUsername, etc.            │
-                   └───────────────┬──────────────┘
-                                   │
-                                   ▼
-                   ┌──────────────────────────────┐
-                   │      Firebase Realtime DB     │
-                   │  (data storage + listeners)   │
-                   └──────────────────────────────┘
-
-Known Limitations / Bugs
-
-🔸 TMDB Rate Limits
+## TMDB Rate Limits
 
 Heavy searching may temporarily block requests.
 
-🔸 Groups
+## Groups
 
 Users can create or delete groups, but cannot leave a group they didn’t create.
 
-🔸 Search / Navigation
+## Search / Navigation
 
 Going “Back” after viewing a movie page clears the previous search results.
-
 No sorting or filtering options for movie lists or search results.
 
-🔸 Firebase Rules
+## Firebase Rules
 
-Realtime Database security rules are not fully locked down yet.
+Realtime Database security rules are not fully secure for real-world deployment.
 
-🔸 UI / UX
-
-Some modals and animations need refinement
+## UI / UX
 
 No user profile pages yet
 
-Future Improvements
+---
+
+# FUTURE IMPROVEMENTS
 
 Add sorting/filtering for search and watchlist
-
-Add pagination or infinite scroll
 
 Add user profile pages
 
@@ -283,8 +186,4 @@ Improve database security rules
 
 Add ability to leave groups
 
-Add caching for TMDB responses
-
 Add search history or recent searches
-
-Improve mobile layout and animations

@@ -1,8 +1,8 @@
 /*
 
-    ===========================
-              NOTES
-    ===========================
+      ===========================
+                NOTES
+      ===========================
 
 How API Requests Work in This Project
 All network requests to The Movie Database (TMDB) are routed through Vercel Serverless Functions located in the /api directory. 
@@ -24,12 +24,17 @@ variables (those are not stored in the github repository - only on the Vercel we
 3. Receives the JSON response from TMDB and forwards it to the frontend
 
 This lets the website fetch TMDB data securely without ever exposing the API key to the frontend.
-*/
 
-/*
-==============================
-    FETCH MOVIE SEARCH
-==============================
+
+
+
+
+      ==============================
+          FETCHER DESCRIPTIONS
+      ==============================
+
+
+    _______fetchMovieSearch()_______
 
 This fetcher takes in a movie string param and returns a list of TMDB movies with the following info for each:
 
@@ -50,28 +55,9 @@ This fetcher takes in a movie string param and returns a list of TMDB movies wit
       "vote_average": 8.433,
       "vote_count": 26279
     },
- */
 
-export async function fetchMovieSearch(searchParams) {
-  // Build the URL for your Vercel API route
-  const url = `/api/tmdb?path=search/movie&query=${encodeURIComponent(
-    searchParams,
-  )}&include_adult=false&language=en-US&page=1`;
 
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error("fetchMovieSearch failed");
-  }
-
-  console.log("fetchMovieSearch successful");
-  return await response.json();
-}
-
-/*
-==============================
-    FETCH MOVIE DETAILS
-==============================
+    _______fetchMovieDetails()_______
 
 This fetcher takes in a single TMDB movieID and returns the following movie object:
 
@@ -107,6 +93,27 @@ This fetcher takes in a single TMDB movieID and returns the following movie obje
 }
 */
 
+/*
+==============================
+  FETCHERS for PRODUCTION
+==============================
+*/
+
+export async function fetchMovieSearch(searchParams) {
+  const url = `/api/tmdb?path=search/movie&query=${encodeURIComponent(
+    searchParams,
+  )}&include_adult=false&language=en-US&page=1`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error("fetchMovieSearch failed");
+  }
+
+  console.log("fetchMovieSearch successful");
+  return await response.json();
+}
+
 export async function fetchMovieDetails(movieID) {
   const response = await fetch(
     `/api/tmdb?path=movie/${movieID}&append_to_response=credits,videos,images&language=en-US`,
@@ -123,11 +130,6 @@ export async function fetchMovieDetails(movieID) {
 ==================================
   FETCHERS for LOCAL DEVELOPMENT
 ==================================
-
-To test this website's functionality on your local host,
-comment out the above fetchers and uncomment the below fetchers.
-You will need to insert your own TMDB Auth Token where indicated.
-
 */
 
 // const AUTH_TOKEN = "insert your TMDB token here";
