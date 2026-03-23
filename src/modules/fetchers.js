@@ -1,5 +1,9 @@
 /*
 
+    ===========================
+              NOTES
+    ===========================
+
 How API Requests Work in This Project
 All network requests to The Movie Database (TMDB) are routed through Vercel Serverless Functions located in the /api directory. 
 These files run on the server, not in the browser, which keeps the TMDB API key private.
@@ -15,14 +19,14 @@ That backend function then does the following:
 1.  Reads the secret TMDB key from the Vercel project's environment 
 variables (those are not stored in the github repository - only on the Vercel website)
 
-2. Forwards the request to the real TMDB API
+2. Parses the query parameters and sends a new request to the TMDB API
 
-3. Returns the JSON response back to the frontend
+3. Receives the JSON response from TMDB and forwards it to the frontend
 
-This lets the frontend fetch TMDB data securely without ever exposing the API key to the frontend.
+This lets the website fetch TMDB data securely without ever exposing the API key to the frontend.
+*/
 
-
-
+/*
 ==============================
     FETCH MOVIE SEARCH
 ==============================
@@ -114,3 +118,52 @@ export async function fetchMovieDetails(movieID) {
   const movieInfo = await response.json();
   return movieInfo;
 }
+
+/* 
+==================================
+  FETCHERS for LOCAL DEVELOPMENT
+==================================
+
+To test this website's functionality on your local host,
+comment out the above fetchers and uncomment the below fetchers.
+You will need to insert your own TMDB Auth Token where indicated.
+
+*/
+
+// const AUTH_TOKEN = "insert your TMDB token here";
+
+// export async function fetchMovieSearch(searchParams) {
+//   const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(searchParams)}&include_adult=false&language=en-US&page=1`;
+//   const response = await fetch(url, {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${AUTH_TOKEN}`,
+//     },
+//   });
+
+//   if (!response.ok) {
+//     console.log(response.statusText);
+
+//     throw new Error("fetchMovieSearch failed");
+//   }
+
+//   return await response.json();
+// }
+
+// export async function fetchMovieDetails(movieId) {
+//   const url = `https://api.themoviedb.org/3/movie/${movieId}?append_to_response=credits,recommendations,videos,images&language=en-US`;
+//   const response = await fetch(url, {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${AUTH_TOKEN}`,
+//     },
+//   });
+
+//   if (!response.ok) {
+//     throw new Error("fetchMovieDetails failed");
+//   }
+
+//   return await response.json();
+// }
