@@ -56,10 +56,10 @@ export default function MovieSearchPage() {
 
   return (
     <main className={styles.container}>
-      <div className={styles.section}>
-        <div className={styles.sectionHeader}>
+      <article className={styles.section}>
+        <header className={styles.sectionHeader}>
           <h2 className={styles.title}>Search Movies</h2>
-        </div>
+        </header>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <label htmlFor="search" className={styles.visuallyHidden}>
@@ -82,7 +82,7 @@ export default function MovieSearchPage() {
             Search
           </button>
         </form>
-      </div>
+      </article>
 
       {searchResults && (
         <>
