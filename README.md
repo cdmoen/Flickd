@@ -151,42 +151,6 @@ Example:
 
 ---
 
-# FOLDER STRUCTURE
-
-**src/**
-├── **components/** # Reusable UI components shared across pages
-│ ├── AddFilmSheet/ # Bottom-sheet UI for adding films to groups
-│ ├── Layout/ # Global layout wrapper (header, spacing, theming)
-│ └── NavBar/ # Top navigation bar (links, theme toggle, auth)
-│
-├── **contexts/** # React Context providers (AuthContext, ThemeContext)
-|
-|
-├── **hooks/** # Realtime tracking hooks for Firebase realtime database
-│
-├── **modules/**
-│ ├── friends/ # sendFriendRequest, acceptFriendRequest, etc.
-│ ├── groups/ # createGroup, addFilmToGroup, etc.
-│ └── users/ # user profile creation, username reservation, etc.
-│
-├── **pages/**
-│ ├── AboutPage/ # Static about page
-│ ├── FriendsPage/ # Friend list + incoming/outgoing requests
-│ ├── GroupPage/ # Individual group with shared film list
-│ ├── GroupsPage/ # List of groups the user belongs to
-│ ├── HomePage/ # Landing page
-│ ├── LoginPage/ # Authentication
-│ ├── MoviePage/ # Movie detail page (trailer, cast, director)
-│ ├── MovieSearchPage/ # Search for movies
-│ ├── RegisterPage/ # Account creation
-│ └── UserAccountPage/ # User settings (avatar, logout)
-│
-└── **routes/**
-├── AuthRedirect/ # Redirects logged-in users away from login/register
-└── ProtectedRoute/ # Blocks access to pages unless authenticated
-
----
-
 # KNOWN LIMITATIONS
 
 ## TMDB Rate Limits
