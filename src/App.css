@@ -1,0 +1,21 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layoutContent {
+  flex: 1;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+}

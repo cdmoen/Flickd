@@ -1,0 +1,41 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  margin-top: auto;
+  background: var(--color-card-bg);
+  border-top: 1px solid var(--color-border);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.link {
+  background: linear-gradient(180deg, #d97721, #9e4738);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.link:hover {
+  opacity: 0.75;
+}
+
+.copyright {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+@media screen and (max-width: 320px) {
+  .footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 1rem;
+  }
+}
