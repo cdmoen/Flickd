@@ -60,7 +60,7 @@ export default function MoviePage() {
   };
 
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
       {/* hero */}
       <div className={styles.hero}>
         <img src={backdrop} alt={movie.title} className={styles.backdrop} />
@@ -151,6 +151,6 @@ export default function MoviePage() {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }
