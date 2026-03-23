@@ -130,19 +130,22 @@ Example:
 1. Clone the repository
 
 `git clone https://github.com/cdmoen/Flickd.git`
-`cd flickd`
 
-2. Install dependencies
+2. Navigate to the project directory
+
+`cd FLICKD`
+
+3. Install dependencies
 
 `npm install`
 
-3. Enable TMDB Fetches Locally
+4. Enable TMDB Fetches Locally
    1. Navigate to src/modules/fetchers.js
    2. Comment out lines 102-127 (production fetchers)
    3. Uncomment lines 135-171 (fetchers for local development)
    4. Add your own TMDB Auth Token in line 135
 
-4. Run the development server
+5. Run the development server
 
 `npm run dev`
 
