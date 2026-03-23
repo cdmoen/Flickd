@@ -30,23 +30,23 @@ export default function FriendPickerSheet({
   );
 
   return createPortal(
-    <div className={styles.backdrop} onClick={onClose}>
-      <div
+    <article className={styles.backdrop} onClick={onClose}>
+      <section
         className={styles.sheet}
         onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
         aria-label="Invite Friends to Group" 
       >
-        <div className={styles.header}>
+        <header className={styles.header}>
           <h2>Invite Friends</h2>
-        </div>
+        </header>
 
-        <div className={styles.list}>
+        <section className={styles.list}>
           {filteredFriends.length === 0 && (
             <p className={styles.empty}>You have no friends to invite.</p>
           )}
 
           {friendsMinusGroupOwner.map((friend) => (
-            <div key={friend.uid} className={styles.friendRow}>
+            <section key={friend.uid} className={styles.friendRow}>
               <span className={styles.friendName}>{friend.username}</span>
               <button
                 className={styles.inviteButton}
@@ -55,11 +55,11 @@ export default function FriendPickerSheet({
               >
                 Invite
               </button>
-            </div>
+            </section>
           ))}
-        </div>
-      </div>
-    </div>,
+        </section>
+      </section>
+    </article>,
     document.body,
   );
 }
