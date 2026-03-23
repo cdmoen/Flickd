@@ -16,6 +16,7 @@ body {
   /* text */
   --color-text-primary: #222;
   --color-text-muted: #888;
+  --color-heading: #555555;
 
   /* amber */
   --color-amber: #D97721;
@@ -49,6 +50,7 @@ body {
   --color-border: #2A3A55;
   --color-text-primary: #F0F4FF;
   --color-text-muted: #6B7A99;
+  --color-heading: #ffffff;
   --color-amber: #F0A23C;
   --color-amber-hover: #D97721;
   --color-amber-soft-bg: #2A2010;
