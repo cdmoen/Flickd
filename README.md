@@ -133,7 +133,7 @@ Example:
 
 2. Navigate to the project directory
 
-`cd FLICKD`
+`cd Flickd`
 
 3. Install dependencies
 
