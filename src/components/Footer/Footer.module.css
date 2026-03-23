@@ -11,7 +11,10 @@
 }
 
 .link {
-  color: var(--color-amber);
+  background: linear-gradient(180deg, #d97721, #9e4738);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;

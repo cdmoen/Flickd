@@ -18,9 +18,14 @@ export default function HomePage() {
 
   function handleOpenWatchlist() {
     setShowCards(false);
-    setTimeout(() => {
-      watchlistRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+  setTimeout(() => {
+    const el = watchlistRef.current;
+    if (el) {
+      const navbarHeight = 80; 
+      const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }, 100);
   }
 
   function handleBack() {
