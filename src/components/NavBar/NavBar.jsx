@@ -46,11 +46,8 @@ export default function NavBar() {
             className={styles.searchIcon}
           />
           <span className={styles.linkText}>Search</span>
-        </NavLink>
 
-        {/* Right-side items pushed to the end */}
-        <div className={styles.navRight}>
-          <NavLink to="/account" className={styles.link}>
+                    <NavLink to="/account" className={styles.link}>
             <img
               src="/images/faces.png"
               alt="Link to User Account"
@@ -77,7 +74,11 @@ export default function NavBar() {
               />
             )}
           </button>
+          
+        </NavLink>
 
+        {/* Right-side items pushed to the end */}
+        <div className={styles.navRight}>
           <span className={styles.loginStatus}>
             Welcome, {profile?.username}!
           </span>
