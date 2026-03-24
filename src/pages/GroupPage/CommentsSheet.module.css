@@ -12,14 +12,14 @@
   width: 100%;
   max-width: 600px;
   max-height: 75vh;
-  background: #0f1923;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   padding: 12px 20px 24px;
   display: flex;
   flex-direction: column;
-  color: #e8e4dc;
+  color: var(--color-text-primary);
   font-family: "Open Sans", sans-serif;
   animation: slideUp 0.25s ease-out;
 }
@@ -40,7 +40,7 @@
 .handle {
   width: 36px;
   height: 4px;
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--color-border);
   border-radius: 2px;
   margin: 0 auto 20px;
   flex-shrink: 0;
@@ -57,7 +57,7 @@
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #e07b2a;
+  color: var(--color-amber);
   font-weight: 500;
   margin: 0 0 6px;
 }
@@ -71,8 +71,8 @@
 
 .backBtn {
   background: none;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
   font-family: "Open Sans", sans-serif;
   font-size: 11px;
   font-weight: 600;
@@ -81,23 +81,21 @@
   padding: 6px 12px;
   border-radius: 3px;
   cursor: pointer;
-  transition:
-    border-color 0.2s,
-    color 0.2s;
+  transition: border-color 0.2s, color 0.2s;
   -webkit-tap-highlight-color: transparent;
   white-space: nowrap;
 }
 
 .backBtn:hover {
-  border-color: #e07b2a;
-  color: #e07b2a;
+  border-color: var(--color-amber);
+  color: var(--color-amber);
 }
 
 .title {
   font-family: "Rajdhani", sans-serif;
   font-size: 28px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-primary);
   letter-spacing: 0.02em;
   line-height: 1;
   margin: 0;
@@ -123,7 +121,7 @@
   background: transparent;
 }
 .list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-border);
   border-radius: 2px;
 }
 
@@ -131,7 +129,7 @@
 
 .empty {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--color-text-muted);
   font-weight: 300;
   font-style: italic;
   margin: 0;
@@ -147,10 +145,10 @@
 
 .input {
   flex: 1;
-  background: #1a2535;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
-  color: #e8e4dc;
+  color: var(--color-text-primary);
   font-family: "Open Sans", sans-serif;
   font-size: 13px;
   padding: 10px 14px;
@@ -160,15 +158,15 @@
 }
 
 .input::placeholder {
-  color: rgba(255, 255, 255, 0.2);
+  color: var(--color-text-muted);
 }
 
 .input:focus {
-  border-color: #e07b2a;
+  border-color: var(--color-amber);
 }
 
 .sendBtn {
-  background: linear-gradient(135deg, #e07b2a, #c9521a);
+  background: linear-gradient(135deg, var(--color-amber), var(--color-amber-hover));
   border: none;
   color: #fff;
   font-family: "Open Sans", sans-serif;
@@ -179,15 +177,13 @@
   padding: 10px 18px;
   border-radius: 4px;
   cursor: pointer;
-  transition:
-    filter 0.2s,
-    opacity 0.2s;
+  transition: opacity 0.2s;
   -webkit-tap-highlight-color: transparent;
   white-space: nowrap;
 }
 
 .sendBtn:hover:not(:disabled) {
-  filter: brightness(1.12);
+  opacity: 0.85;
 }
 
 .sendBtn:disabled {
