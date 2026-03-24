@@ -58,7 +58,11 @@ export default function NavBar() {
           <span className={styles.linkText}>Account</span>
         </NavLink>
 
-        <button className={styles.themeToggle} onClick={toggleTheme}>
+
+
+        {/* Right-side items pushed to the end */}
+        <div className={styles.navRight}>
+          <button className={styles.themeToggle} onClick={toggleTheme}>
           {theme === "light" ? (
             <img
               src="/images/moon.png"
@@ -75,9 +79,6 @@ export default function NavBar() {
             />
           )}
         </button>
-
-        {/* Right-side items pushed to the end */}
-        <div className={styles.navRight}>
           <img
             src={profile?.avatarUrl || "/images/avatar1.png"}
             alt="Link to User Account"
