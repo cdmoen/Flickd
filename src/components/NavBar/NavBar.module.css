@@ -42,10 +42,6 @@
   color: var(--color-text-primary);
 }
 
-.active {
-  background: var(--color-surface);
-}
-
 /* Hide link text on smaller screens */
 .linkText {
   display: none;
@@ -99,10 +95,12 @@
 .accountIcon {
   width: 1.5rem;
   height: 1.5rem;
+    display: block;
+  padding-right: 10px;
 }
 
 .themeToggle:hover {
-  /* background: var(--color-surface); */
+  background: var(--color-surface);
 }
 
 /* ── max 320px ── */
@@ -116,8 +114,8 @@
   }
 }
 
-/* ── 321px – 767px ── */
-@media screen and (min-width: 321px) and (max-width: 767px) {
+/* ── 460px – 767px ── */
+@media screen and (min-width: 460px) and (max-width: 767px) {
   .navbar {
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -154,6 +152,7 @@
   .themeIcon {
     width: 2.5em;
     height: 2.5rem;
+    display: block;
   }
 }
 
@@ -178,6 +177,7 @@
   .themeIcon {
     width: 2.5rem;
     height: 2.5rem;
+    display: block;
   }
 }
 

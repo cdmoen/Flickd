@@ -22,10 +22,10 @@ export default function RegisterPage() {
     setError("");
 
     try {
-      // First make sure selected username is available
+      // reserveUsername checks if the username is available and throws an error if not
       await reserveUsername(username);
 
-      // If username is available, create new Firebase user Authentication (nothing happens to realtime database)
+      // If username is available, create new Firebase user Authentication (nothing happens to realtime database yet)
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -49,7 +49,7 @@ export default function RegisterPage() {
           className={styles.logo}
         />
       </header>
-      
+
       <h1 className={styles.title}>Register</h1>
 
       {error && <p className={styles.error}>{error}</p>}
@@ -96,20 +96,17 @@ export default function RegisterPage() {
           onChange={(e) => setUsername(e.target.value)}
         />
 
-          <button 
-            className={styles.button} 
-            type="submit"
-          >
-              Create account
-          </button>
+        <button className={styles.button} type="submit">
+          Create account
+        </button>
 
-          <NavLink 
-            to="/login" 
-            className={styles.loginbutton}
-            aria-label="Go to Login Page"
-          >
-            Login
-          </NavLink>
+        <NavLink
+          to="/login"
+          className={styles.loginbutton}
+          aria-label="Go to Login Page"
+        >
+          Login
+        </NavLink>
       </form>
     </main>
   );

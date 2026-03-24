@@ -11,6 +11,7 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
   // ===== Drag-to-close logic =====
   const sheetRef = useRef(null);
   const handleRef = useRef(null);
+  const inputRef = useRef(null);
   const dragStart = useRef(null);
   const dragYRef = useRef(0);
   const [dragY, setDragY] = useState(0);
@@ -30,6 +31,15 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
     };
   }, [isOpen]);
 
+  // ===== Auto-focus input when sheet opens =====
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current?.focus();
+    }
+  }, [isOpen]);
+
+  // ===== End of Drag-to-close logic =====
+
   function handleTouchStart(e) {
     dragStart.current = e.touches[0].clientY;
   }
@@ -48,10 +58,8 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
       handleClose();
     }
     dragYRef.current = 0;
-    setDragY(0); // snap back if not past threshold
+    setDragY(0);
   }
-
-  // ===== End of Drag-to-close logic =====
 
   async function handleSearch(e) {
     e.preventDefault();
@@ -97,6 +105,7 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
             Search Films
           </label>
           <input
+            ref={inputRef}
             id="film-search"
             type="text"
             placeholder="Search films..."
