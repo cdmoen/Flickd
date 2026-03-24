@@ -16,20 +16,10 @@ export default function NavBar() {
   return (
     <>
       <nav className={styles.navbar}>
-        <NavLink 
-          to="/home"
-        >
+        <NavLink to="/home">
           <picture>
-            {/* Responsive logo: show smaller logo on mobile, larger logo on desktop */}
-
-            <source
-              media="(max-width: 412px)"
-              srcSet="/images/logo-f-play.png"
-            />
-            <source
-              media="(min-width: 412px)"
-              srcSet="/images/logo-flickd-play.png"
-            />
+            <source media="(max-width: 412px)" srcSet="/images/logo-f-play.png" />
+            <source media="(min-width: 412px)" srcSet="/images/logo-flickd-play.png" />
             <img
               src="/images/logo-f-play.png"
               alt="Link to Flickd Home"
@@ -49,9 +39,6 @@ export default function NavBar() {
             isActive ? `${styles.link} ${styles.active}` : styles.link
           }
         >
-          {/* Search icon with both image and text for multiple screen sizes
-              Smaller is icon only, Larger is icon and text */}
-
           <img
             src="/images/search.png"
             alt="Link to Movie Search"
@@ -61,44 +48,40 @@ export default function NavBar() {
           <span className={styles.linkText}>Search</span>
         </NavLink>
 
-        <NavLink 
-          to="/account" 
-          className={styles.link}
-        >
-          {/* User account icon with both image and text for multiple screen sizes
-              Smaller is icon only, Larger is icon and text */}
-          <img
-            src="/images/faces.png"
-            alt="Link to User Account"
-            title="User Account"
-            className={styles.accountIcon}
-          />
-          <span className={styles.linkText}>Account</span>
-        </NavLink>
-
-        {/* Theme toggle button with icon that changes based on current theme */}
-        <button 
-          className={styles.themeToggle} onClick={toggleTheme}>
-          {theme === "light" ? 
+        {/* Right-side items pushed to the end */}
+        <div className={styles.navRight}>
+          <NavLink to="/account" className={styles.link}>
             <img
-              src="/images/moon.png"
-              alt="Button for Dark Theme"
-              title="Switch to Dark Theme"
-              className={styles.themeIcon}
-            /> : 
-            <img
-              src="/images/sun.png"
-              alt="Button for Light Theme"
-              title="Switch to Light Theme"
-              className={styles.themeIcon}
-            />}
-        </button>
+              src="/images/faces.png"
+              alt="Link to User Account"
+              title="User Account"
+              className={styles.accountIcon}
+            />
+            <span className={styles.linkText}>Account</span>
+          </NavLink>
 
-        {/* Show Welcome message with username only on larger screens,
-            hide on smaller */}
-        <span className={styles.loginStatus}>
-          Welcome, {profile?.username}!
-        </span>
+          <button className={styles.themeToggle} onClick={toggleTheme}>
+            {theme === "light" ? (
+              <img
+                src="/images/moon.png"
+                alt="Button for Dark Theme"
+                title="Switch to Dark Theme"
+                className={styles.themeIcon}
+              />
+            ) : (
+              <img
+                src="/images/sun.png"
+                alt="Button for Light Theme"
+                title="Switch to Light Theme"
+                className={styles.themeIcon}
+              />
+            )}
+          </button>
+
+          <span className={styles.loginStatus}>
+            Welcome, {profile?.username}!
+          </span>
+        </div>
       </nav>
     </>
   );

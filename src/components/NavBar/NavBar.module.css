@@ -12,6 +12,12 @@
   box-sizing: border-box;
 }
 
+.navRight {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
 .logo {
   height: 40px;
 }
@@ -95,7 +101,6 @@
   height: 1.5rem;
 }
 
-
 .themeToggle:hover {
   /* background: var(--color-surface); */
 }
@@ -109,7 +114,6 @@
   .logo {
     height: 30px;
   }
-  
 }
 
 /* ── 321px – 767px ── */
@@ -122,13 +126,13 @@
   .logo {
     height: 40px;
   }
+
   .searchIcon,
   .accountIcon,
   .themeIcon {
     height: 2rem;
     width: 2rem;
   }
-
 }
 
 /* ── 768px – 1023px ── */
@@ -140,7 +144,7 @@
   .logo {
     height: 50px;
   }
-  /* Show link text*/
+
   .linkText {
     display: inline;
   }
@@ -151,7 +155,6 @@
     width: 2.5em;
     height: 2.5rem;
   }
-
 }
 
 /* ── 1024px and up ── */
@@ -166,7 +169,6 @@
     height: 50px;
   }
 
-  /* Show link text */
   .linkText {
     display: inline;
   }
@@ -177,7 +179,6 @@
     width: 2.5rem;
     height: 2.5rem;
   }
-
 }
 
 @media screen and (min-width: 1025px) {
