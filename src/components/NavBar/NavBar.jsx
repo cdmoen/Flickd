@@ -46,39 +46,44 @@ export default function NavBar() {
             className={styles.searchIcon}
           />
           <span className={styles.linkText}>Search</span>
-
-                    <NavLink to="/account" className={styles.link}>
-            <img
-              src="/images/faces.png"
-              alt="Link to User Account"
-              title="User Account"
-              className={styles.accountIcon}
-            />
-            <span className={styles.linkText}>Account</span>
-          </NavLink>
-
-          <button className={styles.themeToggle} onClick={toggleTheme}>
-            {theme === "light" ? (
-              <img
-                src="/images/moon.png"
-                alt="Button for Dark Theme"
-                title="Switch to Dark Theme"
-                className={styles.themeIcon}
-              />
-            ) : (
-              <img
-                src="/images/sun.png"
-                alt="Button for Light Theme"
-                title="Switch to Light Theme"
-                className={styles.themeIcon}
-              />
-            )}
-          </button>
-          
         </NavLink>
+
+        <NavLink to="/account" className={styles.link}>
+          <img
+            src="/images/faces.png"
+            alt="Link to User Account"
+            title="User Account"
+            className={styles.accountIcon}
+          />
+          <span className={styles.linkText}>Account</span>
+        </NavLink>
+
+        <button className={styles.themeToggle} onClick={toggleTheme}>
+          {theme === "light" ? (
+            <img
+              src="/images/moon.png"
+              alt="Button for Dark Theme"
+              title="Switch to Dark Theme"
+              className={styles.themeIcon}
+            />
+          ) : (
+            <img
+              src="/images/sun.png"
+              alt="Button for Light Theme"
+              title="Switch to Light Theme"
+              className={styles.themeIcon}
+            />
+          )}
+        </button>
 
         {/* Right-side items pushed to the end */}
         <div className={styles.navRight}>
+          <img
+            src={profile?.avatarUrl || "/images/avatar1.png"}
+            alt="Link to User Account"
+            title="User Account"
+            className={styles.accountIcon}
+          />
           <span className={styles.loginStatus}>
             Welcome, {profile?.username}!
           </span>

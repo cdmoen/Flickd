@@ -42,10 +42,6 @@
   color: var(--color-text-primary);
 }
 
-.active {
-  background: var(--color-surface);
-}
-
 /* Hide link text on smaller screens */
 .linkText {
   display: none;
@@ -99,10 +95,12 @@
 .accountIcon {
   width: 1.5rem;
   height: 1.5rem;
+  display: none;
+  padding-right: 10px;
 }
 
 .themeToggle:hover {
-  /* background: var(--color-surface); */
+  background: var(--color-surface);
 }
 
 /* ── max 320px ── */
@@ -154,6 +152,7 @@
   .themeIcon {
     width: 2.5em;
     height: 2.5rem;
+    display: block;
   }
 }
 
@@ -178,6 +177,7 @@
   .themeIcon {
     width: 2.5rem;
     height: 2.5rem;
+    display: block;
   }
 }
 
