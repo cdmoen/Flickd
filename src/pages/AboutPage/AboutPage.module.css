@@ -1,12 +1,12 @@
 /* ── Shared styles ── */
 
 .container {
-  max-width: 1100px;
-  margin: 2rem auto;
-  padding: 1.5rem;
+  max-width: 1500px;
+  margin: .2rem auto;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   box-sizing: border-box;
 }
 
@@ -46,10 +46,15 @@
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1rem;
   box-sizing: border-box;
-  text-align: center;
+}
+
+.profileRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 .photoWrapper {
@@ -58,6 +63,7 @@
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid var(--color-amber);
+  flex-shrink: 0;
 }
 
 .photo {
@@ -66,17 +72,18 @@
   object-fit: cover;
 }
 
-.info {
+.profileInfo {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  width: 100%;
+  flex: 1;
 }
 
 .name {
   font-size: 1.2rem;
   font-weight: 600;
   margin: 0;
+  padding-top: 30px;
   background: linear-gradient(180deg, #D97721, #9E4738);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -84,24 +91,16 @@
 }
 
 .role {
-  font-size: 0.9rem;
   color: var(--color-text-muted);
   margin: 0;
-  font-style: italic;
-}
-
-.bio {
-  font-size: 0.95rem;
-  color: var(--color-text-primary);
-  margin: 0;
-  line-height: 1.6;
+  font-size: 1rem;
 }
 
 .links {
   display: flex;
   gap: 0.75rem;
-  justify-content: center;
-  margin-top: auto;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
 
 .link {
@@ -119,39 +118,64 @@
   opacity: 0.85;
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+}
 
-/* ── max 767px — stack cards ── */
-@media screen and (max-width: 767px) {
+.thisproject {
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.passion {
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.passion strong{
+  font-size: 0.9rem;
+}
+
+/* ── max 1050px — stack cards ── */
+@media screen and (max-width: 1050px) {
   .cardGrid {
     grid-template-columns: 1fr;
-  }
-
-  .card {
-    flex-direction: row;
-    text-align: left;
-    align-items: flex-start;
   }
 
   .photoWrapper {
     width: 70px;
     height: 70px;
-    flex-shrink: 0;
-  }
-
-  .links {
-    justify-content: flex-start;
   }
 }
 
 /* ── max 320px ── */
 @media screen and (max-width: 320px) {
-  .card {
+  .profileRow {
     flex-direction: column;
+    align-items: center;
+  }
+
+  .profileInfo {
     align-items: center;
     text-align: center;
   }
 
   .links {
     justify-content: center;
+  }
+
+  .thisproject,
+  .passion {
+    text-align: center;
   }
 }
