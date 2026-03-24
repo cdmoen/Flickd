@@ -36,17 +36,16 @@ export function useUserGroups(uid) {
   useEffect(() => {
     if (!uid) return;
 
-    // Point to this user's group membership list at root/users/$uid/groups
+    // Point to the groups this user belongs to
     const userGroupsRef = ref(database, `users/${uid}/groups`);
 
-    // Subscribe to the membership list. This callback fires immediately
-    // with the current data, and again any time the membership list changes.
+    // Create a listener at this same location
     const unsub = onValue(userGroupsRef, async (snap) => {
       // The snapshot value is a flat object of { groupId: true } pairs,
-      // or null if the user has no memberships yet
+      // or null if the user belongs to no groups
       const data = snap.val() || {};
 
-      // Extract just the group IDs from the membership object
+      // Extract just the group IDs
       const ids = Object.keys(data);
 
       // If the user has no group memberships, short-circuit and return early
@@ -56,9 +55,9 @@ export function useUserGroups(uid) {
         return;
       }
 
-      // Fetch the full group record for each ID simultaneously, rather than
-      // sequentially, by firing all requests at once and waiting for them all
-      // to resolve
+      // Using the group ID's relevant to this specific user, we can now fetch
+      // the complete information about each group from root/groups
+      // We use Promise.all to generate all async promises at once and wait for them all to resolve before continuing on.
       const snaps = await Promise.all(
         ids.map((id) => get(ref(database, `groups/${id}`))),
       );
@@ -70,11 +69,12 @@ export function useUserGroups(uid) {
         .filter((s) => s.exists())
         .map((s) => ({ ...s.val() }));
 
+      // Update the state using our group object
       setUserGroups(results);
       setLoading(false);
     });
 
-    // Unsubscribe the listener when the component unmounts or uid changes
+    // Unsubscribe the firebase listener when the component unmounts or uid changes
     return () => unsub();
   }, [uid]);
 
