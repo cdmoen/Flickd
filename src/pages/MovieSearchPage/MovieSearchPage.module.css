@@ -69,9 +69,10 @@
 }
 
 .input:focus {
-  border-color: #1d4ed8;
-  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
   outline: none;
+  border-color: var(--color-amber-hover);
+  box-shadow: 0 0 0 3px var(--color-amber-soft-bg);
+
 }
 
 .button {

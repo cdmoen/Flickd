@@ -32,7 +32,7 @@
 }
 
 .searchInput:focus {
-  border-color: var(--color-amber);
+  border-color: var(--color-amber-hover);
   box-shadow: 0 0 0 3px var(--color-amber-soft-bg);
   outline: none;
 }

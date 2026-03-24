@@ -109,11 +109,12 @@
 }
 
 .searchBar input:focus {
-  border-color: var(--color-amber);
+  border-color: var(--color-amber-hover);
+  box-shadow: 0 0 0 3px var(--color-amber-soft-bg);
 }
 
 .searchBar button {
-  background: var(--color-amber);
+  background: linear-gradient(180deg, #D97721, #9E4738);
   color: #fff;
   border: none;
   border-radius: 8px;
