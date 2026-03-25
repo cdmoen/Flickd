@@ -4,15 +4,15 @@ Flickd is a social movie discovery web app built with React, Firebase, and the T
 
 ---
 
-# FEATURES
+## FEATURES
 
-## Authentication
+### Authentication
 
 Firebase Authentication (email/password)
 
 Persistent login state
 
-## Movie Search
+### Movie Search
 
 Search TMDB’s movie database via a secure Vercel serverless proxy
 
@@ -20,7 +20,7 @@ Results include poster, release date, genres, and quick‑add actions
 
 Smooth animations for search results
 
-## Movie Detail Pages
+### Movie Detail Pages
 
 Each movie page includes:
 
@@ -36,7 +36,7 @@ Runtime
 
 Release date
 
-## Watchlist
+### Watchlist
 
 Add/remove movies from your personal watchlist
 
@@ -44,7 +44,7 @@ Stored in Firebase Realtime Database
 
 Synced across devices
 
-## Friends System
+### Friends System
 
 Search for users by username
 
@@ -56,7 +56,7 @@ View your friend list
 
 Real‑time updates via Firebase listeners
 
-## Groups (Shared Film Lists)
+### Groups (Shared Film Lists)
 
 Users can create or delete groups
 
@@ -74,7 +74,7 @@ Bottom‑sheet modals for comments, ratings, and seen status
 
 ---
 
-# UI / UX
+## UI / UX
 
 Responsive layout
 
@@ -88,9 +88,9 @@ React Portals for modals
 
 ---
 
-# TECH STACK
+## TECH STACK
 
-## Frontend
+### Frontend
 
 React (Vite)
 
@@ -98,9 +98,9 @@ CSS Modules
 
 React Portals
 
-Custom hooks (useWatchlist, useGroups, useAuth, etc.)
+Custom hooks (useWatchlist, useUserGroups, etc.)
 
-## Backend / Services
+### Backend / Services
 
 Firebase Authentication
 
@@ -112,7 +112,7 @@ TMDB API (proxied through Vercel)
 
 ---
 
-# APIs
+## APIs
 
 /api/tmdb — secure proxy to TMDB
 
@@ -125,7 +125,7 @@ Example:
 
 ---
 
-# PROJECT SETUP
+## PROJECT SETUP
 
 1. Clone the repository
 
@@ -151,9 +151,9 @@ Example:
 
 ---
 
-# KNOWN LIMITATIONS
+## KNOWN LIMITATIONS
 
-## TMDB Rate Limits
+### TMDB Rate Limits
 
 Heavy searching may temporarily block requests.
 
@@ -161,26 +161,30 @@ Heavy searching may temporarily block requests.
 
 Users can create or delete groups, but cannot leave a group they didn’t create.
 
-## Search / Navigation
+### Search / Navigation
 
 Going “Back” after viewing a movie page clears the previous search results.
 No sorting or filtering options for movie lists or search results.
 
-## Firebase Rules
+### Firebase Rules
 
 Realtime Database security rules are not fully secure for real-world deployment.
+User Authentication is very simple email/password setup. Does not allow for 2-factor
+authentication or updating username/email for an existing account.
 
-## UI / UX
+### UI / UX
 
 No user profile pages yet
 
 ---
 
-# FUTURE IMPROVEMENTS
+## FUTURE IMPROVEMENTS
 
 Add sorting/filtering for search and watchlist
 
 Add user profile pages
+
+Add more user authentication options
 
 Improve database security rules
 
