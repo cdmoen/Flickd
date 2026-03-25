@@ -11,15 +11,26 @@ const developers = [
       "For this project, I took on the primary role of setting up the backend functionality via Firebase and hosting the app with Vercel. This included creating custom fetchers to retrieve movie data from the TMDB API, as well as custom hooks to track live updates such as friend requests, group invitations, and watchlist changes, all of which are stored in the Firebase Realtime Database.",
   },
   {
-    photo: "/images/james.jpg",
+    photo: "/images/james.png",
     name: "James Kim",
     role: "Creator & Developer",
-    email: "james@x.com",
-    portfolio: "https://james.github.io/james/index.html",
-    github: "https://github.com/james",
-    linkedin: "https://linkedin.com/in/james",
-    thisproject: "Add contribution here.",
-    passion: "Add passion here.",
+    email: "james010698@gmail.com",
+    github: "https://github.com/ValeriaV-8",
+    linkedin: "https://www.linkedin.com/in/james-kim-890534355/",
+    thisproject: (
+      <>
+        For this project, I took on the role of front-end developer, 
+        with a focus on implementing accessibility features to ensure
+        that FlickD is usable and enjoyable for all users, including 
+        those with disabilities. I also made sure that the app is responsive
+        and works well on a variety of devices, from desktops to mobile phones.
+        <br />
+        <br />
+        I worked on adding ARIA attributes and ensuring that the app is compatible with screen readers. My goal
+        was to create an inclusive user experience that allows everyone to 
+        easily navigate and interact with the app, regardless of their abilities.
+      </>
+    ),
   },
   {
     photo: "/images/nikole.jpg",
