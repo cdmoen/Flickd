@@ -11,10 +11,10 @@ export async function sendFriendRequest(myUid, theirUid) {
 
   const updates = {};
 
-  // You → Them (outgoing)
+  // Create outgoing friend request: you -> them
   updates[`friendRequestsOutgoing/${myUid}/${theirUid}`] = true;
 
-  // Them → You (incoming)
+  // Create incoming friend request: them <- you
   updates[`friendRequestsIncoming/${theirUid}/${myUid}`] = true;
 
   await update(ref(database), updates);

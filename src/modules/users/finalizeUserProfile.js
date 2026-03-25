@@ -6,7 +6,7 @@ export async function finalizeUserProfile(uid, username, email) {
 
   const updates = {};
 
-  // Private profile
+  // Create the user's private profile
   updates[`users/${uid}`] = {
     email,
     username,
@@ -14,13 +14,14 @@ export async function finalizeUserProfile(uid, username, email) {
     createdAt,
   };
 
-  // Public profile
+  // Create the user's public profile
   updates[`usersPublic/${uid}`] = {
     username,
     avatarUrl: "/avatars/popcorn.png",
   };
 
-  // Username index
+  // Update the username index with the new user's username + uid so
+  // that nobody else can use the same username in the future
   updates[`usersByUsername/${username}`] = uid;
 
   await update(ref(database), updates);

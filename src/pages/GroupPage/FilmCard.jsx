@@ -37,7 +37,6 @@ export default function FilmCard({ film, filmId, groupId, uid, profile }) {
     await removeFilmFromGroup(groupId, filmId);
   }
 
-  console.log(film);
   return (
     <div className={styles.card}>
       <img

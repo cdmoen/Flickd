@@ -22,7 +22,8 @@ export default function RegisterPage() {
     setError("");
 
     try {
-      // reserveUsername checks if the username is available and throws an error if not
+      // reserveUsername checks if the username is available. If not available,
+      // it throws an error and bails out
       await reserveUsername(username);
 
       // If username is available, create new Firebase user Authentication (nothing happens to realtime database yet)

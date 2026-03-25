@@ -107,7 +107,6 @@ export async function fetchMovieSearch(searchParams) {
     throw new Error("fetchMovieSearch failed");
   }
 
-  console.log("fetchMovieSearch successful");
   return await response.json();
 }
 

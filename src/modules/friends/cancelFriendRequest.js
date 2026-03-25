@@ -8,10 +8,10 @@ export async function cancelFriendRequest(myUid, otherUid) {
 
   const updates = {};
 
-  // Remove your outgoing request
+  // Remove the outgoing request
   updates[`friendRequestsOutgoing/${myUid}/${otherUid}`] = null;
 
-  // Remove their incoming request
+  // Remove the incoming request
   updates[`friendRequestsIncoming/${otherUid}/${myUid}`] = null;
 
   await update(ref(database), updates);

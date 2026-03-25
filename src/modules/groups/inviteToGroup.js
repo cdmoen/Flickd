@@ -8,10 +8,10 @@ export async function inviteToGroup(groupId, fromUid, toUid) {
 
   const updates = {};
 
-  // Outgoing: you → them
+  // Create Outgoing invite: you -> them
   updates[`groupInvitesOutgoing/${fromUid}/${groupId}/${toUid}`] = true;
 
-  // Incoming: them ← you
+  // Create Incoming invite: them <- you
   updates[`groupInvitesIncoming/${toUid}/${groupId}`] = {
     from: fromUid,
     groupId: groupId,
