@@ -11,7 +11,7 @@ const developers = [
       "For this project, I took on the primary role of setting up the backend functionality via Firebase and hosting the app with Vercel. This included creating custom fetchers to retrieve movie data from the TMDB API, as well as custom hooks to track live updates such as friend requests, group invitations, and watchlist changes, all of which are stored in the Firebase Realtime Database.",
   },
   {
-    photo: "/images/james.jpg",
+    photo: "/images/james.png",
     name: "James Kim",
     role: "Creator & Developer",
     email: "james010698@gmail.com",
