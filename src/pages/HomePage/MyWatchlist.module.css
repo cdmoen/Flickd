@@ -49,7 +49,7 @@
 }
 
 .addBtn {
-  background: linear-gradient(135deg, var(--color-amber), var(--color-amber-hover));
+  background: linear-gradient(135deg, var(--color-amber-hover), var(--color-terra-hover));
   color: #fff;
   border: none;
   font-family: "Open Sans", sans-serif;

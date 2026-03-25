@@ -59,8 +59,7 @@
 }
 
 .input:focus {
-  border-color: var(--color-terra);
-  box-shadow: 0 0 0 3px var(--color-terra-soft-bg);
+  border-color: var(--color-amber-hover);
   outline: none;
 }
 
