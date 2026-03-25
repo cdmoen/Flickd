@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { ref, onValue } from "firebase/database";
 import { database } from "../../modules/firebase";
 import styles from "./RatingsSheet.module.css";
@@ -32,7 +33,7 @@ export default function RatingsSheet({
       ).toFixed(1)
     : null;
 
-  return (
+  return createPortal(
     <div className={styles.backdrop} onClick={onClose}>
       <div className={styles.sheet} onClick={(e) => e.stopPropagation()}>
         <div className={styles.handle} />
@@ -83,6 +84,7 @@ export default function RatingsSheet({
           Close
         </button>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

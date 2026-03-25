@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { ref, onValue } from "firebase/database";
 import { database } from "../../modules/firebase";
 import styles from "./SeenSheet.module.css";
@@ -18,7 +19,7 @@ export default function SeenSheet({ isOpen, onClose, groupId, filmId }) {
 
   const entries = Object.entries(seen);
 
-  return (
+  return createPortal(
     <div className={styles.backdrop} onClick={onClose}>
       <div className={styles.sheet} onClick={(e) => e.stopPropagation()}>
         <div className={styles.handle} />
@@ -56,6 +57,7 @@ export default function SeenSheet({ isOpen, onClose, groupId, filmId }) {
           Close
         </button>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

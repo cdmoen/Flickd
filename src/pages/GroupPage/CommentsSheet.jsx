@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ref, onValue, push } from "firebase/database";
+import { createPortal } from "react-dom";
 import { database } from "../../modules/firebase";
 import CommentCard from "./CommentCard";
 import styles from "./CommentsSheet.module.css";
@@ -51,7 +52,7 @@ export default function CommentsSheet({
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className={styles.backdrop} onClick={onClose}>
       <div className={styles.sheet} onClick={(e) => e.stopPropagation()}>
         <div className={styles.handle} />
@@ -100,6 +101,7 @@ export default function CommentsSheet({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
