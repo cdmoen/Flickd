@@ -18,8 +18,14 @@ export default function NavBar() {
       <nav className={styles.navbar}>
         <NavLink to="/home">
           <picture>
-            <source media="(max-width: 412px)" srcSet="/images/logo-f-play.png" />
-            <source media="(min-width: 412px)" srcSet="/images/logo-flickd-play.png" />
+            <source
+              media="(max-width: 412px)"
+              srcSet="/images/logo-f-play.png"
+            />
+            <source
+              media="(min-width: 413px)"
+              srcSet="/images/logo-flickd-play.png"
+            />
             <img
               src="/images/logo-f-play.png"
               alt="Link to Flickd Home"
@@ -58,27 +64,25 @@ export default function NavBar() {
           <span className={styles.linkText}>Account</span>
         </NavLink>
 
-
-
         {/* Right-side items pushed to the end */}
         <div className={styles.navRight}>
           <button className={styles.themeToggle} onClick={toggleTheme}>
-          {theme === "light" ? (
-            <img
-              src="/images/moon.png"
-              alt="Button for Dark Theme"
-              title="Switch to Dark Theme"
-              className={styles.themeIcon}
-            />
-          ) : (
-            <img
-              src="/images/sun.png"
-              alt="Button for Light Theme"
-              title="Switch to Light Theme"
-              className={styles.themeIcon}
-            />
-          )}
-        </button>
+            {theme === "light" ? (
+              <img
+                src="/images/moon.png"
+                alt="Button for Dark Theme"
+                title="Switch to Dark Theme"
+                className={styles.themeIcon}
+              />
+            ) : (
+              <img
+                src="/images/sun.png"
+                alt="Button for Light Theme"
+                title="Switch to Light Theme"
+                className={styles.themeIcon}
+              />
+            )}
+          </button>
           <img
             src={profile?.avatarUrl || "/images/avatar1.png"}
             alt="Link to User Account"
